@@ -17,7 +17,7 @@ function setup() {
 
   let cWidth = sWidth, cHeight = sHeight;
   if(!IS_DEVICE_SIZE_OK) {
-    let maxSteps = 5;
+    let maxSteps = 7;
     let steps = 0;
     while(steps < maxSteps) {
       GAME_SCALE -= 0.10;
@@ -69,10 +69,10 @@ function draw() {
   textFont(font);
   textAlign(LEFT, CENTER);
 
-  // scale(GAME_SCALE);
-  // let nWidth = width - width * GAME_SCALE;
-  // let nHeight = height - height * GAME_SCALE;
-  // translate(nWidth - nWidth/2, nHeight - nHeight/2);
+  scale(GAME_SCALE);
+  let nWidth = width - width * GAME_SCALE;
+  let nHeight = height - height * GAME_SCALE;
+  translate(nWidth - nWidth/2, nHeight - nHeight/2);
 
   if(!IS_DEVICE_SIZE_OK) {
     let tS = 75;
