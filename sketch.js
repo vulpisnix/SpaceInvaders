@@ -11,21 +11,16 @@ function preload() {
 }
 
 function setup() {
-  let sWidth = windowWidth, sHeight = windowHeight;
-  if(sHeight < 600)
-    sHeight = 600;
-  else if(sHeight > 900)
-    sHeight = 900;
-  IS_DEVICE_SIZE_OK = (sHeight <= 900 && sWidth >= 1300);
+  let sWidth = 1300, sHeight = 900;
+  IS_DEVICE_SIZE_OK = (windowWidth >= 1300 && windowHeight >= 900);
   IS_TOUCH_SUPPORTED = is_touch_supported();
-  sWidth = 1300;
 
   if(!IS_DEVICE_SIZE_OK) {
     let maxSteps = 5;
     let steps = 0;
     while(steps < maxSteps) {
       GAME_SCALE -= 0.10;
-      let h = 600 * GAME_SCALE;
+      let h = 900 * GAME_SCALE;
       if(h <= windowHeight) {
         IS_DEVICE_SIZE_OK = true;
         break;
@@ -84,7 +79,7 @@ function draw() {
     fill(200,0,0);
     textSize(tS/3);
     text("Sorry but your device isn't big enough.", width/2, height/2-15);
-    text("Your screen resolution must be atleast 1300x600", width/2, height/2+15);
+    text("Your screen resolution must be atleast 1300x900", width/2, height/2+15);
     text("Your screen resolution is "+windowWidth+"x"+windowHeight, width/2, height/2+45);
 
     return;
