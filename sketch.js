@@ -59,6 +59,10 @@ function draw() {
   // let nHeight = height - height * GAME_SCALE;
   // translate(nWidth - nWidth/2, nHeight - nHeight/2);
 
+  fill(255);
+  textSize(20);
+  text('Heyy', width/2, height/2)
+
   if(!IS_DEVICE_SIZE_OK) {
     let tS = 75;
     if(width < 600)
