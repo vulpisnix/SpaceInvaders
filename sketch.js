@@ -125,11 +125,14 @@ function drawTitle() {
   noStroke();
   fill(255,255,0);
   textSize(75);
-  textAlign(LEFT, CENTER);
   textAlign(CENTER, CENTER);
   text('space invaders', width/2, 50);
+
+  textSize(30);
+  text(width + ', ' + height, width/2, 170);
+
   textAlign(LEFT, CENTER);
-  noStroke();
+
 }
 
 function AABB(x1, y1, w1, h1, x2, y2, w2, h2) {
