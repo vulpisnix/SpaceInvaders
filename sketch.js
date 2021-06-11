@@ -11,14 +11,13 @@ function preload() {
 }
 
 function setup() {
-  let sHeight = windowHeight;
-  let sWidth = 1300;
-  
+  let sWidth = 1300, sHeight = windowHeight;
+
   if(sHeight < 600)
     sHeight = 600;
-  else
-    sHeight -= 1;
-  
+  else if(sHeight > 900)
+    sHeight = 900;
+
   createCanvas(sWidth, sHeight);
   frameRate(60);
   
