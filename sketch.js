@@ -64,6 +64,18 @@ function draw() {
   let nHeight = height - height * GAME_SCALE;
   translate(nWidth - nWidth/2, nHeight - nHeight/2);
 
+  if (backgroundToDraw != null)
+    image(backgroundToDraw.sprite, 0, 0, width, height);
+  if (backgroundToDraw == null || backgroundToDraw.name != backgroundToDrawName) {
+    backgroundToDraw = getBackgroundByName(backgroundToDrawName);
+  }
+
+  for (let i = buttons.length - 1; i >= 0; i--) {
+    const button = buttons[i];
+    button.update();
+    button.render();
+  }
+
   if(!IS_DEVICE_SIZE_OK) {
     let tS = 75;
     if(width < 600)
@@ -80,19 +92,6 @@ function draw() {
     text("Your screen resolution must be atleast 1300x600", width/2, height/2+15);
     return;
   }
-
-  if (backgroundToDraw != null)
-    image(backgroundToDraw.sprite, 0, 0, width, height);
-  if (backgroundToDraw == null || backgroundToDraw.name != backgroundToDrawName) {
-    backgroundToDraw = getBackgroundByName(backgroundToDrawName);
-  }
-
-  for (let i = buttons.length - 1; i >= 0; i--) {
-    const button = buttons[i];
-    button.update();
-    button.render();
-  }
-
 
   if (MENU) {
     renderMenu_Main();
