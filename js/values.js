@@ -1,3 +1,4 @@
+let IS_DEVICE_SIZE_OK = false, IS_TOUCH_SUPPORTED = false;
 let MENU = true, GAME = false, SHOP = false, SETTINGS = false, CREDITS = false;
 let GAME_STARTED = false, GAME_PAUSE = false, GAME_DEAD = false;
 let font;
@@ -26,6 +27,22 @@ let settingsOrig = {
     },
     visuell: {
         screenshake: true
+    },
+    controls: {
+        movement: {
+            up: 'w',
+            down: 's',
+            left: 'a',
+            right: 'd'
+        },
+        fire: ' ',
+        useTouch: false
     }
 }
 let settings = JSON.parse(JSON.stringify(settingsOrig));
+
+function is_touch_enabled() {
+    return ( 'ontouchstart' in window ) ||
+        ( navigator.maxTouchPoints > 0 ) ||
+        ( navigator.msMaxTouchPoints > 0 );
+}

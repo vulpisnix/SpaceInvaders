@@ -98,10 +98,22 @@ function createSettings() {
     SaveSettings();
   }
 
-  const screenshakeCheckbox = new Checkbox('Screenshake', 15, 235);
+  const screenshakeCheckbox = new Checkbox('Screenshake', 15, 250);
   screenshakeCheckbox.value = settings.visuell.screenshake;
   screenshakeCheckbox.onChange = function(value) {
     settings.visuell.screenshake = value;
+    SaveSettings();
+  }
+
+  const useTouchControlsCheckbox = new Checkbox('Use Touch Controls', 15, 325);
+  useTouchControlsCheckbox.value = settings.controls.useTouch;
+  if(!IS_TOUCH_SUPPORTED) {
+    useTouchControlsCheckbox.value = false;
+    useTouchControlsCheckbox.disabled = true;
+    useTouchControlsCheckbox.disabledText = 'Touch not supported';
+  }
+  useTouchControlsCheckbox.onChange = function(value) {
+    settings.controls.useTouch = value;
     SaveSettings();
   }
 
