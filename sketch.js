@@ -46,7 +46,7 @@ function setup() {
     createCanvas(windowWidth, windowHeight-1);
     frameRate(60);
 
-    const btn = new Button(width/2, height-200, 0, 40, 30, 'Debug');
+    const btn = new Button(width/2, height/2+50, 0, 40, 30, 'Debug');
     btn.action = function () {
       document.location.reload();
     }
