@@ -31,9 +31,10 @@ function setup() {
       }
     }
   }
-
-  cWidth *= GAME_SCALE;
-  cHeight *= GAME_SCALE;
+  else {
+    cWidth *= GAME_SCALE;
+    cHeight *= GAME_SCALE;
+  }
 
   if(IS_DEVICE_SIZE_OK) {
     createCanvas(cWidth, cHeight);
