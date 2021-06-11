@@ -6,6 +6,7 @@ function createMenu() {
   enemyBullets = [];
   animations = [];
   sliders = [];
+  checkboxes = [];
   MENU = true;
   GAME = false;
   SHOP = false;
@@ -66,6 +67,7 @@ function createStore() {
   buttons = [];
   enemys = [];
   sliders = [];
+  checkboxes = [];
   MENU = false;
   GAME = false;
   SHOP = true;
@@ -79,18 +81,42 @@ function createSettings() {
   buttons = [];
   enemys = [];
   sliders = [];
+  checkboxes = [];
   MENU = false;
   GAME = false;
   SHOP = false;
   CREDITS = false;
   SETTINGS = true;
-  
   createBackButton();
-  
+
+
   const volumeSlider = new Slider('Volume', 15, 175);
-  volumeSlider.onChange = function(volume) {
-    settings.sound.volume = volume;
+  volumeSlider.sliderPos = (settings.sound.fullvolume * (volumeSlider.size.x-20))+20;
+  volumeSlider.onChange = function(percentage) {
+    settings.sound.volume = map(floor(percentage*100), 0, 100, 0, 1);
+    settings.sound.fullvolume = percentage;
+    SaveSettings();
   }
+
+  const screenshakeCheckbox = new Checkbox('Screenshake', 15, 235);
+  screenshakeCheckbox.value = settings.visuell.screenshake;
+  screenshakeCheckbox.onChange = function(value) {
+    settings.visuell.screenshake = value;
+    SaveSettings();
+  }
+
+
+
+  const resetSettingsButton = new Button(width-80, height-25, 0, 50, 40,'Reset');
+  resetSettingsButton.action = function () {
+    ResetSettings();
+
+    volumeSlider.sliderPos = (settings.sound.fullvolume * (volumeSlider.size.x-20))+20;
+    screenshakeCheckbox.value = settings.visuell.screenshake;
+
+    SaveSettings();
+  }
+  buttons.push(resetSettingsButton);
 }
 
 function createGame() {
@@ -110,6 +136,7 @@ function createGame() {
   sliders = [];
   playerBullets = [];
   enemyBullets = [];
+  checkboxes = [];
   
   currentscore = 0;
   currentcredits = 0;
@@ -159,6 +186,7 @@ function createCredits() {
   buttons = [];
   enemys = [];
   sliders = [];
+  checkboxes = [];
   MENU = false;
   GAME = false;
   SHOP = false;
@@ -169,7 +197,7 @@ function createCredits() {
 }
 
 function createBackButton() {
-  const backButton = new Button(60, height-25, 150, 50, 40, 'back');
+  const backButton = new Button(60, height-25, 0, 50, 40, 'back');
   backButton.action = function() {
     createMenu();
   }

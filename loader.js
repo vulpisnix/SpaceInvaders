@@ -2,11 +2,9 @@ let fallbackSprite;
 let backgroundToDraw;
 let backgrounds = [];
 let bulletSprite, enemyZeroSprite, enemyOneSprite, enemyTwoSprite;
-let shipLevelZeroSprite, shipLevelOneSprite, shipLevelTwoSprite;
 let selectedBackground = 'background_normal', backgroundToDrawName = 'background_normal';
 
 let ships = [];
-
 let explosionSprites = [];
 
 
@@ -94,3 +92,64 @@ function getShipByName(name) {
       sprite: fallbackSprite
     };
 }
+
+
+function setCookie(cname, cvalue) {
+  var d = new Date();
+  d.setTime(d.getTime() + (24 * 60 * 60 * 1000 * 300));
+  var expires = "expires=" + d.toUTCString();
+  document.cookie = cname + "=" + cvalue + ";" + expires + ";path=/";
+}
+function getCookie(name) {
+  name = name+"=";
+  var decodedCookie = decodeURIComponent(document.cookie);
+  var ca = decodedCookie.split(';');
+  for (var i = 0; i < ca.length; i++) {
+    var c = ca[i];
+    while (c.charAt(0) == ' ') {
+      c = c.substring(1);
+    }
+    if (c.indexOf(name) == 0) {
+      return c.substring(name.length, c.length);
+    }
+  }
+  return "";
+}
+
+function LoadGame() {
+  const rawScores = getCookie('scores');
+  if(rawScores != '') {
+    const scores = JSON.parse(rawScores);
+    if(scores) {
+      highscore = scores.highscore;
+      bestStage = scores.bestStage;
+      currentcredits = scores.credits;
+    }
+  }
+
+  const rawSettings = getCookie('settings');
+  if(rawSettings != '') {
+    const settings_ = JSON.parse(rawSettings);
+    settings = settings_;
+  }
+
+}
+function SaveGame() {
+  SaveScores();
+  SaveSettings();
+}
+function SaveScores() {
+  setCookie('scores', JSON.stringify({
+    highscore: highscore,
+    bestStage: bestStage,
+    credits: credits
+  }));
+}
+function SaveSettings() {
+  setCookie('settings', JSON.stringify(settings));
+}
+function ResetSettings() {
+  settings = JSON.parse(JSON.stringify(settingsOrig));
+}
+
+LoadGame();

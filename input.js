@@ -41,4 +41,9 @@ function mousePressed() {
       buttons[i].mousePressed();
     }
   }
+  if(checkboxes.length > 0) {
+    for (let i = checkboxes.length - 1; i >= 0; i--) {
+      checkboxes[i].mousePressed();
+    }
+  }
 }

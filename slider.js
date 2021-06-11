@@ -8,7 +8,7 @@ function Slider(text_, x,y) {
 
   this.drag = false;
   
-  this.onChange = function() {}
+  this.onChange = function(p) {}
   
   this.update = function() {
     if(mouseIsPressed) {
@@ -20,6 +20,7 @@ function Slider(text_, x,y) {
 
     if(mouseIsPressed && this.drag) {
       this.sliderPos = constrain(mouseX, 20, this.size.x);
+      this.onChange(this.getPercentage());
     }
     this.sliderPos = constrain(this.sliderPos, 20, this.size.x);
   }
