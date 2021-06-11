@@ -45,12 +45,6 @@ function setup() {
   else {
     createCanvas(windowWidth, windowHeight-1);
     frameRate(60);
-
-    const btn = new Button(width/2, height/2+50, 0, 40, 30, 'Debug');
-    btn.action = function () {
-      document.location.reload();
-    }
-    buttons.push(btn);
   }
 }
 
@@ -78,13 +72,7 @@ function draw() {
     textSize(tS/3);
     text("Sorry but your device isn't big enough.", width/2, height/2-15);
     text("Your screen resolution must be atleast 1300x600", width/2, height/2+15);
-
-
-    for (let i = buttons.length - 1; i >= 0; i--) {
-      const button = buttons[i];
-      button.update();
-      button.render();
-    }
+    text("Your screen resolution is "+windowWidth+"x"+windowHeight, width/2, height/2+45);
 
     return;
   }
