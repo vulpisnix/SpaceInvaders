@@ -23,7 +23,8 @@ function setup() {
       GAME_SCALE -= 0.10;
       let w = sWidth * GAME_SCALE;
       let h = sHeight * GAME_SCALE;
-      if(h <= windowHeight) {
+
+      if(h <= windowHeight && w <= windowWidth) {
         cWidth = w;
         cHeight = h;
         IS_DEVICE_SIZE_OK = true;
@@ -69,10 +70,10 @@ function draw() {
   textFont(font);
   textAlign(LEFT, CENTER);
 
-  scale(GAME_SCALE);
-  let nWidth = width - width * GAME_SCALE;
-  let nHeight = height - height * GAME_SCALE;
-  translate(nWidth - nWidth/2, nHeight - nHeight/2);
+  // scale(GAME_SCALE);
+  // let nWidth = width - width * GAME_SCALE;
+  // let nHeight = height - height * GAME_SCALE;
+  // translate(nWidth - nWidth/2, nHeight - nHeight/2);
 
   if(!IS_DEVICE_SIZE_OK) {
     let tS = 75;
