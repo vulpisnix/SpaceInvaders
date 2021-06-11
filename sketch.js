@@ -21,8 +21,16 @@ function setup() {
   sWidth = 1300;
 
   if(!IS_DEVICE_SIZE_OK) {
-    GAME_SCALE = 0.75;
-    IS_DEVICE_SIZE_OK = true;
+    let maxSteps = 5;
+    let steps = 0;
+    while(steps < maxSteps) {
+      GAME_SCALE -= 0.10;
+      let h = 600 * GAME_SCALE;
+      if(h <= windowHeight) {
+        IS_DEVICE_SIZE_OK = true;
+        break;
+      }
+    }
   }
 
   if(IS_DEVICE_SIZE_OK) {
