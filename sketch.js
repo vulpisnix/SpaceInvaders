@@ -64,7 +64,7 @@ function draw() {
     noStroke();
     textAlign(CENTER, CENTER);
     fill(200,0,0);
-    textSize(tS-8);
+    textSize(tS-15);
     text("Sorry but your device isn't big enough.", width/2, height/2-15);
     text("Your screen resolution must be atleast 1300x600", width/2, height/2+15);
     return;
