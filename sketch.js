@@ -54,7 +54,12 @@ function draw() {
   textAlign(LEFT, CENTER);
 
   if(!IS_DEVICE_SIZE_OK) {
-    drawTitle();
+    let tS = 75;
+    if(width < 600)
+      tS = 40;
+    if(width < 400)
+      tS = 20;
+    drawTitle(tS);
 
     noStroke();
     textAlign(CENTER, CENTER);
