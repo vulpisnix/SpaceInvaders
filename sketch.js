@@ -20,6 +20,7 @@ function setup() {
   IS_DEVICE_SIZE_OK = true;
   IS_TOUCH_SUPPORTED = is_touch_enabled();
   sWidth = 1300;
+  sWidth = windowWidth;
 
   if(IS_DEVICE_SIZE_OK) {
     createCanvas(sWidth, sHeight);
