@@ -20,7 +20,6 @@ function setup() {
   IS_DEVICE_SIZE_OK = true;
   IS_TOUCH_SUPPORTED = is_touch_enabled();
   sWidth = 1300;
-  sWidth = windowWidth;
 
   if(IS_DEVICE_SIZE_OK) {
     createCanvas(sWidth, sHeight);
@@ -55,10 +54,10 @@ function draw() {
   textFont(font);
   textAlign(LEFT, CENTER);
 
-  scale(GAME_SCALE);
-  let nWidth = width - width * GAME_SCALE;
-  let nHeight = height - height * GAME_SCALE;
-  translate(nWidth - nWidth/2, nHeight - nHeight/2);
+  // scale(GAME_SCALE);
+  // let nWidth = width - width * GAME_SCALE;
+  // let nHeight = height - height * GAME_SCALE;
+  // translate(nWidth - nWidth/2, nHeight - nHeight/2);
 
   if(!IS_DEVICE_SIZE_OK) {
     let tS = 75;
