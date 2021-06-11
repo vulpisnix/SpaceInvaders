@@ -17,7 +17,7 @@ function setup() {
   else if(sHeight > 900)
     sHeight = 900;
   IS_DEVICE_SIZE_OK = (sHeight <= 900 && sWidth >= 1300);
-  IS_TOUCH_SUPPORTED = is_touch_enabled();
+  IS_TOUCH_SUPPORTED = is_touch_supported();
   sWidth = 1300;
 
   if(IS_DEVICE_SIZE_OK) {

@@ -11,7 +11,7 @@ function Button(x,y,w,h,fS,txt = '') {
     this.size.x = textWidth(this.text)+10;
     this.isHovering = AABB(mouseX, mouseY, 1,1,this.pos.x - this.size.x/2,this.pos.y - this.size.y/2, this.size.x,this.size.y);
 
-    if(is_touch_enabled()) {
+    if(is_touch_supported()) {
       if(AABB(touches[0].x, touches[0].y, 5, 5, this.pos.x - this.size.x/2,this.pos.y - this.size.y/2, this.size.x,this.size.y)) {
         this.isHovering = true;
         this.action();
