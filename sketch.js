@@ -45,6 +45,12 @@ function setup() {
   else {
     createCanvas(windowWidth, windowHeight-1);
     frameRate(60);
+
+    const btn = new Button(width/2, height-200, 0, 40, 30, 'Debug');
+    btn.action = function () {
+      document.location.reload();
+    }
+    buttons.push(btn);
   }
 }
 
@@ -53,14 +59,10 @@ function draw() {
   textFont(font);
   textAlign(LEFT, CENTER);
 
-  // scale(GAME_SCALE);
-  // let nWidth = width - width * GAME_SCALE;
-  // let nHeight = height - height * GAME_SCALE;
-  // translate(nWidth - nWidth/2, nHeight - nHeight/2);
-
-  fill(255);
-  textSize(20);
-  text('Heyy', width/2, height/2)
+  scale(GAME_SCALE);
+  let nWidth = width - width * GAME_SCALE;
+  let nHeight = height - height * GAME_SCALE;
+  translate(nWidth - nWidth/2, nHeight - nHeight/2);
 
   if(!IS_DEVICE_SIZE_OK) {
     let tS = 75;
