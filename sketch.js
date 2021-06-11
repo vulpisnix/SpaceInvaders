@@ -11,15 +11,14 @@ function preload() {
 }
 
 function setup() {
-  let sWidth = 1300, sHeight = windowHeight;
-
+  let sWidth = windowWidth, sHeight = windowHeight;
   if(sHeight < 600)
     sHeight = 600;
   else if(sHeight > 900)
     sHeight = 900;
-
-  IS_DEVICE_SIZE_OK = (sHeight <= 900 && sWidth <= 1300);
+  IS_DEVICE_SIZE_OK = (sHeight <= 900 && sWidth >= 1300);
   IS_TOUCH_SUPPORTED = is_touch_enabled();
+  sWidth = 1300;
 
   if(IS_DEVICE_SIZE_OK) {
     createCanvas(sWidth, sHeight);
