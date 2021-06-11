@@ -17,6 +17,7 @@ function setup() {
   else if(sHeight > 900)
     sHeight = 900;
   IS_DEVICE_SIZE_OK = (sHeight <= 900 && sWidth >= 1300);
+  IS_DEVICE_SIZE_OK = true;
   IS_TOUCH_SUPPORTED = is_touch_enabled();
   sWidth = 1300;
 
@@ -52,6 +53,11 @@ function draw() {
   background(0);
   textFont(font);
   textAlign(LEFT, CENTER);
+
+  scale(GAME_SCALE);
+  let nWidth = width - width * GAME_SCALE;
+  let nHeight = height - height * GAME_SCALE;
+  translate(nWidth - nWidth/2, nHeight - nHeight/2);
 
   if(!IS_DEVICE_SIZE_OK) {
     let tS = 75;
