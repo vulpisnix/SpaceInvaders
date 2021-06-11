@@ -20,6 +20,11 @@ function setup() {
   IS_TOUCH_SUPPORTED = is_touch_supported();
   sWidth = 1300;
 
+  if(!IS_DEVICE_SIZE_OK) {
+    GAME_SCALE = 0.75;
+    IS_DEVICE_SIZE_OK = true;
+  }
+
   if(IS_DEVICE_SIZE_OK) {
     createCanvas(sWidth, sHeight);
     frameRate(60);
