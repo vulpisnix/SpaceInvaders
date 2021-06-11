@@ -54,6 +54,8 @@ function draw() {
   textAlign(LEFT, CENTER);
 
   if(!IS_DEVICE_SIZE_OK) {
+    drawTitle();
+
     noStroke();
     textAlign(CENTER, CENTER);
     fill(200,0,0);
@@ -120,10 +122,10 @@ function draw() {
   }
 }
 
-function drawTitle() {
+function drawTitle(tS = 75) {
   noStroke();
   fill(255,255,0);
-  textSize(75);
+  textSize(tS);
   textAlign(CENTER, CENTER);
   text('space invaders', width/2, 50);
 
