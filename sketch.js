@@ -133,10 +133,6 @@ function drawTitle(tS = 75) {
   textSize(tS);
   textAlign(CENTER, CENTER);
   text('space invaders', width/2, 50);
-
-  textSize(30);
-  text(width + ', ' + height + ' // ' + windowWidth + ', '+ windowHeight, width/2, 170);
-
   textAlign(LEFT, CENTER);
 
 }
