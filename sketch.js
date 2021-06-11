@@ -34,6 +34,14 @@ function setup() {
     loadShip('Level0', 0, 0);
     loadShip('Level1', 1, 75);
     loadShip('Level2', 2, 150);
+
+    if(IS_TOUCH_SUPPORTED) {
+      loadTouchIcon('directionControl');
+      loadTouchIcon('directionControlHighlighted');
+      loadTouchIcon('shot');
+      loadTouchIcon('shotHighlighted');
+    }
+
   }
   else {
     createCanvas(windowWidth, windowHeight-1);

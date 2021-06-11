@@ -6,6 +6,7 @@ let selectedBackground = 'background_normal', backgroundToDrawName = 'background
 
 let ships = [];
 let explosionSprites = [];
+let touchIcons = [];
 
 
 function loadBackground(name, price) {
@@ -91,6 +92,32 @@ function getShipByName(name) {
       price: -1,
       sprite: fallbackSprite
     };
+}
+
+function loadTouchIcon(name) {
+  loadImage('./data/touchcontrolicons/'+name+'.png', (img) => {
+    touchIcons.push({
+      name: name,
+      sprite: img
+    });
+  });
+}
+function getTouchIconByName(name) {
+  if(touchIcons.length == 0) {
+    return {
+      name: 'fallback',
+      sprite: fallbackSprite
+    };
+  }
+  for(let i = 0; i <= touchIcons.length-1; i++) {
+    if(touchIcons[i].name == name) {
+      return touchIcons[i];
+    }
+  }
+  return {
+    name: 'fallback',
+    sprite: fallbackSprite
+  };
 }
 
 

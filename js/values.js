@@ -42,7 +42,7 @@ let settingsOrig = {
 let settings = JSON.parse(JSON.stringify(settingsOrig));
 
 function is_touch_enabled() {
-    return ( 'ontouchstart' in window ) ||
+    return ( touches != undefined && 'ontouchstart' in window ) ||
         ( navigator.maxTouchPoints > 0 ) ||
         ( navigator.msMaxTouchPoints > 0 );
 }
