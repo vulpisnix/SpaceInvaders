@@ -15,21 +15,28 @@ function setup() {
   IS_DEVICE_SIZE_OK = (windowWidth >= 1300 && windowHeight >= 900);
   IS_TOUCH_SUPPORTED = is_touch_supported();
 
+  let cWidth = sWidth, cHeight = sHeight;
   if(!IS_DEVICE_SIZE_OK) {
     let maxSteps = 5;
     let steps = 0;
     while(steps < maxSteps) {
       GAME_SCALE -= 0.10;
-      let h = 900 * GAME_SCALE;
+      let w = sWidth * GAME_SCALE;
+      let h = sHeight * GAME_SCALE;
       if(h <= windowHeight) {
+        cWidth = w;
+        cHeight = h;
         IS_DEVICE_SIZE_OK = true;
         break;
       }
     }
   }
 
+  cWidth *= GAME_SCALE;
+  cHeight *= GAME_SCALE;
+
   if(IS_DEVICE_SIZE_OK) {
-    createCanvas(sWidth, sHeight);
+    createCanvas(cWidth, cHeight);
     frameRate(60);
     createMenu();
 
@@ -61,10 +68,10 @@ function draw() {
   textFont(font);
   textAlign(LEFT, CENTER);
 
-  scale(GAME_SCALE);
-  let nWidth = width - width * GAME_SCALE;
-  let nHeight = height - height * GAME_SCALE;
-  translate(nWidth - nWidth/2, nHeight - nHeight/2);
+  // scale(GAME_SCALE);
+  // let nWidth = width - width * GAME_SCALE;
+  // let nHeight = height - height * GAME_SCALE;
+  // translate(nWidth - nWidth/2, nHeight - nHeight/2);
 
   if(!IS_DEVICE_SIZE_OK) {
     let tS = 75;
