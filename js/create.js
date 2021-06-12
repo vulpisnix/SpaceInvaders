@@ -12,6 +12,7 @@ function createMenu() {
   SHOP = false;
   SETTINGS = false;
   CREDITS = false;
+  ACHIEVEMENTS = false;
 
   let bHeight = 50 * GAME_SCALE;
   let bFS = 50 * GAME_SCALE;
@@ -19,14 +20,16 @@ function createMenu() {
   const playButton = new Button(width/2, height/2-(75 * GAME_SCALE), bHeight, bFS, 'play');
   const storeButton = new Button(width/2, height/2, bHeight, bFS, 'store');
   const settingsButton = new Button(width/2, height/2+(75 * GAME_SCALE), bHeight, bFS, 'settings');
-  const creditsButton = new Button(width/2, height/2+(150 * GAME_SCALE), bHeight, bFS, 'credits');
-  
+  const achievementsButton = new Button(width/2, height/2+(150 * GAME_SCALE), bHeight, bFS, 'achievements');
+  const creditsButton = new Button(width/2, height/2+(225 * GAME_SCALE), bHeight, bFS, 'credits');
+
   playButton.action = function() {
     MENU = false;
     SHOP = false;
     SETTINGS = false;
     CREDITS = true;
     GAME = true;
+    ACHIEVEMENTS = false;
     
     createGame();
     print('GAME');
@@ -37,6 +40,7 @@ function createMenu() {
     SETTINGS = false;
     CREDITS = true;
     SHOP = true;
+    ACHIEVEMENTS = false;
     
     createStore();
     print('STORE');
@@ -48,6 +52,7 @@ function createMenu() {
     CREDITS = true;
     CREDITS = true;
     SETTINGS = true;
+    ACHIEVEMENTS = false;
     
     createSettings();
     print('SETTINGS');
@@ -58,9 +63,21 @@ function createMenu() {
     SHOP = false;
     SETTINGS = false;
     CREDITS = true;
+    ACHIEVEMENTS = false;
     
     createCredits();
     print('CREDITS');
+  }
+  achievementsButton.action = function() {
+    MENU = false;
+    GAME = false;
+    SHOP = false;
+    SETTINGS = false;
+    CREDITS = false;
+    ACHIEVEMENTS = true;
+
+    createAchievements();
+    print('ACHIEVEMENTS');
   }
 }
 
@@ -204,6 +221,18 @@ function createCredits() {
   SETTINGS = false;
   CREDITS = true;
   
+  createBackButton();
+}
+
+function createAchievements() {
+  buttons = [];
+  MENU = false;
+  GAME = false;
+  SHOP = false;
+  SETTINGS = false;
+  CREDITS = false;
+  ACHIEVEMENTS = true;
+
   createBackButton();
 }
 

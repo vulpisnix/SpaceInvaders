@@ -8,6 +8,10 @@ function renderMenu_Store() {
   textAlign(CENTER,CENTER);
   textSize(50 * GAME_SCALE);
   text('store', width/2, 120 * GAME_SCALE);
+
+  textSize(40 * GAME_SCALE);
+  fill(255, 0, 0);
+  text('to be added', width/2, height/2);
 }
 
 function renderMenu_Settings() {
@@ -24,13 +28,13 @@ function renderMenu_Credits() {
   textAlign(CENTER,CENTER);
   textSize(50 * GAME_SCALE);
   text('credits', width/2, 120 * GAME_SCALE);
-  
+
   let highlightColour = color(200, 200, 0);
   let textColour = color(255);
-  
+
   let xPos = 250 * GAME_SCALE;
   let yPos = height/2- (45 * GAME_SCALE);
-  
+
   textAlign(CENTER,CENTER);
   textSize(40 * GAME_SCALE);
   fill(highlightColour);
@@ -40,10 +44,10 @@ function renderMenu_Credits() {
   text('felix sandhop', xPos, yPos+ (30 * GAME_SCALE));
   text('and', xPos, yPos+ (60 * GAME_SCALE));
   text('conner bangel', xPos, yPos+ (90 * GAME_SCALE));
-  
-  
+
+
   xPos = width/2;
-  
+
   textAlign(CENTER,CENTER);
   textSize(40 * GAME_SCALE);
   fill(highlightColour);
@@ -51,10 +55,10 @@ function renderMenu_Credits() {
   textSize(27 * GAME_SCALE);
   fill(textColour);
   text('philipp schott', xPos, yPos+ (30 * GAME_SCALE));
-  
-  
+
+
   xPos = width-250 * GAME_SCALE;
-  
+
   textAlign(CENTER,CENTER);
   textSize(40 * GAME_SCALE);
   fill(highlightColour);
@@ -64,7 +68,19 @@ function renderMenu_Credits() {
   text('conner bangel', xPos, yPos+ (30 * GAME_SCALE));
   text('and', xPos, yPos+ (60 * GAME_SCALE));
   text('philipp schott', xPos, yPos+ (90 * GAME_SCALE));
-  
+
+}
+
+function renderMenu_Achievements() {
+  drawTitle();
+  fill(255);
+  textAlign(CENTER,CENTER);
+  textSize(50 * GAME_SCALE);
+  text('achievements', width/2, 120 * GAME_SCALE);
+
+  textSize(40 * GAME_SCALE);
+  fill(255, 0, 0);
+  text('to be added', width/2, height/2);
 }
 
 function renderGame() {

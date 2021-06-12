@@ -14,7 +14,6 @@ function setup() {
   let sWidth = 1300, sHeight = 900;
   IS_DEVICE_SIZE_OK = (windowWidth >= 1300 && windowHeight >= 900);
   IS_TOUCH_SUPPORTED = is_touch_supported();
-  IS_TOUCH_SUPPORTED = true;
 
   let cWidth = sWidth, cHeight = sHeight;
   if(!IS_DEVICE_SIZE_OK) {
@@ -101,12 +100,6 @@ function draw() {
     backgroundToDraw = getBackgroundByName(backgroundToDrawName);
   }
 
-  for (let i = buttons.length - 1; i >= 0; i--) {
-    const button = buttons[i];
-    button.update();
-    button.render();
-  }
-
   if (MENU) {
     renderMenu_Main();
   }
@@ -123,11 +116,19 @@ function draw() {
     renderMenu_Credits();
   }
 
+  if(ACHIEVEMENTS) {
+    renderMenu_Achievements();
+  }
+
   if (GAME) {
     renderGame();
   }
 
-
+  for (let i = buttons.length - 1; i >= 0; i--) {
+    const button = buttons[i];
+    button.update();
+    button.render();
+  }
   for (let i = animations.length - 1; i >= 0; i--) {
     const anim = animations[i];
     if (!GAME_PAUSE) {
@@ -139,13 +140,11 @@ function draw() {
       animations.splice(i, 1);
     }
   }
-
   for (let i = sliders.length - 1; i >= 0; i--) {
     const slider = sliders[i];
     slider.update();
     slider.render();
   }
-
   for (let i = checkboxes.length - 1; i >= 0; i--) {
     checkboxes[i].render();
   }
