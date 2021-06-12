@@ -160,7 +160,7 @@ function drawTitle(tS = 75) {
   text('space invaders', width/2, 50 * GAME_SCALE);
 
   if(IS_TOUCH_SUPPORTED) {
-    textSize(15);
+    textSize(15 * GAME_SCALE);
     text('touch is supported', width/2, 100 * GAME_SCALE);
   }
   textAlign(LEFT, CENTER);
