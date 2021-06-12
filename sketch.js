@@ -14,6 +14,7 @@ function setup() {
   let sWidth = 1300, sHeight = 900;
   IS_DEVICE_SIZE_OK = (windowWidth >= 1300 && windowHeight >= 900);
   IS_TOUCH_SUPPORTED = is_touch_supported();
+  IS_TOUCH_SUPPORTED = true;
 
   let cWidth = sWidth, cHeight = sHeight;
   if(!IS_DEVICE_SIZE_OK) {
@@ -151,17 +152,18 @@ function draw() {
 }
 
 function drawTitle(tS = 75) {
+  tS *= GAME_SCALE;
   noStroke();
   fill(255,255,0);
   textSize(tS);
   textAlign(CENTER, CENTER);
   text('space invaders', width/2, 50);
-  textAlign(LEFT, CENTER);
 
   if(IS_TOUCH_SUPPORTED) {
     textSize(15);
     text('touch is supported', width/2, 300);
   }
+  textAlign(LEFT, CENTER);
 }
 
 function AABB(x1, y1, w1, h1, x2, y2, w2, h2) {

@@ -79,11 +79,11 @@ function Player() {
     noStroke();
 
 
-    if(IS_TOUCH_SUPPORTED && settings.controls.useTouch && touches.length > 0) {
+    if(IS_TOUCH_SUPPORTED && settings.controls.useTouch) {
       let sprite = getTouchIconByName('directionControl').sprite;
       let spriteHighlighted = getTouchIconByName('directionControlHighlighted').sprite;
 
-      const x = touches[0].x, y = touches[0].y;
+      const x = mouseX, y = mouseY;
       const right = AABB(x, y, 1, 1, width-75, height-100, 50, 50);
       const left =  AABB(x, y, 1, 1, width-150, height-100, 50, 50);
       const up =    AABB(x, y, 1, 1, width-75 - 75/2, height-100 - 75/2, 50, 50);
