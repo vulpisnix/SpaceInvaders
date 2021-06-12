@@ -17,10 +17,10 @@ function setup() {
 
   let cWidth = sWidth, cHeight = sHeight;
   if(!IS_DEVICE_SIZE_OK) {
-    let maxSteps = 7;
+    let maxSteps = 20;
     let steps = 0;
     while(steps < maxSteps) {
-      GAME_SCALE -= 0.10;
+      GAME_SCALE -= 0.05;
       let w = sWidth * GAME_SCALE;
       let h = sHeight * GAME_SCALE;
 

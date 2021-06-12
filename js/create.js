@@ -62,8 +62,6 @@ function createMenu() {
     createCredits();
     print('CREDITS');
   }
-  
-  buttons.push(playButton, storeButton, settingsButton, creditsButton);
 }
 
 function createStore() {
@@ -121,7 +119,6 @@ function createSettings() {
   }
 
 
-
   const resetSettingsButton = new Button(width-80, height-25, 50 * GAME_SCALE, 40 * GAME_SCALE,'Reset');
   resetSettingsButton.action = function () {
     ResetSettings();
@@ -131,7 +128,6 @@ function createSettings() {
 
     SaveSettings();
   }
-  buttons.push(resetSettingsButton);
 }
 
 function createGame() {
@@ -216,5 +212,4 @@ function createBackButton() {
   backButton.action = function() {
     createMenu();
   }
-  buttons.push(backButton);
 }
