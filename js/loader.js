@@ -213,7 +213,30 @@ function LoadGame() {
   const rawSettings = getCookie('settings');
   if(rawSettings != '') {
     const settings_ = JSON.parse(rawSettings);
-    settings = settings_;
+    if(settings_.sound.musicVolume)
+      settings.sound.musicVolume = settings_.sound.musicVolume;
+    if(settings_.sound.musicFullVolume)
+      settings.sound.musicFullVolume = settings_.sound.musicFullVolume;
+    if(settings_.sound.soundsVolume)
+      settings.sound.soundsVolume = settings_.sound.soundsVolume;
+    if(settings_.sound.soundsFullVolume)
+      settings.sound.soundsFullVolume = settings_.sound.soundsFullVolume;
+
+    if(settings_.visuell.screenshake)
+      settings.visuell.screenshake = settings_.visuell.screenshake;
+
+    if(settings_.controls.useTouch)
+      settings.controls.useTouch = settings_.controls.useTouch;
+    if(settings_.controls.fire)
+      settings.controls.fire = settings_.controls.fire;
+    if(settings_.controls.movement.up)
+      settings.controls.movement.up = settings_.controls.movement.up;
+    if(settings_.controls.movement.down)
+      settings.controls.movement.down = settings_.controls.movement.down;
+    if(settings_.controls.movement.left)
+      settings.controls.movement.left = settings_.controls.movement.left;
+    if(settings_.controls.movement.right)
+      settings.controls.movement.right = settings_.controls.movement.right;
   }
 
 }
