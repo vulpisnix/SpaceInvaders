@@ -158,6 +158,10 @@ function drawTitle(tS = 75) {
   text('space invaders', width/2, 50);
   textAlign(LEFT, CENTER);
 
+  if(IS_TOUCH_SUPPORTED) {
+    textSize(15);
+    text('touch is supported', width/2, 300);
+  }
 }
 
 function AABB(x1, y1, w1, h1, x2, y2, w2, h2) {
