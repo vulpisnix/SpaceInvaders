@@ -17,20 +17,49 @@
 
 </head>
 	<body oncontextmenu="return false;">
-		<script src="js/values.js"></script>
-		<script src="js/loader.js"></script>
+<!--		<script src="js/values.js?q="></script>-->
+<!--		<script src="js/loader.js"></script>-->
 
-		<script src="js/checkbox.js"></script>
-		<script src="js/slider.js"></script>
-		<script src="js/input.js"></script>
-		<script src="js/effects.js"></script>
-		<script src="js/create.js"></script>
-		<script src="js/animation.js"></script>
-		<script src="js/button.js"></script>
-		<script src="js/enemy.js"></script>
-		<script src="js/bullet.js"></script>
-		<script src="js/player.js"></script>
-		<script src="js/renderer.js"></script>
-		<script src="sketch.js"></script>
+<!--		<script src="js/checkbox.js"></script>-->
+<!--		<script src="js/slider.js"></script>-->
+<!--		<script src="js/input.js"></script>-->
+<!--		<script src="js/effects.js"></script>-->
+<!--		<script src="js/create.js"></script>-->
+<!--		<script src="js/animation.js"></script>-->
+<!--		<script src="js/button.js"></script>-->
+<!--		<script src="js/enemy.js"></script>-->
+<!--		<script src="js/bullet.js"></script>-->
+<!--		<script src="js/player.js"></script>-->
+<!--		<script src="js/renderer.js"></script>-->
+<!--		<script src="sketch.js"></script>-->
 	</body>
 </html>
+
+<script>
+	const loadScript = src => {
+		return new Promise((resolve, reject) => {
+			const script = document.createElement('script')
+			script.type = 'text/javascript'
+			script.onload = resolve
+			script.onerror = reject
+			script.src = src
+			document.head.append(script)
+		})
+	}
+
+	loadScript('js/values.js');
+	loadScript('js/loader.js');
+
+	loadScript('js/checkbox.js');
+	loadScript('js/slider.js');
+	loadScript('js/input.js');
+	loadScript('js/effects.js');
+	loadScript('js/create.js');
+	loadScript('js/animation.js');
+	loadScript('js/button.js');
+	loadScript('js/enemy.js');
+	loadScript('js/bullet.js');
+	loadScript('js/player.js');
+	loadScript('js/renderer.js');
+	loadScript('sketch.js');
+</script>
