@@ -91,7 +91,7 @@ function createSettings() {
   createBackButton();
 
 
-  const volumeSlider = new Slider('Volume', 15, 175);
+  const volumeSlider = new Slider('Volume', 15 * GAME_SCALE, 175 * GAME_SCALE);
   volumeSlider.sliderPos = (settings.sound.fullvolume * (volumeSlider.size.x-20))+20;
   volumeSlider.onChange = function(percentage) {
     settings.sound.volume = map(floor(percentage*100), 0, 100, 0, 1);
@@ -99,14 +99,14 @@ function createSettings() {
     SaveSettings();
   }
 
-  const screenshakeCheckbox = new Checkbox('Screenshake', 15, 250);
+  const screenshakeCheckbox = new Checkbox('Screenshake', 15 * GAME_SCALE, 250 * GAME_SCALE);
   screenshakeCheckbox.value = settings.visuell.screenshake;
   screenshakeCheckbox.onChange = function(value) {
     settings.visuell.screenshake = value;
     SaveSettings();
   }
 
-  const useTouchControlsCheckbox = new Checkbox('Use Touch Controls', 15, 325);
+  const useTouchControlsCheckbox = new Checkbox('Use Touch Controls', 15 * GAME_SCALE, 325 * GAME_SCALE);
   useTouchControlsCheckbox.value = settings.controls.useTouch;
   if(!IS_TOUCH_SUPPORTED) {
     useTouchControlsCheckbox.value = false;

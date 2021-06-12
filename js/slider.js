@@ -1,9 +1,9 @@
 function Slider(text_, x,y) {
   sliders.push(this);
   this.pos = createVector(x,y);
-  this.size = createVector(300,60);
+  this.size = createVector(300 * GAME_SCALE,60 * GAME_SCALE);
   this.text = text_;
-  this.textSize = 22;
+  this.textSize = 22 * GAME_SCALE;
   this.sliderPos = 0;
 
   this.drag = false;
@@ -12,7 +12,7 @@ function Slider(text_, x,y) {
   
   this.update = function() {
     if(mouseIsPressed) {
-      if(AABB(mouseX,mouseY,1,1,this.sliderPos,this.pos.y+this.size.y-25, 10, 20)) {
+      if(AABB(mouseX,mouseY,1,1,this.sliderPos,this.pos.y+this.size.y-(25 * GAME_SCALE), 10 * GAME_SCALE, 20 * GAME_SCALE)) {
         this.drag = true;
       }
     }
@@ -33,15 +33,15 @@ function Slider(text_, x,y) {
     fill(255);
     textAlign(LEFT, CENTER);
     textSize(this.textSize);
-    text(this.text + ' ('+floor(this.getPercentage()*100)+'%)', this.pos.x+5, this.pos.y+20);
+    text(this.text + ' ('+floor(this.getPercentage()*100)+'%)', this.pos.x+(5 * GAME_SCALE), this.pos.y+(20 * GAME_SCALE));
     
     //Slider bar
     fill(50);
-    rect(this.pos.x+5, this.pos.y+this.size.y-20, this.size.x-10, 10);
+    rect(this.pos.x+(5 * GAME_SCALE), this.pos.y+this.size.y-(20 * GAME_SCALE), this.size.x-(10 * GAME_SCALE), 10 * GAME_SCALE);
 
     //Drag knob
     fill(255);
-    rect((this.getPercentage() * (this.size.x-20))+20, this.pos.y+this.size.y-25, 10, 20);
+    rect((this.getPercentage() * (this.size.x-(20 * GAME_SCALE)))+(20 * GAME_SCALE), this.pos.y+this.size.y-(25 * GAME_SCALE), 10 * GAME_SCALE, 20 * GAME_SCALE);
   }
   
   this.getPercentage = function() {

@@ -17,8 +17,8 @@ function Button(x,y,h,fS,txt = '') {
     let sY = this.size.y;
 
     this.isHovering = AABB(mouseX, mouseY, 1,1,x,y,sX,sY);
-    fill(50);
-    rect(x,y,sX,sY);
+    // fill(50);
+    // rect(x,y,sX,sY);
   }
   
   this.render = function() {
