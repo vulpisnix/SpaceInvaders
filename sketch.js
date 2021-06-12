@@ -14,6 +14,7 @@ function setup() {
   let sWidth = 1300, sHeight = 900;
   IS_DEVICE_SIZE_OK = (windowWidth >= 1300 && windowHeight >= 900);
   IS_TOUCH_SUPPORTED = is_touch_supported();
+  IS_TOUCH_SUPPORTED = true;
 
   let cWidth = sWidth, cHeight = sHeight;
   if(!IS_DEVICE_SIZE_OK) {

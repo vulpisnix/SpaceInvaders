@@ -157,16 +157,16 @@ function createGame() {
   player.bulletCooldown = 20;
   player.shipName = 'Level0';
   player.shoot = function() {
-    createPlayerBullet(player.pos.x+player.size.x/2-6, player.pos.y, -1);
+    createPlayerBullet(player.pos.x+player.size.x/2- (6 * GAME_SCALE), player.pos.y, -1);
   }
   
-  let enemyCols = floor(width / 75)-1;
+  let enemyCols = floor(width / (75 * GAME_SCALE))-1;
   let enemyX = 0;
-  let enemyY = 25;
+  let enemyY = 25 * GAME_SCALE;
   let right = false;
   for(let j = 0; j < 5; j++) {
     for(let i = 0; i <= enemyCols; i++) {
-      const enemy = new Enemy(enemyX+(75/2), enemyY, 50);
+      const enemy = new Enemy(enemyX+((75 * GAME_SCALE)/2), enemyY, 50 * GAME_SCALE);
       enemy.moveDir = right ? 1 : -1;
       enemy.sprite = enemyZeroSprite;
       
@@ -183,11 +183,11 @@ function createGame() {
       }
       
       enemys.push(enemy);
-      enemyX += 75;
-      if(enemyX >= width-50) {
+      enemyX += 75 * GAME_SCALE;
+      if(enemyX >= width-(50 * GAME_SCALE)) {
         right = !right;
         enemyX = 0;
-        enemyY += 50;
+        enemyY += 50 * GAME_SCALE;
       }
     }
   }

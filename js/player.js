@@ -1,6 +1,6 @@
 function Player() {
-  this.pos = createVector(width/2, height-50);
-  this.size = createVector(18*2, 26*2);
+  this.pos = createVector(width/2, height-(50 * GAME_SCALE));
+  this.size = createVector(18*2 * GAME_SCALE, 26*2 * GAME_SCALE);
   this.dirX = 0;
   
   this.shipName = 'Level0';
@@ -11,10 +11,7 @@ function Player() {
   this.bulletCooldown = 10;
   this.bulletCooldownCounter = 0;
   
-  this.shoot = function() {
-    createPlayerBullet(this.pos.x, this.pos.y, -1);
-    createPlayerBullet(this.pos.x+this.size-5, this.pos.y, -1);
-  }
+  this.shoot = function() {}
   
   this.dataUpdate = function() {
     if(this.shipData == null || this.shipData.name == 'fallback') {
@@ -23,8 +20,8 @@ function Player() {
   }
   
   this.update = function() {
-    this.pos.x += (this.dirX * this.shipSpeed);
-    this.pos.x = constrain(this.pos.x, 5, width-this.size.x-5);
+    this.pos.x += (this.dirX * (this.shipSpeed * GAME_SCALE));
+    this.pos.x = constrain(this.pos.x, 5 * GAME_SCALE, width-this.size.x-(5 * GAME_SCALE));
     
     this.bulletCooldownCounter--;
     if(this.fire && this.bulletCooldownCounter <= 0) {
@@ -67,15 +64,15 @@ function Player() {
     fill(255);
     
     textAlign(LEFT,CENTER);
-    textSize(15);
-    text('credits: '+currentcredits, 5, 15);
-    text('score: '+currentscore, 5, 30);
-    text('stage: '+stage, 5, 45);
+    textSize(15 * GAME_SCALE);
+    text('credits: '+currentcredits, 5 * GAME_SCALE, 15 * GAME_SCALE);
+    text('score: '+currentscore, 5 * GAME_SCALE, 30 * GAME_SCALE);
+    text('stage: '+stage, 5 * GAME_SCALE, 45 * GAME_SCALE);
     
     stroke(color(255,0,0,100));
     strokeWeight(3);
     fill(255,0,0);
-    line(0,height-150, width, height-150);
+    line(0,height-(150 * GAME_SCALE), width, height-(150 * GAME_SCALE));
     noStroke();
 
 
@@ -84,11 +81,11 @@ function Player() {
       let spriteHighlighted = getTouchIconByName('directionControlHighlighted').sprite;
 
       const x = mouseX, y = mouseY;
-      const right = AABB(x, y, 1, 1, width-75, height-100, 50, 50);
-      const left =  AABB(x, y, 1, 1, width-150, height-100, 50, 50);
-      const up =    AABB(x, y, 1, 1, width-75 - 75/2, height-100 - 75/2, 50, 50);
-      const down =  AABB(x, y, 1, 1, width-75 - 75/2, height-100 + 75/2, 50, 50);
-      const fire =  AABB(x, y, 1, 1, 75 + 75/2, height-100 - 75/2, 50, 50);
+      const right = AABB(x, y, 1, 1, width-(75 * GAME_SCALE),                         height-(100 * GAME_SCALE),                          50 * GAME_SCALE, 50 * GAME_SCALE);
+      const left =  AABB(x, y, 1, 1, width-(150 * GAME_SCALE),                        height-(100 * GAME_SCALE),                          50 * GAME_SCALE, 50 * GAME_SCALE);
+      const up =    AABB(x, y, 1, 1, width-(75 * GAME_SCALE) - ((75 * GAME_SCALE)/2), height-(100 * GAME_SCALE) - ((75 * GAME_SCALE)/2),  50 * GAME_SCALE, 50 * GAME_SCALE);
+      const down =  AABB(x, y, 1, 1, width-(75 * GAME_SCALE) - 75/2,                  height-(100 * GAME_SCALE) + ((75 * GAME_SCALE)/2),  50 * GAME_SCALE, 50 * GAME_SCALE);
+      const fire =  AABB(x, y, 1, 1, (75 * GAME_SCALE) + ((75 * GAME_SCALE)/2),       height-(100 * GAME_SCALE) - ((75 * GAME_SCALE)/2),  50 * GAME_SCALE, 50 * GAME_SCALE);
 
 
       if(left) {
@@ -108,30 +105,30 @@ function Player() {
 
       // RIGHT
       push();
-      translate(width-50, height-75);
+      translate(width-(50 * GAME_SCALE), height-(75 * GAME_SCALE));
       rotate(radians(90));
-      image(right ? spriteHighlighted : sprite, -25,-25,50,50);
+      image(right ? spriteHighlighted : sprite, -25 * GAME_SCALE,-25 * GAME_SCALE,50 * GAME_SCALE,50 * GAME_SCALE);
       pop();
 
       // LEFT
       push();
-      translate(width-125, height-75);
+      translate(width-(125 * GAME_SCALE), height-(75 * GAME_SCALE));
       rotate(radians(-90));
-      image(left ? spriteHighlighted : sprite, -25,-25,50,50);
+      image(left ? spriteHighlighted : sprite, -25 * GAME_SCALE,-25 * GAME_SCALE,50 * GAME_SCALE,50 * GAME_SCALE);
       pop();
 
 
       // UP
       push();
-      translate(width-50 - 75/2, height-75 - 75/2);
-      image(up ? spriteHighlighted : sprite, -25,-25,50,50);
+      translate(width-(50 * GAME_SCALE) - ((75 * GAME_SCALE)/2), height-(75 * GAME_SCALE) - ((75 * GAME_SCALE)/2));
+      image(up ? spriteHighlighted : sprite, -25 * GAME_SCALE,-25 * GAME_SCALE,50 * GAME_SCALE,50 * GAME_SCALE);
       pop();
 
       // DOWN
       push();
-      translate(width-50 - 75/2, height-75 + 75/2);
+      translate(width-(50 * GAME_SCALE) - ((75 * GAME_SCALE)/2), height-(75 * GAME_SCALE) + ((75 * GAME_SCALE)/2));
       rotate(radians(180));
-      image(down ? spriteHighlighted : sprite, -25,-25,50,50);
+      image(down ? spriteHighlighted : sprite, -25 * GAME_SCALE,-25 * GAME_SCALE,50 * GAME_SCALE,50 * GAME_SCALE);
       pop();
 
 
@@ -140,8 +137,8 @@ function Player() {
 
       // FIRE
       push();
-      translate(50 + 75/2, height-75 - 75/2);
-      image((fire || this.fire) ? spriteHighlighted : sprite, -25,-25,50,50);
+      translate((50 * GAME_SCALE) + ((75 * GAME_SCALE)/2), height-(75 * GAME_SCALE) - ((75 * GAME_SCALE)/2));
+      image((fire || this.fire) ? spriteHighlighted : sprite, -25 * GAME_SCALE,-25 * GAME_SCALE,50 * GAME_SCALE,50 * GAME_SCALE);
       pop();
     }
   }
