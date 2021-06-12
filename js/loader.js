@@ -8,6 +8,9 @@ let ships = [];
 let explosionSprites = [];
 let touchIcons = [];
 
+let music = [];
+let sounds = [];
+
 
 function loadBackground(name, price) {
   loadImage('./data/backgrounds/'+name+'.png', (img) => {
@@ -118,6 +121,59 @@ function getTouchIconByName(name) {
     name: 'fallback',
     sprite: fallbackSprite
   };
+}
+
+function loadMusic(name) {
+  loadSound('./data/sounds/music/'+name+'.wav', (sound) => {
+    music.push({
+      name: name,
+      sound: sound
+    });
+  });
+}
+function getMusicByName(name) {
+  if(music.length == 0) {
+    return null;
+  }
+  for(let i = 0; i <= music.length-1; i++) {
+    if(music[i].name == name) {
+      const m = music[i];
+      m.sound.setVolume(settings.sound.musicVolume);
+      return m;
+    }
+  }
+  return null;
+}
+function loadSFXSound(name) {
+  loadSound('./data/sounds/sfx/'+name+'.wav', (sound) => {
+    sounds.push({
+      name: name,
+      sound: sound
+    });
+  });
+}
+function getSoundByName(name) {
+  if(sounds.length == 0) {
+    return null;
+  }
+  for(let i = 0; i <= sounds.length-1; i++) {
+    if(sounds[i].name == name) {
+      const m = sounds[i];
+      m.sound.setVolume(settings.sound.musicVolume);
+      return m;
+    }
+  }
+  return null;
+}
+function UpdateMusicVolume() {
+  for(let i = 0; i <= music.length-1; i++) {
+    music[i].sound.setVolume(settings.sound.musicVolume);
+  }
+}
+function UpdateSoundVolume() {
+  for(let i = 0; i <= sounds.length-1; i++) {
+    sounds[i].sound.setVolume(settings.sound.musicVolume);
+  }
 }
 
 

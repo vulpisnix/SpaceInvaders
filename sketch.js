@@ -63,6 +63,17 @@ function setup() {
     createCanvas(windowWidth, windowHeight-1);
     frameRate(60);
   }
+
+  loadMusic('SpaceInvaders_BackgroundMusic');
+  loadSFXSound('Explosion');
+
+  setTimeout(() => {
+    const bgM = getMusicByName('SpaceInvaders_BackgroundMusic');
+    if(bgM != null) {
+      bgM.sound.loop();
+      bgM.sound.play();
+    }
+  }, 3000)
 }
 
 function draw() {

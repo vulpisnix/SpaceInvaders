@@ -24,8 +24,10 @@ let credits = 0, currentcredits = 0;
 
 let settingsOrig = {
     sound: {
-        volume: 1,
-        fullvolume: 1
+        musicVolume: 0.15,
+        musicFullVolume: 0.15,
+        soundsVolume: 0.3,
+        soundsFullVolume: 0.3
     },
     visuell: {
         screenshake: true

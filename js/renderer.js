@@ -62,7 +62,7 @@ function renderMenu_Credits() {
   textAlign(CENTER,CENTER);
   textSize(40 * GAME_SCALE);
   fill(highlightColour);
-  text('sounds & audio', xPos, yPos);
+  text('sfx & audio', xPos, yPos);
   textSize(27 * GAME_SCALE);
   fill(textColour);
   text('conner bangel', xPos, yPos+ (30 * GAME_SCALE));
@@ -331,7 +331,7 @@ function renderGame() {
     let hoverPlayAgainButton = AABB(mouseX, mouseY, 1, 1, width/2 - (bWidth*GAME_SCALE) - bWidth/2, height-bHeight-(10*GAME_SCALE), bWidth, bHeight);
 
     // Play again Button
-    fill(hoverRetryGameButton ? 25 : 50);
+    fill(hoverPlayAgainButton ? 25 : 50);
     rect(width/2 - (bWidth*GAME_SCALE) - bWidth/2, height-bHeight-(10*GAME_SCALE), bWidth, bHeight);
     textAlign(LEFT, CENTER);
     fill(255);

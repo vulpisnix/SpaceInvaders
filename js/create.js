@@ -108,22 +108,32 @@ function createSettings() {
   createBackButton();
 
 
-  const volumeSlider = new Slider('Volume', 15 * GAME_SCALE, 175 * GAME_SCALE);
-  volumeSlider.sliderPos = (settings.sound.fullvolume * (volumeSlider.size.x-20))+20;
-  volumeSlider.onChange = function(percentage) {
-    settings.sound.volume = map(floor(percentage*100), 0, 100, 0, 1);
-    settings.sound.fullvolume = percentage;
+  const musicVolumeSlider = new Slider('Music Volume', 15 * GAME_SCALE, 175 * GAME_SCALE);
+  musicVolumeSlider.sliderPos = (settings.sound.musicFullVolume * (musicVolumeSlider.size.x-20))+20;
+  musicVolumeSlider.onChange = function(percentage) {
+    settings.sound.musicVolume = map(floor(percentage*100), 0, 100, 0, 1);
+    settings.sound.musicFullVolume = percentage;
+    UpdateMusicVolume();
     SaveSettings();
   }
 
-  const screenshakeCheckbox = new Checkbox('Screenshake', 15 * GAME_SCALE, 250 * GAME_SCALE);
+  const soundsVolumeSlider = new Slider('Effects Volume', 15 * GAME_SCALE, 250 * GAME_SCALE);
+  soundsVolumeSlider.sliderPos = (settings.sound.soundsFullVolume * (soundsVolumeSlider.size.x-20))+20;
+  soundsVolumeSlider.onChange = function(percentage) {
+    settings.sound.soundsVolume = map(floor(percentage*100), 0, 100, 0, 1);
+    settings.sound.soundsFullVolume = percentage;
+    UpdateSoundVolume();
+    SaveSettings();
+  }
+
+  const screenshakeCheckbox = new Checkbox('Screenshake', 15 * GAME_SCALE, 325 * GAME_SCALE);
   screenshakeCheckbox.value = settings.visuell.screenshake;
   screenshakeCheckbox.onChange = function(value) {
     settings.visuell.screenshake = value;
     SaveSettings();
   }
 
-  const useTouchControlsCheckbox = new Checkbox('Use Touch Controls', 15 * GAME_SCALE, 325 * GAME_SCALE);
+  const useTouchControlsCheckbox = new Checkbox('Touch Controls', 15 * GAME_SCALE, 400 * GAME_SCALE);
   useTouchControlsCheckbox.value = settings.controls.useTouch;
   if(!IS_TOUCH_SUPPORTED) {
     useTouchControlsCheckbox.value = false;
@@ -140,14 +150,22 @@ function createSettings() {
   resetSettingsButton.action = function () {
     ResetSettings();
 
-    volumeSlider.sliderPos = (settings.sound.fullvolume * (volumeSlider.size.x-20))+20;
+    musicVolumeSlider.sliderPos = (settings.sound.musicFullVolume * (musicVolumeSlider.size.x-20))+20;
+    soundsVolumeSlider.sliderPos = (settings.sound.soundsFullVolume * (soundsVolumeSlider.size.x-20))+20;
     screenshakeCheckbox.value = settings.visuell.screenshake;
 
+    UpdateSoundVolume();
+    UpdateMusicVolume();
     SaveSettings();
   }
 }
 
 function createGame() {
+  const bgM = getMusicByName('SpaceInvaders_BackgroundMusic');
+  if(bgM != null) {
+    bgM.sound.stop();
+  }
+
   backgroundToDrawName = selectedBackground;
   MENU = false;
   GAME = true;
@@ -187,7 +205,7 @@ function createGame() {
       enemy.moveDir = right ? 1 : -1;
       enemy.sprite = enemyZeroSprite;
       
-      if(random(0,3) > 1.8) {
+      if(random(0,10) > 9) {
         enemy.sprite = enemyOneSprite;
         enemy.credits = 3;
         enemy.score = 12;

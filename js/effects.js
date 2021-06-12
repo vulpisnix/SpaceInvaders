@@ -16,4 +16,8 @@ function createExplosion(x,y) {
     sprites.push(getExplosionSpriteByIndex(i));
   }  
   animations.push(new Animation(x-(25 * GAME_SCALE),y-(25 * GAME_SCALE),50 * GAME_SCALE,50 * GAME_SCALE,3,sprites));
+
+  const explosionSound = getSoundByName('Explosion');
+  if(explosionSound != null)
+    explosionSound.sound.play();
 }
