@@ -12,11 +12,14 @@ function createMenu() {
   SHOP = false;
   SETTINGS = false;
   CREDITS = false;
-  
-  const playButton = new Button(width/2, height/2-75, 200, 50, 50, 'play');
-  const storeButton = new Button(width/2, height/2, 250, 50, 50, 'store');
-  const settingsButton = new Button(width/2, height/2+75, 360, 50, 50, 'settings');
-  const creditsButton = new Button(width/2, height/2+150, 330, 50, 50, 'credits');
+
+  let bHeight = 50 * GAME_SCALE;
+  let bFS = 50 * GAME_SCALE;
+
+  const playButton = new Button(width/2, height/2-(75 * GAME_SCALE), bHeight, bFS, 'play');
+  const storeButton = new Button(width/2, height/2, bHeight, bFS, 'store');
+  const settingsButton = new Button(width/2, height/2+(75 * GAME_SCALE), bHeight, bFS, 'settings');
+  const creditsButton = new Button(width/2, height/2+(150 * GAME_SCALE), bHeight, bFS, 'credits');
   
   playButton.action = function() {
     MENU = false;
@@ -119,7 +122,7 @@ function createSettings() {
 
 
 
-  const resetSettingsButton = new Button(width-80, height-25, 0, 50, 40,'Reset');
+  const resetSettingsButton = new Button(width-80, height-25, 50 * GAME_SCALE, 40 * GAME_SCALE,'Reset');
   resetSettingsButton.action = function () {
     ResetSettings();
 
@@ -209,7 +212,7 @@ function createCredits() {
 }
 
 function createBackButton() {
-  const backButton = new Button(60, height-25, 0, 50, 40, 'back');
+  const backButton = new Button(60 * GAME_SCALE, height-(25 * GAME_SCALE), 50 * GAME_SCALE, 40 * GAME_SCALE, 'back');
   backButton.action = function() {
     createMenu();
   }

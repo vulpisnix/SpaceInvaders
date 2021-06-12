@@ -1,74 +1,69 @@
 function renderMenu_Main() {
   drawTitle();
-    
-  fill(255);
-  textAlign(RIGHT,CENTER);
-  textSize(15);
-  text('by philipp schott, felix sandhop & conner bangel', width-10, height-15);
 }
 
 function renderMenu_Store() {
   drawTitle();
   fill(255);
   textAlign(CENTER,CENTER);
-  textSize(50);
-  text('store', width/2, 120);
+  textSize(50 * GAME_SCALE);
+  text('store', width/2, 120 * GAME_SCALE);
 }
 
 function renderMenu_Settings() {
   drawTitle();
   fill(255);
   textAlign(CENTER,CENTER);
-  textSize(50);
-  text('settings', width/2, 120);
+  textSize(50 * GAME_SCALE);
+  text('settings', width/2, 120 * GAME_SCALE);
 }
 
 function renderMenu_Credits() {
   drawTitle();
   fill(255);
   textAlign(CENTER,CENTER);
-  textSize(50);
-  text('credits', width/2, 120);
+  textSize(50 * GAME_SCALE);
+  text('credits', width/2, 120 * GAME_SCALE);
   
   let highlightColour = color(200, 200, 0);
   let textColour = color(255);
   
-  let xPos = 250;
-  let yPos = height/2-45;
+  let xPos = 250 * GAME_SCALE;
+  let yPos = height/2- (45 * GAME_SCALE);
   
   textAlign(CENTER,CENTER);
-  textSize(40);
+  textSize(40 * GAME_SCALE);
   fill(highlightColour);
   text('visuell & graphics', xPos, yPos);
-  textSize(27);
+  textSize(27 * GAME_SCALE);
   fill(textColour);
-  text('by felix sandhop', xPos, yPos+30);
-  text('and', xPos, yPos+60);
-  text('conner bangel', xPos, yPos+90);
+  text('felix sandhop', xPos, yPos+ (30 * GAME_SCALE));
+  text('and', xPos, yPos+ (60 * GAME_SCALE));
+  text('conner bangel', xPos, yPos+ (90 * GAME_SCALE));
   
   
   xPos = width/2;
   
   textAlign(CENTER,CENTER);
-  textSize(40);
+  textSize(40 * GAME_SCALE);
   fill(highlightColour);
   text('programming', xPos, yPos);
-  textSize(27);
+  textSize(27 * GAME_SCALE);
   fill(textColour);
-  text('by philipp schott', xPos, yPos+30);
+  text('philipp schott', xPos, yPos+ (30 * GAME_SCALE));
   
   
-  xPos = width-250;
+  xPos = width-250 * GAME_SCALE;
   
   textAlign(CENTER,CENTER);
-  textSize(40);
+  textSize(40 * GAME_SCALE);
   fill(highlightColour);
   text('sounds & audio', xPos, yPos);
-  textSize(27);
+  textSize(27 * GAME_SCALE);
   fill(textColour);
-  text('by conner bangel', xPos, yPos+30);
-  text('and', xPos, yPos+60);
-  text('philipp schott', xPos, yPos+90);
+  text('conner bangel', xPos, yPos+ (30 * GAME_SCALE));
+  text('and', xPos, yPos+ (60 * GAME_SCALE));
+  text('philipp schott', xPos, yPos+ (90 * GAME_SCALE));
   
 }
 
