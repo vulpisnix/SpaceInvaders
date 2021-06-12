@@ -14,7 +14,6 @@ function setup() {
   let sWidth = 1300, sHeight = 900;
   IS_DEVICE_SIZE_OK = (windowWidth >= 1300 && windowHeight >= 900);
   IS_TOUCH_SUPPORTED = is_touch_supported();
-  IS_TOUCH_SUPPORTED = true;
 
   let cWidth = sWidth, cHeight = sHeight;
   if(!IS_DEVICE_SIZE_OK) {
@@ -87,10 +86,10 @@ function draw() {
     noStroke();
     textAlign(CENTER, CENTER);
     fill(200,0,0);
-    textSize(tS/3);
-    text("Sorry but your device isn't big enough.", width/2, height/2-15);
-    text("Your screen resolution must be atleast 1300x900", width/2, height/2+15);
-    text("Your screen resolution is "+windowWidth+"x"+windowHeight, width/2, height/2+45);
+    textSize((tS/3) * GAME_SCALE);
+    text("Sorry but your device isn't big enough.", width/2, height/2-(15 * GAME_SCALE));
+    text("Your screen resolution must be atleast 1300x900", width/2, height/2+(15 * GAME_SCALE));
+    text("Your screen resolution is "+windowWidth+"x"+windowHeight, width/2, height/2+(45 * GAME_SCALE));
 
     return;
   }
@@ -158,11 +157,6 @@ function drawTitle(tS = 75) {
   textSize(tS);
   textAlign(CENTER, CENTER);
   text('space invaders', width/2, 50 * GAME_SCALE);
-
-  if(IS_TOUCH_SUPPORTED) {
-    textSize(15 * GAME_SCALE);
-    text('touch is supported', width/2, 100 * GAME_SCALE);
-  }
   textAlign(LEFT, CENTER);
 }
 
