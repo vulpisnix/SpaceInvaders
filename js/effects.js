@@ -20,14 +20,30 @@ function createExplosion(x,y) {
   }  
   animations.push(new Animation(x-(25 * GAME_SCALE),y-(25 * GAME_SCALE),50 * GAME_SCALE,50 * GAME_SCALE,3,sprites));
 
+  screenShake();
+
   const explosionSound = getSoundByName('Explosion');
   if(explosionSound != null)
     explosionSound.play();
 }
 
+function screenShake() {
+  if(shakeScreen)
+    return;
+  shakeScreen = true;
+  setTimeout(() => {
+    shakeScreen = false;
+    shakeEffect.x = 0;
+    shakeEffect.y = 0;
+  }, 500);
+}
 
 function createEnemysStageZero() {
   enemys = [];
+  playerBullets = [];
+  enemyBullets = [];
+  enemyBombs = [];
+
   let enemyCols = floor(width / (75 * GAME_SCALE))-1;
   let enemyX = 0;
   let enemyY = 25 * GAME_SCALE;
@@ -62,6 +78,10 @@ function createEnemysStageZero() {
 }
 function createEnemysStageOne() {
   enemys = [];
+  playerBullets = [];
+  enemyBullets = [];
+  enemyBombs = [];
+
   let enemyCols = floor(width / (75 * GAME_SCALE))-1;
   let enemyX = 0;
   let enemyY = 25 * GAME_SCALE;
@@ -109,6 +129,10 @@ function createEnemysStageOne() {
 }
 function createEnemysStageTwo() {
   enemys = [];
+  playerBullets = [];
+  enemyBullets = [];
+  enemyBombs = [];
+
   let enemyCols = floor(width / (75 * GAME_SCALE))-1;
   let enemyX = 0;
   let enemyY = 25 * GAME_SCALE;
@@ -156,6 +180,10 @@ function createEnemysStageTwo() {
 }
 function createEnemysStageThree_BOSS() {
   enemys = [];
+  playerBullets = [];
+  enemyBullets = [];
+  enemyBombs = [];
+
   let enemyX1 = 0, enemyX2 = width-(6*(75 * GAME_SCALE));
   let enemyY1 = 25 * GAME_SCALE, enemyY2 = 25 * GAME_SCALE;
   let right1 = false, right2 = true;

@@ -232,29 +232,29 @@ function LoadGame() {
   const rawSettings = getCookie('settings');
   if(rawSettings != '') {
     const settings_ = JSON.parse(rawSettings);
-    if(settings_.sound.musicVolume)
+    if(settings_.sound.musicVolume !== undefined)
       settings.sound.musicVolume = settings_.sound.musicVolume;
-    if(settings_.sound.musicFullVolume)
+    if(settings_.sound.musicFullVolume !== undefined)
       settings.sound.musicFullVolume = settings_.sound.musicFullVolume;
-    if(settings_.sound.soundsVolume)
+    if(settings_.sound.soundsVolume !== undefined)
       settings.sound.soundsVolume = settings_.sound.soundsVolume;
-    if(settings_.sound.soundsFullVolume)
+    if(settings_.sound.soundsFullVolume !== undefined)
       settings.sound.soundsFullVolume = settings_.sound.soundsFullVolume;
 
-    if(settings_.visuell.screenshake)
+    if(settings_.visuell.screenshake !== undefined)
       settings.visuell.screenshake = settings_.visuell.screenshake;
 
-    if(settings_.controls.useTouch)
+    if(settings_.controls.useTouch !== undefined)
       settings.controls.useTouch = settings_.controls.useTouch;
-    if(settings_.controls.fire)
+    if(settings_.controls.fire !== undefined)
       settings.controls.fire = settings_.controls.fire;
-    if(settings_.controls.movement.up)
+    if(settings_.controls.movement.up !== undefined)
       settings.controls.movement.up = settings_.controls.movement.up;
-    if(settings_.controls.movement.down)
+    if(settings_.controls.movement.down !== undefined)
       settings.controls.movement.down = settings_.controls.movement.down;
-    if(settings_.controls.movement.left)
+    if(settings_.controls.movement.left !== undefined)
       settings.controls.movement.left = settings_.controls.movement.left;
-    if(settings_.controls.movement.right)
+    if(settings_.controls.movement.right !== undefined)
       settings.controls.movement.right = settings_.controls.movement.right;
   }
 }

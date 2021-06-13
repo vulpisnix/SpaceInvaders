@@ -23,6 +23,9 @@ let highscore = 0, currentscore = 0;
 let bestStage = 0, stage = 0;
 let credits = 0, currentcredits = 0;
 
+let shakeEffect;
+let shakeScreen = false;
+
 let settingsOrig = {
     sound: {
         musicVolume: 0.15,

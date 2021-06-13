@@ -12,6 +12,7 @@ function preload() {
 }
 
 function setup() {
+  shakeEffect = createVector(0,0);
   let sWidth = 1300, sHeight = 900;
   IS_DEVICE_SIZE_OK = (windowWidth >= 1300 && windowHeight >= 900);
   IS_TOUCH_SUPPORTED = is_touch_supported();
@@ -79,10 +80,11 @@ function draw() {
   textFont(font);
   textAlign(LEFT, CENTER);
 
-  // scale(GAME_SCALE);
-  // let nWidth = width - width * GAME_SCALE;
-  // let nHeight = height - height * GAME_SCALE;
-  // translate(nWidth - nWidth/2, nHeight - nHeight/2);
+  if(shakeScreen && settings.visuell.screenshake) {
+    translate(shakeEffect.x, shakeEffect.y);
+    shakeEffect.x += random(-1, 1)*3;
+    shakeEffect.y += random(-1, 1)*3;
+  }
 
   if(!IS_DEVICE_SIZE_OK) {
     let tS = 75;

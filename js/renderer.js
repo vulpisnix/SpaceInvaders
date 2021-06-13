@@ -85,17 +85,19 @@ function renderMenu_Achievements() {
 
 function renderGame() {
   const GAME_WON = enemys.length == 0 && stage == 4;
-  
+
   if(GAME_COUNTDOWN >= 0 && !GAME_STARTED && !GAME_DEAD && !GAME_PAUSE) {
       fill(255);
       textAlign(CENTER,CENTER);
-      textSize(150 * GAME_SCALE);
+    textSize(140 * GAME_SCALE);
+      text('Stage '+(stage == 3 ? stage+': BOSS' : stage), width/2, height/2-50);
+      textSize(120 * GAME_SCALE);
       if(floor(GAME_COUNTDOWN) < 4) {
         if(floor(GAME_COUNTDOWN) > 0) {
-          text(floor(GAME_COUNTDOWN),width/2, height/2);
+          text(floor(GAME_COUNTDOWN),width/2, height/2+100);
         }
         else {
-          text('go',width/2, height/2);
+          text('go',width/2, height/2+100);
         }
       }
       
@@ -231,6 +233,13 @@ function renderGame() {
     textSize(50 * GAME_SCALE);
     text('game paused', width/2, 120 * GAME_SCALE);
 
+    fill(255);
+    textSize(30 * GAME_SCALE);
+    textAlign(LEFT,CENTER);
+    text('Best Stage: '+(stage == 3 ? stage+' (BOSS)' : stage), width/2-(400 * GAME_SCALE), height/2-(150 * GAME_SCALE));
+    text('Stage: '+(stage == 3 ? stage+' (BOSS)' : stage), width/2-(400 * GAME_SCALE), height/2-(120 * GAME_SCALE));
+
+
     textSize(28 * GAME_SCALE);
     textAlign(LEFT,CENTER);
     text('highscore: '+highscore, width/2-(400 * GAME_SCALE), height/2-(60 * GAME_SCALE));
@@ -266,6 +275,8 @@ function renderGame() {
 
     if(mouseIsPressed && hoverResumeGameButton) {
       GAME_PAUSE = false;
+      GAME_STARTED = false;
+      GAME_COUNTDOWN = 4;
     }
     if(mouseIsPressed && hoverBackToMenuButton) {
       createMenu();
@@ -281,6 +292,12 @@ function renderGame() {
     textSize(50 * GAME_SCALE);
     text('you died!', width/2, 120 * GAME_SCALE);
 
+
+    fill(255);
+    textSize(30 * GAME_SCALE);
+    textAlign(LEFT,CENTER);
+    text('Best Stage: '+(stage == 3 ? stage+' (BOSS)' : stage), width/2-(200 * GAME_SCALE), height/2-(150 * GAME_SCALE));
+    text('Stage: '+(stage == 3 ? stage+' (BOSS)' : stage), width/2-(200 * GAME_SCALE), height/2-(120 * GAME_SCALE));
 
     fill(255);
     textSize(28 * GAME_SCALE);
@@ -326,6 +343,8 @@ function renderGame() {
   
   if(enemys.length == 0 && stage <= 3 && GAME_STARTED && !GAME_NEXT_STAGE && !GAME_WON) {
     GAME_NEXT_STAGE = true;
+    GAME_STARTED = false;
+    GAME_COUNTDOWN = 4;
     stage++;
     print('NEXT STAGE ('+stage+')');
 
@@ -339,6 +358,11 @@ function renderGame() {
       createEnemysStageThree_BOSS();
 
     GAME_NEXT_STAGE = false;
+
+    if(stage > bestStage) {
+      bestStage = stage;
+      SaveScores();
+    }
   }
   
   if(GAME_WON) {
@@ -355,7 +379,6 @@ function renderGame() {
     text('score: '+currentscore, width/2-(200 * GAME_SCALE), height/2-(30 * GAME_SCALE));
     text('total credits: '+credits, width/2-(200 * GAME_SCALE), height/2);
     text('credits: '+currentcredits, width/2-(200 * GAME_SCALE), height/2+(30 * GAME_SCALE));
-
 
 
     let bText = 'Play again';
