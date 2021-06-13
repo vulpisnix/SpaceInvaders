@@ -20,6 +20,18 @@ function renderMenu_Settings() {
   textAlign(CENTER,CENTER);
   textSize(50 * GAME_SCALE);
   text('settings', width/2, 120 * GAME_SCALE);
+
+  if(keyChangerChange != '') {
+    fill(color(0, 0, 0, 175));
+    rect(0, 0, width, height);
+
+    fill(255);
+    textAlign(CENTER,CENTER);
+    textSize(75*GAME_SCALE);
+    text('Change Key', width/2, height/2 - (25*GAME_SCALE));
+    textSize(40*GAME_SCALE);
+    text('Press a key to change the key', width/2, height/2 + (25*GAME_SCALE));
+  }
 }
 
 function renderMenu_Credits() {

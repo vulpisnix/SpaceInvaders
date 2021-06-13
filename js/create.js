@@ -1,4 +1,5 @@
 function createMenu() {
+  keyChangerChange = '';
   backgroundToDrawName = selectedBackground;
   buttons = [];
   enemys = [];
@@ -7,6 +8,8 @@ function createMenu() {
   animations = [];
   sliders = [];
   checkboxes = [];
+  keychangers = [];
+
   MENU = true;
   GAME = false;
   SHOP = false;
@@ -86,6 +89,7 @@ function createStore() {
   enemys = [];
   sliders = [];
   checkboxes = [];
+  keychangers = [];
   MENU = false;
   GAME = false;
   SHOP = true;
@@ -100,6 +104,7 @@ function createSettings() {
   enemys = [];
   sliders = [];
   checkboxes = [];
+  keychangers = [];
   MENU = false;
   GAME = false;
   SHOP = false;
@@ -145,7 +150,6 @@ function createSettings() {
     SaveSettings();
   }
 
-
   const resetSettingsButton = new Button(width-80, height-25, 50 * GAME_SCALE, 40 * GAME_SCALE,'Reset');
   resetSettingsButton.action = function () {
     ResetSettings();
@@ -157,6 +161,44 @@ function createSettings() {
     UpdateSoundVolume();
     UpdateMusicVolume();
     SaveSettings();
+  }
+
+
+  const keyChangerMovementUp = new KeyChanger(width-(300*GAME_SCALE)-(15 * GAME_SCALE), (175 * GAME_SCALE),'Movement: up', 'Key: '+getKeyName(settings.controls.movement.up));
+  const keyChangerMovementDown = new KeyChanger(width-(300*GAME_SCALE)-(15 * GAME_SCALE), (175 * GAME_SCALE)+(75*GAME_SCALE),'Movement: down', 'Key: '+getKeyName(settings.controls.movement.down));
+  const keyChangerMovementLeft = new KeyChanger(width-(300*GAME_SCALE)-(15 * GAME_SCALE), (175 * GAME_SCALE)+(150*GAME_SCALE),'Movement: left', 'Key: '+getKeyName(settings.controls.movement.left));
+  const keyChangerMovementRight = new KeyChanger(width-(300*GAME_SCALE)-(15 * GAME_SCALE), (175 * GAME_SCALE)+(225*GAME_SCALE),'Movement: right', 'Key: '+getKeyName(settings.controls.movement.right));
+  const keyChangerControlsFire = new KeyChanger(width-(300*GAME_SCALE)-(15 * GAME_SCALE), (175 * GAME_SCALE)+(300*GAME_SCALE),'Controls: fire', 'Key: '+getKeyName(settings.controls.fire));
+
+  keyChangerMovementUp.onClick = function() {
+    keyChangerChange = 'movementUP';
+    setTimeout(() => {
+      keyChangerChange = '';
+    }, 3000);
+  }
+  keyChangerMovementDown.onClick = function() {
+    keyChangerChange = 'movementDOWN';
+    setTimeout(() => {
+      keyChangerChange = '';
+    }, 3000);
+  }
+  keyChangerMovementLeft.onClick = function() {
+    keyChangerChange = 'movementLEFT';
+    setTimeout(() => {
+      keyChangerChange = '';
+    }, 3000);
+  }
+  keyChangerMovementRight.onClick = function() {
+    keyChangerChange = 'movementRIGHT';
+    setTimeout(() => {
+      keyChangerChange = '';
+    }, 3000);
+  }
+  keyChangerControlsFire.onClick = function() {
+    keyChangerChange = 'controlsFIRE';
+    setTimeout(() => {
+      keyChangerChange = '';
+    }, 3000);
   }
 }
 
@@ -180,6 +222,7 @@ function createGame() {
   playerBullets = [];
   enemyBullets = [];
   checkboxes = [];
+  keychangers = [];
   
   currentscore = 0;
   currentcredits = 0;
@@ -200,6 +243,7 @@ function createCredits() {
   enemys = [];
   sliders = [];
   checkboxes = [];
+  keychangers = [];
   MENU = false;
   GAME = false;
   SHOP = false;
@@ -210,7 +254,11 @@ function createCredits() {
 }
 
 function createAchievements() {
+  enemys = [];
   buttons = [];
+  sliders = [];
+  checkboxes = [];
+  keychangers = [];
   MENU = false;
   GAME = false;
   SHOP = false;

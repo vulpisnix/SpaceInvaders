@@ -21,13 +21,28 @@ function keyPressed() {
       createGame();
     }
   }
-  
-  if((SHOP || SETTINGS || CREDITS) && (key == 'Escape' || key == 'Backspace')) {
+  if((SHOP || SETTINGS || CREDITS || ACHIEVEMENTS) && (key == 'Escape' || key == 'Backspace')) {
     createMenu();
   }
 
-  if(key == 'l') {
-    enemys = [];
+  if(SETTINGS && keyChangerChange != '' && key != 'Escape') {
+    if(keyChangerChange == 'movementUP') {
+      settings.controls.movement.up = key;
+    }
+    if(keyChangerChange == 'movementDOWN') {
+      settings.controls.movement.down = key;
+    }
+    if(keyChangerChange == 'movementLEFT') {
+      settings.controls.movement.left = key;
+    }
+    if(keyChangerChange == 'movementRIGHT') {
+      settings.controls.movement.right = key;
+    }
+    if(keyChangerChange == 'controlsFIRE') {
+      settings.controls.fire = key;
+    }
+    keyChangerChange = '';
+    SaveSettings();
   }
 }
 
@@ -49,5 +64,29 @@ function mousePressed() {
     for (let i = checkboxes.length - 1; i >= 0; i--) {
       checkboxes[i].mousePressed();
     }
+  }
+}
+
+function getKeyName(key) {
+  switch(key) {
+    case ' ':
+      return 'space';
+      break;
+    case 'ArrowUp':
+      return 'Arrow Up';
+      break;
+    case 'ArrowDown':
+      return 'Arrow Down';
+      break;
+    case 'ArrowLeft':
+      return 'Arrow Left';
+      break;
+    case 'ArrowRight':
+      return 'Arrow Right';
+      break;
+
+    default:
+      return key;
+      break;
   }
 }

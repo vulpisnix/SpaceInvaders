@@ -223,9 +223,12 @@ function LoadGame() {
   if(rawScores != '') {
     const scores = JSON.parse(rawScores);
     if(scores) {
-      highscore = scores.highscore;
-      bestStage = scores.bestStage;
-      currentcredits = scores.credits;
+      if(scores.highscore !== undefined)
+        highscore = scores.highscore;
+      if(scores.bestStage !== undefined)
+        bestStage = scores.bestStage;
+      if(scores.credits !== undefined)
+        currentcredits = scores.credits;
     }
   }
 

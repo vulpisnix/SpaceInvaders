@@ -35,7 +35,7 @@ function Checkbox(text_, x,y) {
     }
 
     fill(255);
-    textSize(this.textSize-5);
+    textSize(this.textSize-(5*GAME_SCALE));
     if(!this.disabled) {
       text(this.value ? 'Activated' : 'Deactivated', this.pos.x + (30 * GAME_SCALE), this.pos.y + this.size.y - (17 * GAME_SCALE));
     }

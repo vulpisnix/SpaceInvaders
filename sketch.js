@@ -111,29 +111,6 @@ function draw() {
     backgroundToDraw = getBackgroundByName(backgroundToDrawName);
   }
 
-  if (MENU) {
-    renderMenu_Main();
-  }
-
-  if (SHOP) {
-    renderMenu_Store();
-  }
-
-  if (SETTINGS) {
-    renderMenu_Settings();
-  }
-
-  if (CREDITS) {
-    renderMenu_Credits();
-  }
-
-  if(ACHIEVEMENTS) {
-    renderMenu_Achievements();
-  }
-
-  if (GAME) {
-    renderGame();
-  }
 
   for (let i = buttons.length - 1; i >= 0; i--) {
     const button = buttons[i];
@@ -158,6 +135,30 @@ function draw() {
   }
   for (let i = checkboxes.length - 1; i >= 0; i--) {
     checkboxes[i].render();
+  }
+  for (let i = keychangers.length - 1; i >= 0; i--) {
+    keychangers[i].update();
+    keychangers[i].render();
+  }
+
+
+  if (MENU) {
+    renderMenu_Main();
+  }
+  if (SHOP) {
+    renderMenu_Store();
+  }
+  if (SETTINGS) {
+    renderMenu_Settings();
+  }
+  if (CREDITS) {
+    renderMenu_Credits();
+  }
+  if(ACHIEVEMENTS) {
+    renderMenu_Achievements();
+  }
+  if (GAME) {
+    renderGame();
   }
 }
 
