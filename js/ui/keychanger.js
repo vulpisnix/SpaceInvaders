@@ -12,7 +12,7 @@ function KeyChanger(x,y,text_, subtext_) {
     this.onClick = function() {}
 
     this.update = function() {
-        if(keyChangerChange != '') return;
+        if(keyChangerChange.name != '') return;
 
         this.isHovering = AABB(mouseX, mouseY, 1, 1, this.pos.x,this.pos.y,this.size.x,this.size.y);
 

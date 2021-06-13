@@ -1,5 +1,5 @@
 function createMenu() {
-  keyChangerChange = '';
+  keyChangerChange.name = '';
   backgroundToDrawName = selectedBackground;
   buttons = [];
   enemys = [];
@@ -9,6 +9,7 @@ function createMenu() {
   sliders = [];
   checkboxes = [];
   keychangers = [];
+  shopPreviews = [];
 
   MENU = true;
   GAME = false;
@@ -85,18 +86,34 @@ function createMenu() {
 }
 
 function createStore() {
+  storeMainSlideXOffset = 0;
   buttons = [];
   enemys = [];
   sliders = [];
   checkboxes = [];
   keychangers = [];
+  shopPreviews = [];
+
   MENU = false;
   GAME = false;
   SHOP = true;
   SETTINGS = false;
   CREDITS = false;
+
+  SHOP_BACKGROUNDS = false;
   
   createBackButton();
+
+  let shipProducts = getShopProductsByCategory('ships');
+  let backgroundProducts = getShopProductsByCategory('backgrounds');
+
+  const shopShipUpgrades = new ShopPreview('Ship Upgrades', shipProducts[floor(random(0,shipProducts.length))]);
+  const shopBackgrounds = new ShopPreview('Backgrounds', backgroundProducts[floor(random(0,backgroundProducts.length))]);
+
+  shopBackgrounds.onClick = function() {
+    createStore_Backgrounds();
+  }
+
 }
 
 function createSettings() {
@@ -105,6 +122,7 @@ function createSettings() {
   sliders = [];
   checkboxes = [];
   keychangers = [];
+  shopPreviews = [];
   MENU = false;
   GAME = false;
   SHOP = false;
@@ -171,33 +189,43 @@ function createSettings() {
   const keyChangerControlsFire = new KeyChanger(width-(300*GAME_SCALE)-(15 * GAME_SCALE), (175 * GAME_SCALE)+(300*GAME_SCALE),'Controls: fire', 'Key: '+getKeyName(settings.controls.fire));
 
   keyChangerMovementUp.onClick = function() {
-    keyChangerChange = 'movementUP';
+    keyChangerChange.target = keyChangerMovementUp;
+    keyChangerChange.name = 'movementUP';
     setTimeout(() => {
-      keyChangerChange = '';
+      keyChangerChange.target = null;
+      keyChangerChange.name = '';
     }, 3000);
   }
   keyChangerMovementDown.onClick = function() {
-    keyChangerChange = 'movementDOWN';
+    keyChangerChange.target = keyChangerMovementDown;
+    keyChangerChange.name = 'movementDOWN';
     setTimeout(() => {
-      keyChangerChange = '';
+      keyChangerChange.target = null;
+      keyChangerChange.name = '';
     }, 3000);
   }
   keyChangerMovementLeft.onClick = function() {
-    keyChangerChange = 'movementLEFT';
+    keyChangerChange.target = keyChangerMovementLeft;
+    keyChangerChange.name = 'movementLEFT';
     setTimeout(() => {
-      keyChangerChange = '';
+      keyChangerChange.target = null;
+      keyChangerChange.name = '';
     }, 3000);
   }
   keyChangerMovementRight.onClick = function() {
-    keyChangerChange = 'movementRIGHT';
+    keyChangerChange.target = keyChangerMovementRight;
+    keyChangerChange.name = 'movementRIGHT';
     setTimeout(() => {
-      keyChangerChange = '';
+      keyChangerChange.target = null;
+      keyChangerChange.name = '';
     }, 3000);
   }
   keyChangerControlsFire.onClick = function() {
-    keyChangerChange = 'controlsFIRE';
+    keyChangerChange.target = keyChangerControlsFire;
+    keyChangerChange.name = 'controlsFIRE';
     setTimeout(() => {
-      keyChangerChange = '';
+      keyChangerChange.target = null;
+      keyChangerChange.name = '';
     }, 3000);
   }
 }
@@ -223,6 +251,7 @@ function createGame() {
   enemyBullets = [];
   checkboxes = [];
   keychangers = [];
+  shopPreviews = [];
   
   currentscore = 0;
   currentcredits = 0;
@@ -259,6 +288,7 @@ function createAchievements() {
   sliders = [];
   checkboxes = [];
   keychangers = [];
+  shopPreviews = [];
   MENU = false;
   GAME = false;
   SHOP = false;
@@ -274,4 +304,37 @@ function createBackButton() {
   backButton.action = function() {
     createMenu();
   }
+}
+function createBackToStoreButton() {
+  const backButton = new Button(60 * GAME_SCALE, height-(25 * GAME_SCALE), 50 * GAME_SCALE, 40 * GAME_SCALE, 'back');
+  backButton.action = function() {
+    createStore();
+  }
+}
+
+
+
+function createStore_Backgrounds() {
+  storeMainSlideXOffset = 0;
+  buttons = [];
+  sliders = [];
+  checkboxes = [];
+  shopPreviews = [];
+
+  MENU = false;
+  GAME = false;
+  SHOP = false;
+  SETTINGS = false;
+  CREDITS = false;
+  SHOP_BACKGROUNDS = true;
+
+  createBackToStoreButton();
+
+
+  let backgroundProducts = getShopProductsByCategory('backgrounds');
+  for(let i = backgroundProducts.length-1; i >= 0; i--) {
+    const bgP = backgroundProducts[i];
+    const background = new ShopPreview(bgP.text, bgP, true);
+  }
+
 }

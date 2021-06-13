@@ -5,11 +5,17 @@ let bombSprite, bulletSprite, enemyWalkerSprite, enemyShooterSprite, enemyBomber
 let selectedBackground = 'background_normal', backgroundToDrawName = 'background_normal';
 
 let ships = [];
+let storeSprites = [];
 let explosionSprites = [];
 let touchIcons = [];
 
 let music = [];
 let sounds = [];
+
+let storeBought = {
+  backgrounds: [],
+  shipUpgrades: []
+};
 
 
 function loadBackground(name, price) {
@@ -123,6 +129,32 @@ function getTouchIconByName(name) {
   };
 }
 
+function loadStoreSprite(name) {
+  loadImage('./data/store/'+name+'.png', (img) => {
+    storeSprites.push({
+      name: name,
+      sprite: img
+    });
+  });
+}
+function getStoreSpriteByName(name) {
+  if(storeSprites.length == 0) {
+    return {
+      name: 'fallback',
+      sprite: fallbackSprite
+    };
+  }
+  for(let i = 0; i <= storeSprites.length-1; i++) {
+    if(storeSprites[i].name == name) {
+      return storeSprites[i];
+    }
+  }
+  return {
+    name: 'fallback',
+    sprite: fallbackSprite
+  };
+}
+
 function loadMusic(name) {
   loadSound('./data/sounds/music/'+name+'.wav', (sound) => {
     let vol = settings.sound.musicVolume;
@@ -222,14 +254,12 @@ function LoadGame() {
   const rawScores = getCookie('scores');
   if(rawScores != '') {
     const scores = JSON.parse(rawScores);
-    if(scores) {
-      if(scores.highscore !== undefined)
-        highscore = scores.highscore;
-      if(scores.bestStage !== undefined)
-        bestStage = scores.bestStage;
-      if(scores.credits !== undefined)
-        currentcredits = scores.credits;
-    }
+    if(scores.highscore !== undefined)
+      highscore = scores.highscore;
+    if(scores.bestStage !== undefined)
+      bestStage = scores.bestStage;
+    if(scores.credits !== undefined)
+      credits = scores.credits;
   }
 
   const rawSettings = getCookie('settings');
@@ -260,10 +290,19 @@ function LoadGame() {
     if(settings_.controls.movement.right !== undefined)
       settings.controls.movement.right = settings_.controls.movement.right;
   }
+
+  const rawStoreBought = getCookie('store');
+  if(rawStoreBought != '') {
+    const store = JSON.parse(rawStoreBought);
+    if(store != undefined) {
+      storeBought = store;
+    }
+  }
 }
 function SaveGame() {
   SaveScores();
   SaveSettings();
+  SaveStore();
 }
 function SaveScores() {
   setCookie('scores', JSON.stringify({
@@ -278,5 +317,6 @@ function SaveSettings() {
 function ResetSettings() {
   settings = JSON.parse(JSON.stringify(settingsOrig));
 }
-
-LoadGame();
+function SaveStore() {
+  setCookie('store', JSON.stringify(storeBought));
+}

@@ -12,6 +12,9 @@ function preload() {
 }
 
 function setup() {
+  InitStoreItems();
+  LoadGame();
+
   shakeEffect = createVector(0,0);
   let sWidth = 1300, sHeight = 900;
   IS_DEVICE_SIZE_OK = (windowWidth >= 1300 && windowHeight >= 900);
@@ -42,7 +45,20 @@ function setup() {
   if(IS_DEVICE_SIZE_OK) {
     createCanvas(cWidth, cHeight);
     frameRate(60);
-    createMenu();
+    let hash = document.location.hash;
+    if(hash == '#store') {
+      createStore();
+    }
+    else if(hash == '#settings') {
+      createSettings();
+    }
+    else if(hash == '#achievements') {
+      createAchievements();
+    }
+    else if(hash == '#credits') {
+      createCredits();
+    }
+    else createMenu();
 
     loadBackground('background_normal', 0);
     loadBackground('background_dead', 0);
@@ -76,6 +92,7 @@ function setup() {
 }
 
 function draw() {
+  updateInput();
   background(0);
   textFont(font);
   textAlign(LEFT, CENTER);
@@ -148,6 +165,9 @@ function draw() {
   if (SHOP) {
     renderMenu_Store();
   }
+  if(SHOP_BACKGROUNDS) {
+    renderMenu_Store_Backgrounds();
+  }
   if (SETTINGS) {
     renderMenu_Settings();
   }
@@ -177,4 +197,26 @@ function AABB(x1, y1, w1, h1, x2, y2, w2, h2) {
     x1 + w1 > x2 &&
     y1 < y2 + h2 &&
     y1 + h1 > y2);
+}
+
+function InitStoreItems() {
+  loadStoreSprite('backgrounds/Normal_Background_1');
+  loadStoreSprite('backgrounds/Normal_Background_2');
+  loadStoreSprite('backgrounds/Normal_Background_3');
+  loadStoreSprite('backgrounds/Normal_Background_4');
+  loadStoreSprite('backgrounds/Normal_Background_5');
+  loadStoreSprite('backgrounds/Normal_Background_6');
+  loadStoreSprite('backgrounds/Normal_Background_7');
+  loadStoreSprite('backgrounds/Normal_Background_8');
+  loadStoreSprite('backgrounds/Normal_Background_9');
+
+  shopProducts.push(new ShopProduct('Mountains', 'backgrounds', 'backgrounds/Normal_Background_3', 100));
+  shopProducts.push(new ShopProduct('Waves', 'backgrounds', 'backgrounds/Normal_Background_1', 1000));
+  shopProducts.push(new ShopProduct('Nebula', 'backgrounds', 'backgrounds/Normal_Background_2', 500));
+  shopProducts.push(new ShopProduct('Sun', 'backgrounds', 'backgrounds/Normal_Background_4', 1500));
+  shopProducts.push(new ShopProduct('Epilepsy', 'backgrounds', 'backgrounds/Normal_Background_5', 2000));
+  shopProducts.push(new ShopProduct('Epilepsy 2', 'backgrounds', 'backgrounds/Normal_Background_6', 3500));
+  shopProducts.push(new ShopProduct('Purple Claws', 'backgrounds', 'backgrounds/Normal_Background_7', 4000));
+  shopProducts.push(new ShopProduct('Laser', 'backgrounds', 'backgrounds/Normal_Background_8', 4500));
+  shopProducts.push(new ShopProduct('Bloody Leaves', 'backgrounds', 'backgrounds/Normal_Background_9', 5000));
 }

@@ -9,9 +9,66 @@ function renderMenu_Store() {
   textSize(50 * GAME_SCALE);
   text('store', width/2, 120 * GAME_SCALE);
 
-  textSize(40 * GAME_SCALE);
-  fill(255, 0, 0);
-  text('to be added', width/2, height/2);
+  fill(255);
+  textSize(30 * GAME_SCALE);
+  text('Credits: '+credits, width-(300*GAME_SCALE), 175*GAME_SCALE);
+
+  let storeXOffset = 50*GAME_SCALE;
+  for (let i = shopPreviews.length-1; i >= 0; i--) {
+    const preview = shopPreviews[i];
+    if(preview != null) {
+      preview.update(storeXOffset + storeMainSlideXOffset, height / 2 - preview.size.y / 2);
+      preview.render();
+      storeXOffset += preview.size.x + (50 * GAME_SCALE);
+    }
+  }
+
+  if(mouseIsPressed || pressedKey != '') {
+    if(inputMouseDX < 0 || pressedKey == 'ArrowLeft') {
+      const last = shopPreviews[0];
+      if ((last.pos.x + last.size.x) >= width - (20 * GAME_SCALE))
+        storeMainSlideXOffset -= 5;
+    }
+    if(inputMouseDX > 0 || pressedKey == 'ArrowRight') {
+      const first = shopPreviews[shopPreviews.length-1];
+      if (first.pos.x <= (20 * GAME_SCALE))
+        storeMainSlideXOffset += 5;
+    }
+  }
+}
+function renderMenu_Store_Backgrounds() {
+  drawTitle();
+  fill(255);
+  textAlign(CENTER,CENTER);
+  textSize(50 * GAME_SCALE);
+  text('store: backgrounds', width/2, 120 * GAME_SCALE);
+
+  fill(255);
+  textSize(30 * GAME_SCALE);
+  text('Credits: '+credits, width-(300*GAME_SCALE), 175*GAME_SCALE);
+
+  let storeXOffset = 50*GAME_SCALE;
+  for (let i = shopPreviews.length-1; i >= 0; i--) {
+    const preview = shopPreviews[i];
+    if(preview != null) {
+      preview.update(storeXOffset + storeMainSlideXOffset, height / 2 - preview.size.y / 2);
+      preview.render();
+      storeXOffset += preview.size.x + (50 * GAME_SCALE);
+    }
+  }
+
+  if(mouseIsPressed || pressedKey != '') {
+    if(inputMouseDX < 0 || pressedKey == 'ArrowLeft') {
+      const last = shopPreviews[0];
+      if ((last.pos.x + last.size.x) >= width - (20 * GAME_SCALE))
+        storeMainSlideXOffset -= 5;
+    }
+    if(inputMouseDX > 0 || pressedKey == 'ArrowRight') {
+      const first = shopPreviews[shopPreviews.length-1];
+      if (first.pos.x <= (20 * GAME_SCALE))
+        storeMainSlideXOffset += 5;
+    }
+  }
 }
 
 function renderMenu_Settings() {
@@ -21,7 +78,7 @@ function renderMenu_Settings() {
   textSize(50 * GAME_SCALE);
   text('settings', width/2, 120 * GAME_SCALE);
 
-  if(keyChangerChange != '') {
+  if(keyChangerChange.name != '') {
     fill(color(0, 0, 0, 175));
     rect(0, 0, width, height);
 
@@ -98,28 +155,6 @@ function renderMenu_Achievements() {
 function renderGame() {
   const GAME_WON = enemys.length == 0 && stage == 4;
 
-  if(GAME_COUNTDOWN >= 0 && !GAME_STARTED && !GAME_DEAD && !GAME_PAUSE) {
-      fill(255);
-      textAlign(CENTER,CENTER);
-    textSize(140 * GAME_SCALE);
-      text('Stage '+(stage == 3 ? stage+': BOSS' : stage), width/2, height/2-50);
-      textSize(120 * GAME_SCALE);
-      if(floor(GAME_COUNTDOWN) < 4) {
-        if(floor(GAME_COUNTDOWN) > 0) {
-          text(floor(GAME_COUNTDOWN),width/2, height/2+100);
-        }
-        else {
-          text('go',width/2, height/2+100);
-        }
-      }
-      
-      GAME_COUNTDOWN -= deltaTime/1000;
-      
-      if(GAME_COUNTDOWN <= 0) {
-        GAME_STARTED = true;
-      }
-    }
-
   if(!GAME_PAUSE && !GAME_DEAD && GAME_STARTED) {
     enemyStepDown++;
     if(enemyStepDown >= 300) {
@@ -166,7 +201,6 @@ function renderGame() {
       }
     }
   }
-
   for(let i = playerBullets.length-1; i >= 0; i--) {
     const bullet = playerBullets[i];
     if(!GAME_PAUSE && GAME_STARTED) {
@@ -179,7 +213,6 @@ function renderGame() {
       playerBullets.splice(i,1);
     }
   }
-
   for(let i = enemyBullets.length-1; i >= 0; i--) {
     const bullet = enemyBullets[i];
     if(!GAME_PAUSE && GAME_STARTED) {
@@ -205,7 +238,6 @@ function renderGame() {
       GAME_DEAD = true;
     }
   }
-
   for(let i = enemyBombs.length-1; i >= 0; i--) {
     const bomb = enemyBombs[i];
     if(!GAME_PAUSE && GAME_STARTED) {
@@ -231,6 +263,29 @@ function renderGame() {
 
   player.render();
   player.dataUpdate();
+
+  if(GAME_COUNTDOWN >= 0 && !GAME_STARTED && !GAME_DEAD && !GAME_PAUSE) {
+    fill(255);
+    textAlign(CENTER,CENTER);
+    textSize(140 * GAME_SCALE);
+    text('Stage '+(stage == 3 ? stage+': BOSS' : stage), width/2, height/2-50);
+    textSize(120 * GAME_SCALE);
+    if(floor(GAME_COUNTDOWN) < 4) {
+      if(floor(GAME_COUNTDOWN) > 0) {
+        text(floor(GAME_COUNTDOWN),width/2, height/2+100);
+      }
+      else {
+        text('go',width/2, height/2+100);
+      }
+    }
+
+    GAME_COUNTDOWN -= deltaTime/1000;
+
+    if(GAME_COUNTDOWN <= 0) {
+      GAME_STARTED = true;
+    }
+  }
+
   if(!GAME_PAUSE && GAME_STARTED && !GAME_DEAD && !GAME_WON) {
     player.update();
     player.renderHUD();
@@ -248,7 +303,7 @@ function renderGame() {
     fill(255);
     textSize(30 * GAME_SCALE);
     textAlign(LEFT,CENTER);
-    text('Best Stage: '+(stage == 3 ? stage+' (BOSS)' : stage), width/2-(400 * GAME_SCALE), height/2-(150 * GAME_SCALE));
+    text('Best Stage: '+(bestStage == 3 ? bestStage+' (BOSS)' : bestStage), width/2-(400 * GAME_SCALE), height/2-(150 * GAME_SCALE));
     text('Stage: '+(stage == 3 ? stage+' (BOSS)' : stage), width/2-(400 * GAME_SCALE), height/2-(120 * GAME_SCALE));
 
 
@@ -308,7 +363,7 @@ function renderGame() {
     fill(255);
     textSize(30 * GAME_SCALE);
     textAlign(LEFT,CENTER);
-    text('Best Stage: '+(stage == 3 ? stage+' (BOSS)' : stage), width/2-(200 * GAME_SCALE), height/2-(150 * GAME_SCALE));
+    text('Best Stage: '+(bestStage == 3 ? bestStage+' (BOSS)' : bestStage), width/2-(200 * GAME_SCALE), height/2-(150 * GAME_SCALE));
     text('Stage: '+(stage == 3 ? stage+' (BOSS)' : stage), width/2-(200 * GAME_SCALE), height/2-(120 * GAME_SCALE));
 
     fill(255);
