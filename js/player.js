@@ -67,7 +67,7 @@ function Player() {
     textSize(18 * GAME_SCALE);
     text('credits: '+currentcredits, 5 * GAME_SCALE, 15 * GAME_SCALE);
     text('score: '+currentscore, 5 * GAME_SCALE, 35 * GAME_SCALE);
-    text('stage: '+stage, 5 * GAME_SCALE, 55 * GAME_SCALE);
+    text('stage: '+(stage == 3 ? 'BOSS' : stage), 5 * GAME_SCALE, 55 * GAME_SCALE);
     
     stroke(color(255,0,0,100));
     strokeWeight(3);

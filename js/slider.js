@@ -19,10 +19,10 @@ function Slider(text_, x,y) {
     else this.drag = false;
 
     if(mouseIsPressed && this.drag) {
-      this.sliderPos = constrain(mouseX, 20, this.size.x);
+      this.sliderPos = constrain(mouseX, (20*GAME_SCALE), this.size.x);
       this.onChange(this.getPercentage());
     }
-    this.sliderPos = constrain(this.sliderPos, 20, this.size.x);
+    this.sliderPos = constrain(this.sliderPos, (20*GAME_SCALE), this.size.x);
   }
   this.render = function() {
     //Background

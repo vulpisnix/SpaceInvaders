@@ -109,7 +109,7 @@ function createSettings() {
 
 
   const musicVolumeSlider = new Slider('Music Volume', 15 * GAME_SCALE, 175 * GAME_SCALE);
-  musicVolumeSlider.sliderPos = (settings.sound.musicFullVolume * (musicVolumeSlider.size.x-20))+20;
+  musicVolumeSlider.sliderPos = (settings.sound.musicFullVolume * (musicVolumeSlider.size.x-(20*GAME_SCALE)))+(20*GAME_SCALE);
   musicVolumeSlider.onChange = function(percentage) {
     settings.sound.musicVolume = map(floor(percentage*100), 0, 100, 0, 1);
     settings.sound.musicFullVolume = percentage;
@@ -118,7 +118,7 @@ function createSettings() {
   }
 
   const soundsVolumeSlider = new Slider('Effects Volume', 15 * GAME_SCALE, 250 * GAME_SCALE);
-  soundsVolumeSlider.sliderPos = (settings.sound.soundsFullVolume * (soundsVolumeSlider.size.x-20))+20;
+  soundsVolumeSlider.sliderPos = (settings.sound.soundsFullVolume * (soundsVolumeSlider.size.x-(20*GAME_SCALE)))+(20*GAME_SCALE);
   soundsVolumeSlider.onChange = function(percentage) {
     settings.sound.soundsVolume = map(floor(percentage*100), 0, 100, 0, 1);
     settings.sound.soundsFullVolume = percentage;
@@ -161,10 +161,7 @@ function createSettings() {
 }
 
 function createGame() {
-  const bgM = getMusicByName('SpaceInvaders_BackgroundMusic');
-  if(bgM != null) {
-    bgM.sound.stop();
-  }
+  // getMusicByName('normal_music').stop();
 
   backgroundToDrawName = selectedBackground;
   MENU = false;
@@ -195,37 +192,7 @@ function createGame() {
     createPlayerBullet(player.pos.x+player.size.x/2- (6 * GAME_SCALE), player.pos.y, -1);
   }
   
-  let enemyCols = floor(width / (75 * GAME_SCALE))-1;
-  let enemyX = 0;
-  let enemyY = 25 * GAME_SCALE;
-  let right = false;
-  for(let j = 0; j < 5; j++) {
-    for(let i = 0; i <= enemyCols; i++) {
-      const enemy = new Enemy(enemyX+((75 * GAME_SCALE)/2), enemyY, 50 * GAME_SCALE);
-      enemy.moveDir = right ? 1 : -1;
-      enemy.sprite = enemyZeroSprite;
-      
-      if(random(0,10) > 9) {
-        enemy.sprite = enemyOneSprite;
-        enemy.credits = 3;
-        enemy.score = 12;
-
-        enemy.bulletCooldown = floor(random(80, 140));
-        enemy.bulletCooldownCounter = floor(random(0, enemy.bulletCooldown-1));
-        enemy.shoot = function() {
-          createEnemyBullet(enemy.pos.x, enemy.pos.y, 1);
-        }
-      }
-      
-      enemys.push(enemy);
-      enemyX += 75 * GAME_SCALE;
-      if(enemyX >= width-(50 * GAME_SCALE)) {
-        right = !right;
-        enemyX = 0;
-        enemyY += 50 * GAME_SCALE;
-      }
-    }
-  }
+  createEnemysStageZero();
 }
 
 function createCredits() {

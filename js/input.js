@@ -25,6 +25,10 @@ function keyPressed() {
   if((SHOP || SETTINGS || CREDITS) && (key == 'Escape' || key == 'Backspace')) {
     createMenu();
   }
+
+  if(key == 'l') {
+    enemys = [];
+  }
 }
 
 function keyReleased() {

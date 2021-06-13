@@ -1,7 +1,7 @@
 let fallbackSprite;
 let backgroundToDraw;
 let backgrounds = [];
-let bulletSprite, enemyZeroSprite, enemyOneSprite, enemyTwoSprite;
+let bombSprite, bulletSprite, enemyWalkerSprite, enemyShooterSprite, enemyBomberSprite;
 let selectedBackground = 'background_normal', backgroundToDrawName = 'background_normal';
 
 let ships = [];
@@ -125,15 +125,27 @@ function getTouchIconByName(name) {
 
 function loadMusic(name) {
   loadSound('./data/sounds/music/'+name+'.wav', (sound) => {
-    music.push({
-      name: name,
-      sound: sound
-    });
+    let vol = settings.sound.musicVolume;
+    if(vol <= 0.02)
+      vol = 0;
+    sound.setVolume(vol);
+    music.push(new Audio(name, sound));
+  });
+}
+function loadMusic(name, callback) {
+  loadSound('./data/sounds/music/'+name+'.wav', (sound) => {
+    let vol = settings.sound.musicVolume;
+    if(vol <= 0.02)
+      vol = 0;
+    sound.setVolume(vol);
+    const audio = new Audio(name, sound);
+    music.push(audio);
+    callback(audio);
   });
 }
 function getMusicByName(name) {
   if(music.length == 0) {
-    return null;
+    return new Audio('fallback', null);
   }
   for(let i = 0; i <= music.length-1; i++) {
     if(music[i].name == name) {
@@ -142,37 +154,44 @@ function getMusicByName(name) {
       return m;
     }
   }
-  return null;
+  return new Audio('fallback', null);
 }
 function loadSFXSound(name) {
   loadSound('./data/sounds/sfx/'+name+'.wav', (sound) => {
-    sounds.push({
-      name: name,
-      sound: sound
-    });
+    let vol = settings.sound.soundsVolume;
+    if(vol <= 0.02)
+      vol = 0;
+    sound.setVolume(vol);
+    sounds.push(new Audio(name, sound));
   });
 }
 function getSoundByName(name) {
   if(sounds.length == 0) {
-    return null;
+    return new Audio('fallback', null);
   }
   for(let i = 0; i <= sounds.length-1; i++) {
     if(sounds[i].name == name) {
       const m = sounds[i];
-      m.sound.setVolume(settings.sound.musicVolume);
+      m.sound.setVolume(settings.sound.soundsVolume);
       return m;
     }
   }
-  return null;
+  return new Audio('fallback', null);
 }
 function UpdateMusicVolume() {
   for(let i = 0; i <= music.length-1; i++) {
-    music[i].sound.setVolume(settings.sound.musicVolume);
+    let vol = settings.sound.musicVolume;
+    if(vol <= 0.02)
+      vol = 0;
+    music[i].sound.setVolume(vol);
   }
 }
 function UpdateSoundVolume() {
   for(let i = 0; i <= sounds.length-1; i++) {
-    sounds[i].sound.setVolume(settings.sound.musicVolume);
+    let vol = settings.sound.soundsVolume;
+    if(vol <= 0.02)
+      vol = 0;
+    sounds[i].sound.setVolume(vol);
   }
 }
 
@@ -238,7 +257,6 @@ function LoadGame() {
     if(settings_.controls.movement.right)
       settings.controls.movement.right = settings_.controls.movement.right;
   }
-
 }
 function SaveGame() {
   SaveScores();

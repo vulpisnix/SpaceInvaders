@@ -5,9 +5,10 @@ function preload() {
   
   
   bulletSprite = loadImage('./data/bullet.png');
-  enemyZeroSprite = loadImage('./data/enemyZero.png');
-  enemyOneSprite = loadImage('./data/enemyOne.png');
-  enemyTwoSprite = loadImage('./data/enemyTwo.png');
+  bombSprite = loadImage('./data/bomb.png');
+  enemyWalkerSprite = loadImage('./data/enemies/enemyZero.png');
+  enemyShooterSprite = loadImage('./data/enemies/enemyOne.png');
+  enemyBomberSprite = loadImage('./data/enemies/enemyTwo.png');
 }
 
 function setup() {
@@ -64,16 +65,13 @@ function setup() {
     frameRate(60);
   }
 
-  loadMusic('SpaceInvaders_BackgroundMusic');
+  loadMusic('normal_music', (audio) => {
+    audio.play(true);
+  });
   loadSFXSound('Explosion');
 
-  setTimeout(() => {
-    const bgM = getMusicByName('SpaceInvaders_BackgroundMusic');
-    if(bgM != null) {
-      bgM.sound.loop();
-      bgM.sound.play();
-    }
-  }, 3000)
+  UpdateSoundVolume();
+  UpdateMusicVolume();
 }
 
 function draw() {
