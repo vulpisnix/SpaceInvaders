@@ -17,6 +17,7 @@ function createMenu() {
   SETTINGS = false;
   CREDITS = false;
   ACHIEVEMENTS = false;
+  GAME_DEAD = false;
 
   let bHeight = 50 * GAME_SCALE;
   let bFS = 50 * GAME_SCALE;
@@ -232,8 +233,6 @@ function createSettings() {
 
 function createGame() {
   // getMusicByName('normal_music').stop();
-
-  backgroundToDrawName = selectedBackground;
   MENU = false;
   GAME = true;
   SHOP = false;
@@ -335,6 +334,9 @@ function createStore_Backgrounds() {
   for(let i = backgroundProducts.length-1; i >= 0; i--) {
     const bgP = backgroundProducts[i];
     const background = new ShopPreview(bgP.text, bgP, true);
+    background.onClick = function () {
+      background.product.buyClickOrSelect();
+    }
   }
 
 }

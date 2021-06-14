@@ -24,6 +24,9 @@ function ShopPreview(name,product, displayFullInformation = false) {
                 this.onClick();
             }
         } else this.pressed = false;
+
+        if(this.product != null)
+            this.product.update();
     }
 
     this.render = function() {
@@ -64,15 +67,17 @@ function ShopPreview(name,product, displayFullInformation = false) {
             fill(255);
             textAlign(LEFT, CENTER);
             textSize((this.size.x / 16) * GAME_SCALE);
-            if(this.product.isBought) {
-                text('Click to select', this.pos.y + this.size.y - (20*GAME_SCALE));
-            }
-            else {
-
-                if (!this.isHovering)
-                    text('Price: ' + this.product.price, this.pos.x + (5 * GAME_SCALE), this.pos.y + this.size.y - (20 * GAME_SCALE));
-                else
-                    text((credits - this.product.price >= 0) ? 'Click to buy' : 'Not enough credits', this.pos.x + (5 * GAME_SCALE), this.pos.y + this.size.y - (20 * GAME_SCALE));
+            if(this.product.spritePath == settings.visuell.selectedBackground) {
+                text('Selected', this.pos.x + (5 * GAME_SCALE), this.pos.y + this.size.y - (20 * GAME_SCALE));
+            } else {
+                if (this.product.isBought) {
+                    text('Click to select', this.pos.x + (5 * GAME_SCALE), this.pos.y + this.size.y - (20 * GAME_SCALE));
+                } else {
+                    if (!this.isHovering)
+                        text('Price: ' + this.product.price, this.pos.x + (5 * GAME_SCALE), this.pos.y + this.size.y - (20 * GAME_SCALE));
+                    else
+                        text((credits - this.product.price >= 0) ? 'Click to buy' : 'Not enough credits', this.pos.x + (5 * GAME_SCALE), this.pos.y + this.size.y - (20 * GAME_SCALE));
+                }
             }
         }
     }

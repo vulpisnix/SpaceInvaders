@@ -2,7 +2,7 @@ function preload() {
   font = loadFont('./data/SpaceInvaders.ttf');
   
   fallbackSprite = loadImage('./data/fallbackSprite.png');
-  
+  spriteDeathBackground = loadImage('./data/store/backgrounds/death.png');
   
   bulletSprite = loadImage('./data/bullet.png');
   bombSprite = loadImage('./data/bomb.png');
@@ -14,6 +14,8 @@ function preload() {
 function setup() {
   InitStoreItems();
   LoadGame();
+  if(settings.visuell.selectedBackground != '')
+    backgroundToDrawName = settings.visuell.selectedBackground;
 
   shakeEffect = createVector(0,0);
   let sWidth = 1300, sHeight = 900;
@@ -59,9 +61,6 @@ function setup() {
       createCredits();
     }
     else createMenu();
-
-    loadBackground('background_normal', 0);
-    loadBackground('background_dead', 0);
 
     loadExplosionSprites();
 
@@ -121,10 +120,11 @@ function draw() {
     return;
   }
 
-  if (backgroundToDraw != null)
-    image(backgroundToDraw.sprite, 0, 0, width, height);
-  if (backgroundToDraw == null || backgroundToDraw.name != backgroundToDrawName) {
-    backgroundToDraw = getBackgroundByName(backgroundToDrawName);
+  if (settings.visuell.selectedBackground != null) {
+    image(getStoreSpriteByName(settings.visuell.selectedBackground).sprite, 0, 0, width, height);
+  }
+  if(GAME_DEAD) {
+    image(spriteDeathBackground, 0, 0, width, height);
   }
 
 
@@ -202,6 +202,7 @@ function AABB(x1, y1, w1, h1, x2, y2, w2, h2) {
 }
 
 function InitStoreItems() {
+  loadStoreSprite('backgrounds/Normal_Background_0');
   loadStoreSprite('backgrounds/Normal_Background_1');
   loadStoreSprite('backgrounds/Normal_Background_2');
   loadStoreSprite('backgrounds/Normal_Background_3');
@@ -212,15 +213,16 @@ function InitStoreItems() {
   loadStoreSprite('backgrounds/Normal_Background_8');
   loadStoreSprite('backgrounds/Normal_Background_9');
 
-  shopProducts.push(new ShopProduct('Waves', 500, 'normal', 'backgrounds', 'backgrounds/Normal_Background_1'));
-  shopProducts.push(new ShopProduct('Gamma Rays', 1000, 'normal', 'backgrounds', 'backgrounds/Normal_Background_2'));
-  shopProducts.push(new ShopProduct('Sun', 1500, 'normal', 'backgrounds', 'backgrounds/Normal_Background_4'));
-  shopProducts.push(new ShopProduct('Nebula', 2000, 'normal', 'backgrounds', 'backgrounds/Normal_Background_5'));
-  shopProducts.push(new ShopProduct('Epilepsy', 2500, 'normal', 'backgrounds', 'backgrounds/Normal_Background_6'));
-  shopProducts.push(new ShopProduct('Purple Claws',3000, 'normal',  'backgrounds', 'backgrounds/Normal_Background_7'));
-  shopProducts.push(new ShopProduct('Laser', 3500, 'normal', 'backgrounds', 'backgrounds/Normal_Background_8'));
-  shopProducts.push(new ShopProduct('Bloody Leaves', 4000, 'normal', 'backgrounds', 'backgrounds/Normal_Background_9'));
-  shopProducts.push(new ShopProduct('Mountains', 10000, 'legendary', 'backgrounds', 'backgrounds/Normal_Background_3'));
+  new ShopProduct('Default', 0, 'normal', 'backgrounds', 'backgrounds/Normal_Background_0');
+  new ShopProduct('Waves', 500, 'normal', 'backgrounds', 'backgrounds/Normal_Background_1');
+  new ShopProduct('Gamma Rays', 1000, 'normal', 'backgrounds', 'backgrounds/Normal_Background_2');
+  new ShopProduct('Sun', 1500, 'normal', 'backgrounds', 'backgrounds/Normal_Background_4');
+  new ShopProduct('Nebula', 2000, 'normal', 'backgrounds', 'backgrounds/Normal_Background_5');
+  new ShopProduct('Epilepsy', 2500, 'normal', 'backgrounds', 'backgrounds/Normal_Background_6');
+  new ShopProduct('Purple Claws',3000, 'normal',  'backgrounds', 'backgrounds/Normal_Background_7');
+  new ShopProduct('Laser', 3500, 'normal', 'backgrounds', 'backgrounds/Normal_Background_8');
+  new ShopProduct('Bloody Leaves', 4000, 'normal', 'backgrounds', 'backgrounds/Normal_Background_9');
+  new ShopProduct('Mountains', 10000, 'legendary', 'backgrounds', 'backgrounds/Normal_Background_3');
 
 
   shopProducts.sort((a, b) => a.price - b.price)

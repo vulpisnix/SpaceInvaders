@@ -1,5 +1,5 @@
 let fallbackSprite;
-let backgroundToDraw;
+let backgroundToDraw, spriteDeathBackground;
 let backgrounds = [];
 let bombSprite, bulletSprite, enemyWalkerSprite, enemyShooterSprite, enemyBomberSprite;
 let selectedBackground = 'background_normal', backgroundToDrawName = 'background_normal';
@@ -11,11 +11,6 @@ let touchIcons = [];
 
 let music = [];
 let sounds = [];
-
-let storeBought = {
-  backgrounds: [],
-  shipUpgrades: []
-};
 
 
 function loadBackground(name, price) {
@@ -276,6 +271,8 @@ function LoadGame() {
 
     if(settings_.visuell.screenshake !== undefined)
       settings.visuell.screenshake = settings_.visuell.screenshake;
+    if(settings_.visuell.selectedBackground !== undefined)
+      settings.visuell.selectedBackground = settings_.visuell.selectedBackground;
 
     if(settings_.controls.useTouch !== undefined)
       settings.controls.useTouch = settings_.controls.useTouch;

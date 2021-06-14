@@ -22,6 +22,11 @@ let keychangers = [];
 let shopPreviews = [];
 let shopProducts = [];
 
+let storeBought = {
+    backgrounds: [],
+    shipUpgrades: []
+};
+
 let highscore = 0, currentscore = 0;
 let bestStage = 0, stage = 0;
 let credits = 0, currentcredits = 0;
@@ -45,7 +50,8 @@ let settingsOrig = {
         soundsFullVolume: 0.3
     },
     visuell: {
-        screenshake: true
+        screenshake: true,
+        selectedBackground: ''
     },
     controls: {
         movement: {
