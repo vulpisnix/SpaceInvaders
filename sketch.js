@@ -14,8 +14,7 @@ function preload() {
 function setup() {
   InitStoreItems();
   LoadGame();
-  if(settings.visuell.selectedBackground != '')
-    backgroundToDrawName = settings.visuell.selectedBackground;
+  SaveGame();
 
   shakeEffect = createVector(0,0);
   let sWidth = 1300, sHeight = 900;
