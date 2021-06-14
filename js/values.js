@@ -51,7 +51,7 @@ let settingsOrig = {
     },
     visuell: {
         screenshake: true,
-        selectedBackground: ''
+        selectedBackground: 'backgrounds/Normal_Background_0'
     },
     controls: {
         movement: {
