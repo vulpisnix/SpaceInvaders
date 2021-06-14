@@ -1,5 +1,6 @@
 let inputMouseX = 0; inputMouseY = 0, inputLastMouseX = 0; inputLastMouseY = 0;
 let inputMouseDX = 0; inputMouseDY = 0;
+let mouseScrollY = 0, mouseScrollX = 0;
 
 function updateInput() {
   if(!mouseIsPressed) {
@@ -16,6 +17,9 @@ function updateInput() {
     inputMouseDX = 0;
     inputMouseDY = 0;
   }
+
+  mouseScrollX = 0;
+  mouseScrollY = 0;
 }
 
 function keyPressed() {
@@ -98,6 +102,11 @@ function mousePressed() {
         checkboxes[i].mousePressed();
     }
   }
+}
+
+function mouseWheel(event) {
+  mouseScrollX = constrain(event.deltaX, -1, 1);
+  mouseScrollY = constrain(event.deltaY, -1, 1);
 }
 
 function getKeyName(key) {

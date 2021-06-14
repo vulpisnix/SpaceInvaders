@@ -23,16 +23,16 @@ function renderMenu_Store() {
     }
   }
 
-  if(mouseIsPressed || pressedKey != '') {
-    if(inputMouseDX < 0 || pressedKey == 'ArrowLeft') {
+  if(mouseIsPressed || pressedKey != '' || mouseScrollX != 0) {
+    if(inputMouseDX < 0 || pressedKey == 'ArrowRight' || mouseScrollX > 0) {
       const last = shopPreviews[0];
       if ((last.pos.x + last.size.x) >= width - (20 * GAME_SCALE))
-        storeMainSlideXOffset -= 5;
+        storeMainSlideXOffset -= 10;
     }
-    if(inputMouseDX > 0 || pressedKey == 'ArrowRight') {
+    if(inputMouseDX > 0 || pressedKey == 'ArrowLeft' || mouseScrollX < 0) {
       const first = shopPreviews[shopPreviews.length-1];
       if (first.pos.x <= (20 * GAME_SCALE))
-        storeMainSlideXOffset += 5;
+        storeMainSlideXOffset += 10;
     }
   }
 }
@@ -57,16 +57,16 @@ function renderMenu_Store_Backgrounds() {
     }
   }
 
-  if(mouseIsPressed || pressedKey != '') {
-    if(inputMouseDX < 0 || pressedKey == 'ArrowLeft') {
+  if(mouseIsPressed || pressedKey != '' || mouseScrollX != 0) {
+    if(inputMouseDX < 0 || pressedKey == 'ArrowRight' || mouseScrollX > 0) {
       const last = shopPreviews[0];
       if ((last.pos.x + last.size.x) >= width - (20 * GAME_SCALE))
-        storeMainSlideXOffset -= 5;
+        storeMainSlideXOffset -= 10;
     }
-    if(inputMouseDX > 0 || pressedKey == 'ArrowRight') {
+    if(inputMouseDX > 0 || pressedKey == 'ArrowLeft' || mouseScrollX < 0) {
       const first = shopPreviews[shopPreviews.length-1];
       if (first.pos.x <= (20 * GAME_SCALE))
-        storeMainSlideXOffset += 5;
+        storeMainSlideXOffset += 10;
     }
   }
 }

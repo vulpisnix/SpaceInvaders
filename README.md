@@ -2,7 +2,7 @@
 ####by Philipp Schott, Felix Sandhop & Conner Bangel
 
 
-####Playable Version: [Website](https://spaceinvaders.crisestudios.com)
+####Playable Version: [Website](https://spaceinvaders.crisestudios.com#credits)
 
 > Programmed by `Philipp Schott`
 > 

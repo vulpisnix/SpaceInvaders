@@ -1,6 +1,7 @@
-function ShopProduct(name = '', category = '', imagePath = '', price = 0) {
+function ShopProduct(name = '', price = 0, type = '', category = '', imagePath = '') {
     this.text = name;
     this.category = category;
+    this.type = type;
     this.spritePath = imagePath;
     this.price = price;
     this.isBought = false;

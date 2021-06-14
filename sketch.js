@@ -92,7 +92,6 @@ function setup() {
 }
 
 function draw() {
-  updateInput();
   background(0);
   textFont(font);
   textAlign(LEFT, CENTER);
@@ -180,6 +179,9 @@ function draw() {
   if (GAME) {
     renderGame();
   }
+
+
+  updateInput();
 }
 
 function drawTitle(tS = 75) {
@@ -210,13 +212,13 @@ function InitStoreItems() {
   loadStoreSprite('backgrounds/Normal_Background_8');
   loadStoreSprite('backgrounds/Normal_Background_9');
 
-  shopProducts.push(new ShopProduct('Mountains', 'backgrounds', 'backgrounds/Normal_Background_3', 100));
-  shopProducts.push(new ShopProduct('Waves', 'backgrounds', 'backgrounds/Normal_Background_1', 1000));
-  shopProducts.push(new ShopProduct('Nebula', 'backgrounds', 'backgrounds/Normal_Background_2', 500));
-  shopProducts.push(new ShopProduct('Sun', 'backgrounds', 'backgrounds/Normal_Background_4', 1500));
-  shopProducts.push(new ShopProduct('Epilepsy', 'backgrounds', 'backgrounds/Normal_Background_5', 2000));
-  shopProducts.push(new ShopProduct('Epilepsy 2', 'backgrounds', 'backgrounds/Normal_Background_6', 3500));
-  shopProducts.push(new ShopProduct('Purple Claws', 'backgrounds', 'backgrounds/Normal_Background_7', 4000));
-  shopProducts.push(new ShopProduct('Laser', 'backgrounds', 'backgrounds/Normal_Background_8', 4500));
-  shopProducts.push(new ShopProduct('Bloody Leaves', 'backgrounds', 'backgrounds/Normal_Background_9', 5000));
+  shopProducts.push(new ShopProduct('Waves', 500, 'normal', 'backgrounds', 'backgrounds/Normal_Background_1'));
+  shopProducts.push(new ShopProduct('Gamma Rays', 1000, 'normal', 'backgrounds', 'backgrounds/Normal_Background_2'));
+  shopProducts.push(new ShopProduct('Sun', 1500, 'normal', 'backgrounds', 'backgrounds/Normal_Background_4'));
+  shopProducts.push(new ShopProduct('Nebula', 2000, 'normal', 'backgrounds', 'backgrounds/Normal_Background_5'));
+  shopProducts.push(new ShopProduct('Epilepsy', 2500, 'normal', 'backgrounds', 'backgrounds/Normal_Background_6'));
+  shopProducts.push(new ShopProduct('Purple Claws',3000, 'normal',  'backgrounds', 'backgrounds/Normal_Background_7'));
+  shopProducts.push(new ShopProduct('Laser', 3500, 'normal', 'backgrounds', 'backgrounds/Normal_Background_8'));
+  shopProducts.push(new ShopProduct('Bloody Leaves', 4000, 'normal', 'backgrounds', 'backgrounds/Normal_Background_9'));
+  shopProducts.push(new ShopProduct('Mountains', 10000, 'legendary', 'backgrounds', 'backgrounds/Normal_Background_3'));
 }
