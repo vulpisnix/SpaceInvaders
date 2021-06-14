@@ -200,29 +200,22 @@ function AABB(x1, y1, w1, h1, x2, y2, w2, h2) {
 }
 
 function InitStoreItems() {
-  loadStoreSprite('backgrounds/Normal_Background_0');
-  loadStoreSprite('backgrounds/Normal_Background_1');
-  loadStoreSprite('backgrounds/Normal_Background_2');
-  loadStoreSprite('backgrounds/Normal_Background_3');
-  loadStoreSprite('backgrounds/Normal_Background_4');
-  loadStoreSprite('backgrounds/Normal_Background_5');
-  loadStoreSprite('backgrounds/Normal_Background_6');
-  loadStoreSprite('backgrounds/Normal_Background_7');
-  loadStoreSprite('backgrounds/Normal_Background_8');
-  loadStoreSprite('backgrounds/Normal_Background_9');
+  fetch('./data/store/store.json')
+    .then(res => res.json())
+    .then(res => {
 
-  new ShopProduct('Default', 0, 'normal', 'backgrounds', 'backgrounds/Normal_Background_0').isBought = true;
-  new ShopProduct('Waves', 500, 'normal', 'backgrounds', 'backgrounds/Normal_Background_1');
-  new ShopProduct('Gamma Rays', 1000, 'normal', 'backgrounds', 'backgrounds/Normal_Background_2');
-  new ShopProduct('Sun', 1500, 'normal', 'backgrounds', 'backgrounds/Normal_Background_4');
-  new ShopProduct('Nebula', 2000, 'normal', 'backgrounds', 'backgrounds/Normal_Background_5');
-  new ShopProduct('Epilepsy', 2500, 'normal', 'backgrounds', 'backgrounds/Normal_Background_6');
-  new ShopProduct('Purple Claws',3000, 'normal',  'backgrounds', 'backgrounds/Normal_Background_7');
-  new ShopProduct('Laser', 3500, 'normal', 'backgrounds', 'backgrounds/Normal_Background_8');
-  new ShopProduct('Bloody Leaves', 4000, 'normal', 'backgrounds', 'backgrounds/Normal_Background_9');
-  new ShopProduct('Mountains', 10000, 'legendary', 'backgrounds', 'backgrounds/Normal_Background_3');
+      for(let i = 0; i < res.backgrounds.length; i++) {
+        const storeItem = res.backgrounds[i];
+        loadStoreSprite(storeItem.imagePath);
+        new ShopProduct(storeItem.name, storeItem.price, storeItem.type, 'backgrounds', storeItem.imagePath);
+      }
 
+      shopProducts.sort((a, b) => a.price - b.price)
+      shopProducts.reverse();
 
-  shopProducts.sort((a, b) => a.price - b.price)
-  shopProducts.reverse();
+    })
+    .catch(err => {
+      console.error('Something went wrong while loading the store data:');
+      console.error(err)
+    })
 }

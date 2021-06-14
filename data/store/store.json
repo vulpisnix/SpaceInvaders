@@ -1,0 +1,65 @@
+{
+  "backgrounds": [
+    {
+      "name": "Default",
+      "imagePath": "backgrounds/Normal_Background_0",
+      "price": 0,
+      "type": "normal"
+    },
+    {
+      "name": "Waves",
+      "imagePath": "backgrounds/Normal_Background_1",
+      "price": 500,
+      "type": "normal"
+    },
+    {
+      "name": "Gamma Rays",
+      "imagePath": "backgrounds/Normal_Background_2",
+      "price": 500,
+      "type": "normal"
+    },
+    {
+      "name": "Mountains",
+      "imagePath": "backgrounds/Normal_Background_3",
+      "price": 10000,
+      "type": "legendary"
+    },
+    {
+      "name": "Sun",
+      "imagePath": "backgrounds/Normal_Background_4",
+      "price": 2000,
+      "type": "normal"
+    },
+    {
+      "name": "Nebula",
+      "imagePath": "backgrounds/Normal_Background_5",
+      "price": 2000,
+      "type": "normal"
+    },
+    {
+      "name": "Epilepsy",
+      "imagePath": "backgrounds/Normal_Background_6",
+      "price": 500,
+      "type": "normal"
+    },
+    {
+      "name": "Purple Claws",
+      "imagePath": "backgrounds/Normal_Background_7",
+      "price": 1000,
+      "type": "normal"
+    },
+    {
+      "name": "Laser",
+      "imagePath": "backgrounds/Normal_Background_8",
+      "price": 1000,
+      "type": "normal"
+    },
+    {
+      "name": "Bloody Leaves",
+      "imagePath": "backgrounds/Normal_Background_9",
+      "price": 500,
+      "type": "normal"
+    }
+  ],
+  "shipUpgrades": []
+}
