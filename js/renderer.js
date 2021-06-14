@@ -261,8 +261,10 @@ function renderGame() {
     }
   }
 
-  player.render();
-  player.dataUpdate();
+  if(player != null) {
+    player.render();
+    player.dataUpdate();
+  }
 
   if(GAME_COUNTDOWN >= 0 && !GAME_STARTED && !GAME_DEAD && !GAME_PAUSE) {
     fill(255);
