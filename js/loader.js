@@ -271,7 +271,7 @@ function LoadGame() {
 
     if(settings_.visuell.screenshake !== undefined)
       settings.visuell.screenshake = settings_.visuell.screenshake;
-    if(settings_.visuell.selectedBackground !== undefined)
+    if(settings_.visuell.selectedBackground !== undefined && settings_.visuell.selectedBackground != '')
       settings.visuell.selectedBackground = settings_.visuell.selectedBackground;
 
     if(settings_.controls.useTouch !== undefined)
