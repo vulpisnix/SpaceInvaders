@@ -42,7 +42,7 @@ let pressedKey = '';
 
 let storeMainSlideXOffset = 0;
 
-let settingsOrig = {
+let settingsORIG = {
     sound: {
         musicVolume: 0.15,
         musicFullVolume: 0.15,
@@ -64,7 +64,7 @@ let settingsOrig = {
         useTouch: false
     }
 }
-let settings = JSON.parse(JSON.stringify(settingsOrig));
+let settings = JSON.parse(JSON.stringify(settingsORIG));
 
 function is_touch_supported() {
     return ('ontouchstart' in window ) ||
