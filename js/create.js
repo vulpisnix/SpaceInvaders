@@ -30,36 +30,38 @@ function createMenu() {
 
   playButton.action = function() {
     MENU = false;
+    GAME = true;
     SHOP = false;
     SETTINGS = false;
-    CREDITS = true;
-    GAME = true;
+    CREDITS = false;
     ACHIEVEMENTS = false;
-    
-    createGame();
+    GAME_DEAD = false;
+
+    setTimeout(createGame, 10);
     print('GAME');
   }
   storeButton.action = function() {
     MENU = false;
     GAME = false;
-    SETTINGS = false;
-    CREDITS = true;
     SHOP = true;
+    SETTINGS = false;
+    CREDITS = false;
     ACHIEVEMENTS = false;
-    
-    createStore();
+    GAME_DEAD = false;
+
+    setTimeout(createStore, 10);
     print('STORE');
   }
   settingsButton.action = function() {
     MENU = false;
     GAME = false;
     SHOP = false;
-    CREDITS = true;
-    CREDITS = true;
     SETTINGS = true;
+    CREDITS = false;
     ACHIEVEMENTS = false;
-    
-    createSettings();
+    GAME_DEAD = false;
+
+    setTimeout(createSettings, 10);
     print('SETTINGS');
   }
   creditsButton.action = function() {
@@ -69,8 +71,9 @@ function createMenu() {
     SETTINGS = false;
     CREDITS = true;
     ACHIEVEMENTS = false;
-    
-    createCredits();
+    GAME_DEAD = false;
+
+    setTimeout(createCredits, 10);
     print('CREDITS');
   }
   achievementsButton.action = function() {
@@ -80,8 +83,9 @@ function createMenu() {
     SETTINGS = false;
     CREDITS = false;
     ACHIEVEMENTS = true;
+    GAME_DEAD = false;
 
-    createAchievements();
+    setTimeout(createAchievements, 10);
     print('ACHIEVEMENTS');
   }
 }
@@ -102,7 +106,7 @@ function createStore() {
   CREDITS = false;
 
   SHOP_BACKGROUNDS = false;
-  
+
   createBackButton();
 
   let shipProducts = getShopProductsByCategory('ships');
@@ -112,9 +116,8 @@ function createStore() {
   const shopBackgrounds = new ShopPreview('Backgrounds', backgroundProducts[floor(random(0,backgroundProducts.length))]);
 
   shopBackgrounds.onClick = function() {
-    createStore_Backgrounds();
+    setTimeout(createStore_Backgrounds, 10);
   }
-
 }
 
 function createSettings() {
@@ -130,7 +133,6 @@ function createSettings() {
   CREDITS = false;
   SETTINGS = true;
   createBackButton();
-
 
   const musicVolumeSlider = new Slider('Music Volume', 15 * GAME_SCALE, 175 * GAME_SCALE);
   musicVolumeSlider.sliderPos = (settings.sound.musicFullVolume * (musicVolumeSlider.size.x-(20*GAME_SCALE)))+(20*GAME_SCALE);
@@ -255,14 +257,14 @@ function createGame() {
   currentscore = 0;
   currentcredits = 0;
   stage = 0;
-  
+
   player = new Player();
   player.bulletCooldown = 20;
   player.shipName = 'Level0';
   player.shoot = function() {
     createPlayerBullet(player.pos.x+player.size.x/2- (6 * GAME_SCALE), player.pos.y, -1);
   }
-  
+
   createEnemysStageZero();
 }
 
@@ -277,7 +279,7 @@ function createCredits() {
   SHOP = false;
   SETTINGS = false;
   CREDITS = true;
-  
+
   createBackButton();
 }
 
@@ -294,7 +296,6 @@ function createAchievements() {
   SETTINGS = false;
   CREDITS = false;
   ACHIEVEMENTS = true;
-
   createBackButton();
 }
 
@@ -329,7 +330,6 @@ function createStore_Backgrounds() {
 
   createBackToStoreButton();
 
-
   let backgroundProducts = getShopProductsByCategory('backgrounds');
   for(let i = backgroundProducts.length-1; i >= 0; i--) {
     const bgP = backgroundProducts[i];
@@ -338,5 +338,4 @@ function createStore_Backgrounds() {
       background.product.buyClickOrSelect();
     }
   }
-
 }

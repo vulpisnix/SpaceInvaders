@@ -179,7 +179,6 @@ function draw() {
     renderGame();
   }
 
-
   updateInput();
 }
 
@@ -212,7 +211,7 @@ function InitStoreItems() {
   loadStoreSprite('backgrounds/Normal_Background_8');
   loadStoreSprite('backgrounds/Normal_Background_9');
 
-  new ShopProduct('Default', 0, 'normal', 'backgrounds', 'backgrounds/Normal_Background_0');
+  new ShopProduct('Default', 0, 'normal', 'backgrounds', 'backgrounds/Normal_Background_0').isBought = true;
   new ShopProduct('Waves', 500, 'normal', 'backgrounds', 'backgrounds/Normal_Background_1');
   new ShopProduct('Gamma Rays', 1000, 'normal', 'backgrounds', 'backgrounds/Normal_Background_2');
   new ShopProduct('Sun', 1500, 'normal', 'backgrounds', 'backgrounds/Normal_Background_4');
