@@ -18,7 +18,7 @@ function ShopPreview(name,product, displayFullInformation = false) {
         else
             this.isHovering = AABB(mouseX, mouseY, 1, 1, this.pos.x,this.pos.y,this.size.x,this.size.y);
 
-        if(isMousePressed && this.isHovering) {
+        if(mouseIsPressed && this.isHovering) {
             if(!this.pressed) {
                 this.pressed = true;
                 this.onClick();
