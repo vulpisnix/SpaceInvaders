@@ -221,4 +221,8 @@ function InitStoreItems() {
   shopProducts.push(new ShopProduct('Laser', 3500, 'normal', 'backgrounds', 'backgrounds/Normal_Background_8'));
   shopProducts.push(new ShopProduct('Bloody Leaves', 4000, 'normal', 'backgrounds', 'backgrounds/Normal_Background_9'));
   shopProducts.push(new ShopProduct('Mountains', 10000, 'legendary', 'backgrounds', 'backgrounds/Normal_Background_3'));
+
+
+  shopProducts.sort((a, b) => a.price - b.price)
+  shopProducts.reverse();
 }
