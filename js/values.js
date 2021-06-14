@@ -23,7 +23,7 @@ let shopPreviews = [];
 let shopProducts = [];
 
 let storeBought = {
-    backgrounds: [],
+    backgrounds: ['backgrounds/Normal_Background_0'],
     shipUpgrades: []
 };
 
