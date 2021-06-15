@@ -20,7 +20,8 @@ function ShopProduct(name = '', price = 0, type = '', category = '', imagePath =
             SaveStore();
         }
         else {
-            settings.visuell.selectedBackground = this.spritePath;
+            if(this.category == 'backgrounds')
+                settings.visuell.selectedBackground = this.spritePath;
             SaveSettings();
         }
     }

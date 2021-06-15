@@ -101,6 +101,36 @@ function renderMenu_Store_Backgrounds() {
     }
   }
 }
+function renderMenu_Store_ShipUpgrades() {
+  drawTitle(-1, 'store: ship upgrades');
+
+  fill(255);
+  textSize(30 * GAME_SCALE);
+  text('Credits: '+credits, width-(300*GAME_SCALE), 175*GAME_SCALE);
+
+  let storeXOffset = 50*GAME_SCALE;
+  for (let i = shopPreviews.length-1; i >= 0; i--) {
+    const preview = shopPreviews[i];
+    if(preview != null) {
+      preview.update(storeXOffset + storeMainSlideXOffset, height / 2 - preview.size.y / 2);
+      preview.render();
+      storeXOffset += preview.size.x + (50 * GAME_SCALE);
+    }
+  }
+
+  if(mouseIsPressed || pressedKey != '' || mouseScrollX != 0) {
+    if(inputMouseDX < 0 || pressedKey == 'ArrowRight' || mouseScrollX > 0) {
+      const last = shopPreviews[0];
+      if ((last.pos.x + last.size.x) >= width - (20 * GAME_SCALE))
+        storeMainSlideXOffset -= 10;
+    }
+    if(inputMouseDX > 0 || pressedKey == 'ArrowLeft' || mouseScrollX < 0) {
+      const first = shopPreviews[shopPreviews.length-1];
+      if (first.pos.x <= (20 * GAME_SCALE))
+        storeMainSlideXOffset += 10;
+    }
+  }
+}
 
 function renderMenu_Settings() {
   drawTitle(-1, 'settings');

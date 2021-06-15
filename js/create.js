@@ -19,6 +19,7 @@ function createMenu() {
   ACHIEVEMENTS = false;
   GAME_DEAD = false;
   MENU_SHIP = false;
+  SHOP_SHIPS = false;
 
   let bHeight = 50 * GAME_SCALE;
   let bFS = 50 * GAME_SCALE;
@@ -119,17 +120,21 @@ function createStore() {
   SETTINGS = false;
   CREDITS = false;
   MENU_SHIP = false;
+  SHOP_SHIPS = false;
 
   SHOP_BACKGROUNDS = false;
 
   createBackButton();
 
-  let shipProducts = getShopProductsByCategory('ships');
+  let shipProducts = getShopProductsByCategory('shipUpgrades');
   let backgroundProducts = getShopProductsByCategory('backgrounds');
 
   const shopShipUpgrades = new ShopPreview('Ship Upgrades', shipProducts[floor(random(0,shipProducts.length))]);
   const shopBackgrounds = new ShopPreview('Backgrounds', backgroundProducts[floor(random(0,backgroundProducts.length))]);
 
+  shopShipUpgrades.onClick = function() {
+    setTimeout(createStore_ShipUpgrades, 10);
+  }
   shopBackgrounds.onClick = function() {
     setTimeout(createStore_Backgrounds, 10);
   }
@@ -148,6 +153,7 @@ function createSettings() {
   CREDITS = false;
   SETTINGS = true;
   MENU_SHIP = false;
+  SHOP_SHIPS = false;
   createBackButton();
 
   const musicVolumeSlider = new Slider('Music Volume', 15 * GAME_SCALE, 175 * GAME_SCALE);
@@ -260,6 +266,7 @@ function createGame() {
   GAME_DEAD = false;
   GAME_STARTED = false;
   MENU_SHIP = false;
+  SHOP_SHIPS = false;
   GAME_COUNTDOWN = 4;
   
   buttons = [];
@@ -298,6 +305,7 @@ function createCredits() {
   SETTINGS = false;
   CREDITS = true;
   MENU_SHIP = false;
+  SHOP_SHIPS = false;
 
   createBackButton();
 }
@@ -316,6 +324,7 @@ function createAchievements() {
   CREDITS = false;
   ACHIEVEMENTS = true;
   MENU_SHIP = false;
+  SHOP_SHIPS = false;
   createBackButton();
 }
 
@@ -352,6 +361,7 @@ function createMenu_Ship() {
   ACHIEVEMENTS = false;
   GAME_DEAD = false;
   MENU_SHIP = true;
+  SHOP_SHIPS = false;
 
   createBackButton();
 
@@ -374,6 +384,7 @@ function createStore_Backgrounds() {
   CREDITS = false;
   SHOP_BACKGROUNDS = true;
   MENU_SHIP = false;
+  SHOP_SHIPS = false;
 
   createBackToStoreButton();
 
@@ -383,6 +394,33 @@ function createStore_Backgrounds() {
     const background = new ShopPreview(bgP.text, bgP, true);
     background.onClick = function () {
       background.product.buyClickOrSelect();
+    }
+  }
+}
+function createStore_ShipUpgrades() {
+  storeMainSlideXOffset = 0;
+  buttons = [];
+  sliders = [];
+  checkboxes = [];
+  shopPreviews = [];
+
+  MENU = false;
+  GAME = false;
+  SHOP = false;
+  SETTINGS = false;
+  CREDITS = false;
+  SHOP_BACKGROUNDS = false;
+  SHOP_SHIPS = true;
+  MENU_SHIP = false;
+
+  createBackToStoreButton();
+
+  let shipUpgradeProducts = getShopProductsByCategory('shipUpgrades');
+  for(let i = shipUpgradeProducts.length-1; i >= 0; i--) {
+    const bgP = shipUpgradeProducts[i];
+    const shipUpgrade = new ShopPreview(bgP.text, bgP, true);
+    shipUpgrade.onClick = function () {
+      shipUpgrade.product.buyClickOrSelect();
     }
   }
 }

@@ -173,6 +173,9 @@ function draw() {
   if(SHOP_BACKGROUNDS) {
     renderMenu_Store_Backgrounds();
   }
+  if(SHOP_SHIPS) {
+    renderMenu_Store_ShipUpgrades();
+  }
   if (SETTINGS) {
     renderMenu_Settings();
   }
@@ -219,6 +222,13 @@ function InitStoreItems() {
         const storeItem = res.backgrounds[i];
         loadStoreSprite(storeItem.imagePath);
         new ShopProduct(storeItem.name, storeItem.price, storeItem.type, 'backgrounds', storeItem.imagePath);
+      }
+
+      for(let i = 0; i < res.shipUpgrades.length; i++) {
+        const storeItem = res.shipUpgrades[i];
+        loadStoreSprite(storeItem.imagePath);
+        new ShopProduct(storeItem.name, storeItem.price, storeItem.type, 'shipUpgrades', storeItem.imagePath);
+        new ShipUpgrade(storeItem.name, storeItem.imagePath);
       }
 
       shopProducts.sort((a, b) => a.price - b.price)

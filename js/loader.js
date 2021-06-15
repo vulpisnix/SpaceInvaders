@@ -5,6 +5,7 @@ let bombSprite, bulletSprite, enemyWalkerSprite, enemyShooterSprite, enemyBomber
 let selectedBackground = 'background_normal', backgroundToDrawName = 'background_normal';
 
 let ships = [];
+let shipUpgrades = [];
 let storeSprites = [];
 let explosionSprites = [];
 let touchIcons = [];
@@ -148,6 +149,18 @@ function getStoreSpriteByName(name) {
     name: 'fallback',
     sprite: fallbackSprite
   };
+}
+
+function getShipUpgradeBySpitePath(spritePath) {
+  if(shipUpgrades.length == 0) {
+    return new ShipUpgrade('fallback', 'fallback');
+  }
+  for(let i = 0; i <= shipUpgrades.length-1; i++) {
+    if(shipUpgrades[i].spritePath == spritePath) {
+      return shipUpgrades[i];
+    }
+  }
+  return new ShipUpgrade('fallback', 'fallback');
 }
 
 function loadMusic(name) {

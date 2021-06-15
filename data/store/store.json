@@ -61,5 +61,21 @@
       "type": "normal"
     }
   ],
-  "shipUpgrades": []
+  "shipUpgrades": [
+    {
+      "name": "Vertical Movement",
+      "imagePath": "shipUpgrades/VerticalMovement",
+      "price": 500
+    },
+    {
+      "name": "Speed +10%",
+      "imagePath": "shipUpgrades/Speed",
+      "price": 150
+    },
+    {
+      "name": "Speed +20%",
+      "imagePath": "shipUpgrades/Speed",
+      "price": 300
+    }
+  ]
 }
