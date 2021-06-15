@@ -1,5 +1,5 @@
 function Player() {
-  this.size = createVector(18*2 * GAME_SCALE, 26*2 * GAME_SCALE);
+  this.size = createVector(18 * GAME_SCALE, 26 * GAME_SCALE);
   this.pos = createVector(width/2, height-this.size.y-(10 * GAME_SCALE));
   this.dirX = 0;
   

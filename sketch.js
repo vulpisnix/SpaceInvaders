@@ -24,7 +24,7 @@ function setup() {
 
   let cWidth = sWidth, cHeight = sHeight;
   if(!IS_DEVICE_SIZE_OK) {
-    let maxSteps = 20;
+    let maxSteps = 10;
     let steps = 0;
     while(steps < maxSteps) {
       GAME_SCALE -= 0.05;
@@ -59,6 +59,9 @@ function setup() {
     }
     else if(hash == '#credits') {
       createCredits();
+    }
+    else if(hash == '#yourship') {
+      createMenu_Ship();
     }
     else createMenu();
 

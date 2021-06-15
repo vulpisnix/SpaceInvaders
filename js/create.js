@@ -354,6 +354,10 @@ function createMenu_Ship() {
   MENU_SHIP = true;
 
   createBackButton();
+
+
+  player.pos.x = width/2 - player.size.x/2;
+  player.pos.y = height/2 - player.size.y/2;
 }
 
 function createStore_Backgrounds() {

@@ -8,6 +8,9 @@ function renderMenu_Main() {
   let ySBoxY = 250 * GAME_SCALE;
   let ySBoxTS = 40 * GAME_SCALE;
 
+  fill(0, 100);
+  rect(ySBoxX, ySBoxY, ySBoxWidth, ySBoxHeight);
+
   player.dataUpdate();
   player.render();
 
@@ -36,7 +39,6 @@ function renderMenu_Main() {
   if(mouseIsPressed && ySBoxHover) {
     createMenu_Ship();
   }
-
 }
 
 function renderMenu_Store() {
@@ -164,6 +166,7 @@ function renderMenu_Credits() {
 function renderMenu_Achievements() {
   drawTitle(-1, 'achievements');
 
+  textAlign(CENTER, CENTER);
   textSize(40 * GAME_SCALE);
   fill(255, 0, 0);
   text('to be added', width/2, height/2);
@@ -504,4 +507,112 @@ function renderGame() {
 
 function renderMenu_Ship() {
   drawTitle(-1, 'Your Ship');
+
+
+  let ySBoxWidth = 350 * GAME_SCALE;
+  let ySBoxHeight = 300 * GAME_SCALE;
+  let ySBoxX = width/2 - ySBoxWidth/2;
+  let ySBoxY = height/2 - ySBoxHeight/2;
+  let ySBoxTS = 40 * GAME_SCALE;
+
+  fill(0, 100);
+  rect(ySBoxX, ySBoxY, ySBoxWidth, ySBoxHeight);
+
+  player.dataUpdate();
+  player.render();
+
+  noFill();
+  stroke(0);
+  strokeWeight(5);
+  rect(ySBoxX, ySBoxY, ySBoxWidth, ySBoxHeight);
+  noStroke();
+
+  fill(255);
+  textSize(ySBoxTS);
+  textAlign(CENTER, CENTER);
+  text('Your Ship', ySBoxX + ySBoxWidth/2, ySBoxY);
+
+
+  let upgradeSlotSize = 150*GAME_SCALE;
+  let upgradeSlotX = 70*GAME_SCALE;
+  let upgradeSlotY = height/3 - upgradeSlotSize/2;
+
+
+  noStroke();
+  fill(255);
+  textSize(30*GAME_SCALE);
+  textAlign(CENTER, CENTER);
+  text('Upgrades', upgradeSlotX+upgradeSlotSize/2, upgradeSlotY - (30*GAME_SCALE));
+
+  for(let i = 0; i < 3; i++) {
+    fill(0, 100);
+    rect(upgradeSlotX, upgradeSlotY, upgradeSlotSize, upgradeSlotSize);
+
+    noFill();
+    stroke(0);
+    strokeWeight(5);
+    rect(upgradeSlotX, upgradeSlotY, upgradeSlotSize, upgradeSlotSize);
+
+    fill(255);
+    textSize(20*GAME_SCALE);
+    textAlign(CENTER, CENTER);
+    text('Locked', upgradeSlotX + upgradeSlotSize/2, upgradeSlotY + upgradeSlotSize/2);
+
+    upgradeSlotY += upgradeSlotSize + (50 * GAME_SCALE);
+  }
+
+  upgradeSlotX = width - upgradeSlotX - upgradeSlotSize;
+  upgradeSlotY = height/3 - upgradeSlotSize/2;
+
+  noStroke();
+  fill(255);
+  textSize(30*GAME_SCALE);
+  textAlign(CENTER, CENTER);
+  text('Upgrades', upgradeSlotX+upgradeSlotSize/2, upgradeSlotY - (30*GAME_SCALE));
+
+  for(let i = 0; i < 3; i++) {
+    fill(0, 100);
+    rect(upgradeSlotX, upgradeSlotY, upgradeSlotSize, upgradeSlotSize);
+
+    noFill();
+    stroke(0);
+    strokeWeight(5);
+    rect(upgradeSlotX, upgradeSlotY, upgradeSlotSize, upgradeSlotSize);
+
+    fill(255);
+    textSize(20*GAME_SCALE);
+    textAlign(CENTER, CENTER);
+    text('Locked', upgradeSlotX + upgradeSlotSize/2, upgradeSlotY + upgradeSlotSize/2);
+
+    upgradeSlotY += upgradeSlotSize + (50 * GAME_SCALE);
+  }
+
+
+  let powerupRadius = 125*GAME_SCALE;
+  let powerupX = width/2 - powerupRadius - powerupRadius/3;
+  let powerupY = height - powerupRadius/2 - (50*GAME_SCALE);
+
+  noStroke();
+  fill(255);
+  textSize(30*GAME_SCALE);
+  textAlign(CENTER, CENTER);
+  text('Powerups', powerupX + powerupRadius + powerupRadius/3, powerupY - powerupRadius/2 - (30*GAME_SCALE));
+
+
+  for(let i = 0; i < 3; i++) {
+    fill(0, 100);
+    circle(powerupX, powerupY, powerupRadius);
+
+    noFill();
+    stroke(0);
+    strokeWeight(5);
+    circle(powerupX, powerupY, powerupRadius);
+
+    fill(255);
+    textSize(20*GAME_SCALE);
+    textAlign(CENTER, CENTER);
+    text('Locked', powerupX, powerupY);
+
+    powerupX += powerupRadius + (50 * GAME_SCALE);
+  }
 }
