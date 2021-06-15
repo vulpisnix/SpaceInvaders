@@ -12,7 +12,7 @@ function renderMenu_Main() {
   rect(ySBoxX, ySBoxY, ySBoxWidth, ySBoxHeight);
 
   player.dataUpdate();
-  player.render();
+  player.renderScaled(2);
 
   let ySBoxHover = AABB(mouseX, mouseY, 1, 1, ySBoxX, ySBoxY, ySBoxWidth, ySBoxHeight);
   if(ySBoxHover) {
@@ -519,7 +519,7 @@ function renderMenu_Ship() {
   rect(ySBoxX, ySBoxY, ySBoxWidth, ySBoxHeight);
 
   player.dataUpdate();
-  player.render();
+  player.renderScaled(2);
 
   noFill();
   stroke(0);

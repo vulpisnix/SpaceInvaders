@@ -51,6 +51,18 @@ function Player() {
       this.shipUpgrades[i].render();
     }
   }
+  this.renderScaled = function(scale = 1) {
+    if(this.shipData != null) {
+      image(this.shipData.sprite, this.pos.x - (this.size.x/scale), this.pos.y- (this.size.y / scale), this.size.x * scale, this.size.y * scale);
+    }
+    else {
+      image(fallbackSprite, this.pos.x- (this.size.x / scale), this.pos.y- (this.size.y / scale), this.size.x * scale, this.size.y * scale);
+    }
+
+    for(let i = this.shipUpgrades.length-1; i >= 0; i--) {
+      this.shipUpgrades[i].renderScaled(scale);
+    }
+  }
 
   this.renderHUD = function() {
     noStroke();
