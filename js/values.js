@@ -1,5 +1,5 @@
 let IS_DEVICE_SIZE_OK = false, IS_TOUCH_SUPPORTED = false;
-let MENU = true, GAME = false, SHOP = false, SETTINGS = false, CREDITS = false, ACHIEVEMENTS = false, SHOP_BACKGROUNDS = false;
+let MENU = true, GAME = false, SHOP = false, SETTINGS = false, CREDITS = false, ACHIEVEMENTS = false, SHOP_BACKGROUNDS = false, MENU_SHIP = false;
 let GAME_STARTED = false, GAME_PAUSE = false, GAME_DEAD = false, GAME_NEXT_STAGE = false;
 let font;
 let GAME_SCALE = 1;

@@ -45,7 +45,7 @@ function keyPressed() {
       createGame();
     }
   }
-  if((SHOP || SETTINGS || CREDITS || ACHIEVEMENTS) && (key == 'Escape' || key == 'Backspace')) {
+  if((SHOP || SETTINGS || CREDITS || ACHIEVEMENTS || MENU_SHIP) && (key == 'Escape' || key == 'Backspace')) {
     createMenu();
   }
   if((SHOP_BACKGROUNDS) && (key == 'Escape' || key == 'Backspace')) {

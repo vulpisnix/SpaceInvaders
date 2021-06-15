@@ -18,15 +18,25 @@ function createMenu() {
   CREDITS = false;
   ACHIEVEMENTS = false;
   GAME_DEAD = false;
+  MENU_SHIP = false;
 
   let bHeight = 50 * GAME_SCALE;
   let bFS = 50 * GAME_SCALE;
+  let bX = 10*GAME_SCALE;
+  let bY = height - bHeight - 10*GAME_SCALE;
+  let bSpacing = 20 * GAME_SCALE;
 
-  const playButton = new Button(width/2, height/2-(75 * GAME_SCALE), bHeight, bFS, 'play');
-  const storeButton = new Button(width/2, height/2, bHeight, bFS, 'store');
-  const settingsButton = new Button(width/2, height/2+(75 * GAME_SCALE), bHeight, bFS, 'settings');
-  const achievementsButton = new Button(width/2, height/2+(150 * GAME_SCALE), bHeight, bFS, 'achievements');
-  const creditsButton = new Button(width/2, height/2+(225 * GAME_SCALE), bHeight, bFS, 'credits');
+  const achievementsButton = new Button(bX, bY, bHeight, bFS, 'achievements');
+  const settingsButton = new Button(bX, bY -= (bHeight + bSpacing), bHeight, bFS, 'settings');
+  const creditsButton = new Button(bX, bY -= (bHeight + bSpacing), bHeight, bFS, 'credits');
+  const storeButton = new Button(bX, bY -= (bHeight + bSpacing), bHeight, bFS, 'store');
+  const playButton = new Button(bX, bY - (bHeight + bSpacing), bHeight, bFS, 'play');
+
+  playButton.textAlign = 'LEFT';
+  storeButton.textAlign = 'LEFT';
+  creditsButton.textAlign = 'LEFT';
+  settingsButton.textAlign = 'LEFT';
+  achievementsButton.textAlign = 'LEFT';
 
   playButton.action = function() {
     MENU = false;
@@ -88,6 +98,10 @@ function createMenu() {
     setTimeout(createAchievements, 10);
     print('ACHIEVEMENTS');
   }
+
+
+  player.pos.x = width-(350*GAME_SCALE)-(100*GAME_SCALE)+(350*GAME_SCALE/2)-player.size.x/2;
+  player.pos.y = (250 * GAME_SCALE) + (250 * GAME_SCALE/2);
 }
 
 function createStore() {
@@ -104,6 +118,7 @@ function createStore() {
   SHOP = true;
   SETTINGS = false;
   CREDITS = false;
+  MENU_SHIP = false;
 
   SHOP_BACKGROUNDS = false;
 
@@ -132,6 +147,7 @@ function createSettings() {
   SHOP = false;
   CREDITS = false;
   SETTINGS = true;
+  MENU_SHIP = false;
   createBackButton();
 
   const musicVolumeSlider = new Slider('Music Volume', 15 * GAME_SCALE, 175 * GAME_SCALE);
@@ -243,6 +259,7 @@ function createGame() {
   GAME_PAUSE = false;
   GAME_DEAD = false;
   GAME_STARTED = false;
+  MENU_SHIP = false;
   GAME_COUNTDOWN = 4;
   
   buttons = [];
@@ -258,7 +275,8 @@ function createGame() {
   currentcredits = 0;
   stage = 0;
 
-  player = new Player();
+  player.pos.x = width/2;
+  player.pos.y =  height-player.size.y-(10 * GAME_SCALE);
   player.bulletCooldown = 20;
   player.shipName = 'Level0';
   player.shoot = function() {
@@ -279,6 +297,7 @@ function createCredits() {
   SHOP = false;
   SETTINGS = false;
   CREDITS = true;
+  MENU_SHIP = false;
 
   createBackButton();
 }
@@ -296,6 +315,7 @@ function createAchievements() {
   SETTINGS = false;
   CREDITS = false;
   ACHIEVEMENTS = true;
+  MENU_SHIP = false;
   createBackButton();
 }
 
@@ -313,6 +333,28 @@ function createBackToStoreButton() {
 }
 
 
+function createMenu_Ship() {
+  buttons = [];
+  enemys = [];
+  playerBullets = [];
+  enemyBullets = [];
+  animations = [];
+  sliders = [];
+  checkboxes = [];
+  keychangers = [];
+  shopPreviews = [];
+
+  MENU = false;
+  GAME = false;
+  SHOP = false;
+  SETTINGS = false;
+  CREDITS = false;
+  ACHIEVEMENTS = false;
+  GAME_DEAD = false;
+  MENU_SHIP = true;
+
+  createBackButton();
+}
 
 function createStore_Backgrounds() {
   storeMainSlideXOffset = 0;
@@ -327,6 +369,7 @@ function createStore_Backgrounds() {
   SETTINGS = false;
   CREDITS = false;
   SHOP_BACKGROUNDS = true;
+  MENU_SHIP = false;
 
   createBackToStoreButton();
 

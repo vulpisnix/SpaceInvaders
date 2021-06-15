@@ -15,6 +15,7 @@ function setup() {
   InitStoreItems();
   LoadGame();
   SaveGame();
+  player = new Player();
 
   shakeEffect = createVector(0,0);
   let sWidth = 1300, sHeight = 900;
@@ -101,11 +102,11 @@ function draw() {
   }
 
   if(!IS_DEVICE_SIZE_OK) {
-    let tS = 75;
+    let tS = 90;
     if(width < 600)
-      tS = 40;
+      tS = 60;
     if(width < 400)
-      tS = 20;
+      tS = 40;
     drawTitle(tS);
 
     noStroke();
@@ -160,6 +161,9 @@ function draw() {
   if (MENU) {
     renderMenu_Main();
   }
+  if(MENU_SHIP) {
+    renderMenu_Ship();
+  }
   if (SHOP) {
     renderMenu_Store();
   }
@@ -182,13 +186,18 @@ function draw() {
   updateInput();
 }
 
-function drawTitle(tS = 75) {
+function drawTitle(tS = 90, subTitle = '') {
+  if(tS == -1)
+    tS = 90;
   tS *= GAME_SCALE;
   noStroke();
   fill(255,255,0);
   textSize(tS);
   textAlign(CENTER, CENTER);
   text('space invaders', width/2, 50 * GAME_SCALE);
+  textSize(tS - (30*GAME_SCALE));
+  fill(255);
+  text(subTitle, width/2, 120 * GAME_SCALE);
   textAlign(LEFT, CENTER);
 }
 
@@ -203,7 +212,6 @@ function InitStoreItems() {
   fetch('./data/store/store.json')
     .then(res => res.json())
     .then(res => {
-
       for(let i = 0; i < res.backgrounds.length; i++) {
         const storeItem = res.backgrounds[i];
         loadStoreSprite(storeItem.imagePath);
@@ -212,7 +220,6 @@ function InitStoreItems() {
 
       shopProducts.sort((a, b) => a.price - b.price)
       shopProducts.reverse();
-
     })
     .catch(err => {
       console.error('Something went wrong while loading the store data:');

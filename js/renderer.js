@@ -1,13 +1,46 @@
 function renderMenu_Main() {
   drawTitle();
+
+
+  let ySBoxWidth = 350 * GAME_SCALE;
+  let ySBoxHeight = 300 * GAME_SCALE;
+  let ySBoxX = width-ySBoxWidth-(100*GAME_SCALE);
+  let ySBoxY = 250 * GAME_SCALE;
+  let ySBoxTS = 40 * GAME_SCALE;
+
+  player.dataUpdate();
+  player.render();
+
+  let ySBoxHover = AABB(mouseX, mouseY, 1, 1, ySBoxX, ySBoxY, ySBoxWidth, ySBoxHeight);
+  if(ySBoxHover) {
+    fill(0, 150);
+    rect(ySBoxX, ySBoxY, ySBoxWidth, ySBoxHeight);
+
+    fill(255);
+    textAlign(CENTER, CENTER);
+    textSize(ySBoxTS - (15 * GAME_SCALE));
+    text('Click to edit', ySBoxX + ySBoxWidth/2, ySBoxY + ySBoxHeight/2);
+  }
+
+  noFill();
+  stroke(0);
+  strokeWeight(5);
+  rect(ySBoxX, ySBoxY, ySBoxWidth, ySBoxHeight);
+  noStroke();
+
+  fill(255);
+  textSize(ySBoxTS);
+  textAlign(CENTER, CENTER);
+  text('Your Ship', ySBoxX + ySBoxWidth/2, ySBoxY);
+
+  if(mouseIsPressed && ySBoxHover) {
+    createMenu_Ship();
+  }
+
 }
 
 function renderMenu_Store() {
-  drawTitle();
-  fill(255);
-  textAlign(CENTER,CENTER);
-  textSize(50 * GAME_SCALE);
-  text('store', width/2, 120 * GAME_SCALE);
+  drawTitle(-1, 'store');
 
   fill(255);
   textSize(30 * GAME_SCALE);
@@ -37,11 +70,7 @@ function renderMenu_Store() {
   }
 }
 function renderMenu_Store_Backgrounds() {
-  drawTitle();
-  fill(255);
-  textAlign(CENTER,CENTER);
-  textSize(50 * GAME_SCALE);
-  text('store: backgrounds', width/2, 120 * GAME_SCALE);
+  drawTitle(-1, 'store: backgrounds');
 
   fill(255);
   textSize(30 * GAME_SCALE);
@@ -72,11 +101,7 @@ function renderMenu_Store_Backgrounds() {
 }
 
 function renderMenu_Settings() {
-  drawTitle();
-  fill(255);
-  textAlign(CENTER,CENTER);
-  textSize(50 * GAME_SCALE);
-  text('settings', width/2, 120 * GAME_SCALE);
+  drawTitle(-1, 'settings');
 
   if(keyChangerChange.name != '') {
     fill(color(0, 0, 0, 175));
@@ -92,11 +117,7 @@ function renderMenu_Settings() {
 }
 
 function renderMenu_Credits() {
-  drawTitle();
-  fill(255);
-  textAlign(CENTER,CENTER);
-  textSize(50 * GAME_SCALE);
-  text('credits', width/2, 120 * GAME_SCALE);
+  drawTitle(-1, 'credits');
 
   let highlightColour = color(200, 200, 0);
   let textColour = color(255);
@@ -141,11 +162,7 @@ function renderMenu_Credits() {
 }
 
 function renderMenu_Achievements() {
-  drawTitle();
-  fill(255);
-  textAlign(CENTER,CENTER);
-  textSize(50 * GAME_SCALE);
-  text('achievements', width/2, 120 * GAME_SCALE);
+  drawTitle(-1, 'achievements');
 
   textSize(40 * GAME_SCALE);
   fill(255, 0, 0);
@@ -482,4 +499,9 @@ function renderGame() {
       createMenu();
     }
   }
+}
+
+
+function renderMenu_Ship() {
+  drawTitle(-1, 'Your Ship');
 }
