@@ -61,10 +61,10 @@ function setup() {
   }
 
 
-  /*loadMusic('normal_music', (audio) => {
+  loadMusic('normal_music', (audio) => {
     audio.play(true);
   });
-  loadSFXSound('Explosion');*/
+  loadSFXSound('Explosion');
 
   UpdateSoundVolume();
   UpdateMusicVolume();

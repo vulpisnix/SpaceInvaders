@@ -74,6 +74,9 @@ class Scene {
             if(this.buttons[i] != null)
                 this.buttons[i].mousePressed();
         }
+        for (let i = this.checkboxes.length - 1; i >= 0; i--) {
+            this.checkboxes[i].mousePressed();
+        }
     }
     mouseReleased() {}
 
