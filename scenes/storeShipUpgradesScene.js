@@ -49,14 +49,14 @@ class StoreShipUpgradesScene extends Scene {
         }
     }
 
-    keyPressed() {
+    keyPressed(key) {
         super.keyPressed();
         this.pressedKey = key;
         if(key == 'Escape') {
-            ShowScene('StoreScene');
+            ShowScene('MenuScene');
         }
     }
-    keyReleased() {
+    keyReleased(key) {
         super.keyReleased();
         this.pressedKey = '';
     }
@@ -66,7 +66,6 @@ class StoreShipUpgradesScene extends Scene {
         const scroll = constrain(event.delta, -1, 1);
         this.storeScroll(scroll, 5);
     }
-
     storeScroll(dir, speed) {
         if(dir > 0) {
             const last = this.shopPreviews[0];

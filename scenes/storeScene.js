@@ -3,6 +3,7 @@ class StoreScene extends Scene {
         super('StoreScene');
         this.shopPreviews = [];
         this.storeSlideXOffset = 0;
+        this.pressedKey = '';
     }
 
     awake() {
@@ -24,6 +25,14 @@ class StoreScene extends Scene {
         }
     }
 
+    update() {
+        super.update();
+        if(this.pressedKey == 'ArrowLeft')
+            this.storeScroll(-1, 2);
+        if(this.pressedKey == 'ArrowRight')
+            this.storeScroll(1, 2);
+    }
+
     render() {
         super.render();
         drawTitle(-1, 'store');
@@ -41,34 +50,35 @@ class StoreScene extends Scene {
                 storeXOffset += preview.size.x + (50 * GAME_SCALE);
             }
         }
-
-        let mouseScrollX = 1;
-
-        if(this.shopPreviews.length > 0) {
-            if (mouseIsPressed || pressedKey != '' || mouseScrollX != 0) {
-                if (pmouseX < 0 || pressedKey == 'ArrowRight' || mouseScrollX > 0) {
-                    const last = this.shopPreviews[0];
-                    if ((last.pos.x + last.size.x) >= width - (20 * GAME_SCALE))
-                        this.storeSlideXOffset -= 10;
-                }
-                if (pmouseX > 0 || pressedKey == 'ArrowLeft' || mouseScrollX < 0) {
-                    const first = this.shopPreviews[this.shopPreviews.length - 1];
-                    if (first.pos.x <= (20 * GAME_SCALE))
-                        this.storeSlideXOffset += 10;
-                }
-            }
-        }
     }
 
-    keyPressed() {
+    keyPressed(key) {
         super.keyPressed();
+        this.pressedKey = key;
         if(key == 'Escape') {
             ShowScene('MenuScene');
         }
     }
+    keyReleased(key) {
+        super.keyReleased();
+        this.pressedKey = '';
+    }
 
     mouseWheel(event) {
-        super.mouseWheel();
-        this.storeSlideXOffset += event.deltaY;
+        super.mouseWheel(event);
+        const scroll = constrain(event.delta, -1, 1);
+        this.storeScroll(scroll, 5);
+    }
+    storeScroll(dir, speed) {
+        if(dir > 0) {
+            const last = this.shopPreviews[0];
+            if ((last.pos.x + last.size.x) >= width - (20 * GAME_SCALE))
+                this.storeSlideXOffset -= 10 * speed;
+        }
+        if(dir < 0) {
+            const first = this.shopPreviews[this.shopPreviews.length-1];
+            if (first.pos.x <= (20 * GAME_SCALE))
+                this.storeSlideXOffset += 10 * speed;
+        }
     }
 }
