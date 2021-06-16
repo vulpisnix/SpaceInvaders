@@ -1,13 +1,48 @@
 function renderMenu_Main() {
   drawTitle();
+
+
+  let ySBoxWidth = 350 * GAME_SCALE;
+  let ySBoxHeight = 300 * GAME_SCALE;
+  let ySBoxX = width-ySBoxWidth-(100*GAME_SCALE);
+  let ySBoxY = 250 * GAME_SCALE;
+  let ySBoxTS = 40 * GAME_SCALE;
+
+  fill(0, 100);
+  rect(ySBoxX, ySBoxY, ySBoxWidth, ySBoxHeight);
+
+  player.dataUpdate();
+  player.renderScaled(2);
+
+  let ySBoxHover = AABB(mouseX, mouseY, 1, 1, ySBoxX, ySBoxY, ySBoxWidth, ySBoxHeight);
+  if(ySBoxHover) {
+    fill(0, 150);
+    rect(ySBoxX, ySBoxY, ySBoxWidth, ySBoxHeight);
+
+    fill(255);
+    textAlign(CENTER, CENTER);
+    textSize(ySBoxTS - (15 * GAME_SCALE));
+    text('Click to edit', ySBoxX + ySBoxWidth/2, ySBoxY + ySBoxHeight/2);
+  }
+
+  noFill();
+  stroke(0);
+  strokeWeight(5);
+  rect(ySBoxX, ySBoxY, ySBoxWidth, ySBoxHeight);
+  noStroke();
+
+  fill(255);
+  textSize(ySBoxTS);
+  textAlign(CENTER, CENTER);
+  text('Your Ship', ySBoxX + ySBoxWidth/2, ySBoxY);
+
+  if(mouseIsPressed && ySBoxHover) {
+    createMenu_Ship();
+  }
 }
 
 function renderMenu_Store() {
-  drawTitle();
-  fill(255);
-  textAlign(CENTER,CENTER);
-  textSize(50 * GAME_SCALE);
-  text('store', width/2, 120 * GAME_SCALE);
+  drawTitle(-1, 'store');
 
   fill(255);
   textSize(30 * GAME_SCALE);
@@ -23,25 +58,21 @@ function renderMenu_Store() {
     }
   }
 
-  if(mouseIsPressed || pressedKey != '') {
-    if(inputMouseDX < 0 || pressedKey == 'ArrowLeft') {
+  if(mouseIsPressed || pressedKey != '' || mouseScrollX != 0) {
+    if(inputMouseDX < 0 || pressedKey == 'ArrowRight' || mouseScrollX > 0) {
       const last = shopPreviews[0];
       if ((last.pos.x + last.size.x) >= width - (20 * GAME_SCALE))
-        storeMainSlideXOffset -= 5;
+        storeMainSlideXOffset -= 10;
     }
-    if(inputMouseDX > 0 || pressedKey == 'ArrowRight') {
+    if(inputMouseDX > 0 || pressedKey == 'ArrowLeft' || mouseScrollX < 0) {
       const first = shopPreviews[shopPreviews.length-1];
       if (first.pos.x <= (20 * GAME_SCALE))
-        storeMainSlideXOffset += 5;
+        storeMainSlideXOffset += 10;
     }
   }
 }
 function renderMenu_Store_Backgrounds() {
-  drawTitle();
-  fill(255);
-  textAlign(CENTER,CENTER);
-  textSize(50 * GAME_SCALE);
-  text('store: backgrounds', width/2, 120 * GAME_SCALE);
+  drawTitle(-1, 'store: backgrounds');
 
   fill(255);
   textSize(30 * GAME_SCALE);
@@ -57,26 +88,52 @@ function renderMenu_Store_Backgrounds() {
     }
   }
 
-  if(mouseIsPressed || pressedKey != '') {
-    if(inputMouseDX < 0 || pressedKey == 'ArrowLeft') {
+  if(mouseIsPressed || pressedKey != '' || mouseScrollX != 0) {
+    if(inputMouseDX < 0 || pressedKey == 'ArrowRight' || mouseScrollX > 0) {
       const last = shopPreviews[0];
       if ((last.pos.x + last.size.x) >= width - (20 * GAME_SCALE))
-        storeMainSlideXOffset -= 5;
+        storeMainSlideXOffset -= 10;
     }
-    if(inputMouseDX > 0 || pressedKey == 'ArrowRight') {
+    if(inputMouseDX > 0 || pressedKey == 'ArrowLeft' || mouseScrollX < 0) {
       const first = shopPreviews[shopPreviews.length-1];
       if (first.pos.x <= (20 * GAME_SCALE))
-        storeMainSlideXOffset += 5;
+        storeMainSlideXOffset += 10;
+    }
+  }
+}
+function renderMenu_Store_ShipUpgrades() {
+  drawTitle(-1, 'store: ship upgrades');
+
+  fill(255);
+  textSize(30 * GAME_SCALE);
+  text('Credits: '+credits, width-(300*GAME_SCALE), 175*GAME_SCALE);
+
+  let storeXOffset = 50*GAME_SCALE;
+  for (let i = shopPreviews.length-1; i >= 0; i--) {
+    const preview = shopPreviews[i];
+    if(preview != null) {
+      preview.update(storeXOffset + storeMainSlideXOffset, height / 2 - preview.size.y / 2);
+      preview.render();
+      storeXOffset += preview.size.x + (50 * GAME_SCALE);
+    }
+  }
+
+  if(mouseIsPressed || pressedKey != '' || mouseScrollX != 0) {
+    if(inputMouseDX < 0 || pressedKey == 'ArrowRight' || mouseScrollX > 0) {
+      const last = shopPreviews[0];
+      if ((last.pos.x + last.size.x) >= width - (20 * GAME_SCALE))
+        storeMainSlideXOffset -= 10;
+    }
+    if(inputMouseDX > 0 || pressedKey == 'ArrowLeft' || mouseScrollX < 0) {
+      const first = shopPreviews[shopPreviews.length-1];
+      if (first.pos.x <= (20 * GAME_SCALE))
+        storeMainSlideXOffset += 10;
     }
   }
 }
 
 function renderMenu_Settings() {
-  drawTitle();
-  fill(255);
-  textAlign(CENTER,CENTER);
-  textSize(50 * GAME_SCALE);
-  text('settings', width/2, 120 * GAME_SCALE);
+  drawTitle(-1, 'settings');
 
   if(keyChangerChange.name != '') {
     fill(color(0, 0, 0, 175));
@@ -92,11 +149,7 @@ function renderMenu_Settings() {
 }
 
 function renderMenu_Credits() {
-  drawTitle();
-  fill(255);
-  textAlign(CENTER,CENTER);
-  textSize(50 * GAME_SCALE);
-  text('credits', width/2, 120 * GAME_SCALE);
+  drawTitle(-1, 'credits');
 
   let highlightColour = color(200, 200, 0);
   let textColour = color(255);
@@ -141,12 +194,9 @@ function renderMenu_Credits() {
 }
 
 function renderMenu_Achievements() {
-  drawTitle();
-  fill(255);
-  textAlign(CENTER,CENTER);
-  textSize(50 * GAME_SCALE);
-  text('achievements', width/2, 120 * GAME_SCALE);
+  drawTitle(-1, 'achievements');
 
+  textAlign(CENTER, CENTER);
   textSize(40 * GAME_SCALE);
   fill(255, 0, 0);
   text('to be added', width/2, height/2);
@@ -261,8 +311,10 @@ function renderGame() {
     }
   }
 
-  player.render();
-  player.dataUpdate();
+  if(player != null) {
+    player.render();
+    player.dataUpdate();
+  }
 
   if(GAME_COUNTDOWN >= 0 && !GAME_STARTED && !GAME_DEAD && !GAME_PAUSE) {
     fill(255);
@@ -479,5 +531,118 @@ function renderGame() {
     if(mouseIsPressed && hoverBackToMenuButton) {
       createMenu();
     }
+  }
+}
+
+
+function renderMenu_Ship() {
+  drawTitle(-1, 'Your Ship');
+
+
+  let ySBoxWidth = 350 * GAME_SCALE;
+  let ySBoxHeight = 300 * GAME_SCALE;
+  let ySBoxX = width/2 - ySBoxWidth/2;
+  let ySBoxY = height/2 - ySBoxHeight/2;
+  let ySBoxTS = 40 * GAME_SCALE;
+
+  fill(0, 100);
+  rect(ySBoxX, ySBoxY, ySBoxWidth, ySBoxHeight);
+
+  player.dataUpdate();
+  player.renderScaled(2);
+
+  noFill();
+  stroke(0);
+  strokeWeight(5);
+  rect(ySBoxX, ySBoxY, ySBoxWidth, ySBoxHeight);
+  noStroke();
+
+  fill(255);
+  textSize(ySBoxTS);
+  textAlign(CENTER, CENTER);
+  text('Your Ship', ySBoxX + ySBoxWidth/2, ySBoxY);
+
+
+  let upgradeSlotSize = 150*GAME_SCALE;
+  let upgradeSlotX = 70*GAME_SCALE;
+  let upgradeSlotY = height/3 - upgradeSlotSize/2;
+
+
+  noStroke();
+  fill(255);
+  textSize(30*GAME_SCALE);
+  textAlign(CENTER, CENTER);
+  text('Upgrades', upgradeSlotX+upgradeSlotSize/2, upgradeSlotY - (30*GAME_SCALE));
+
+  for(let i = 0; i < 3; i++) {
+    fill(0, 100);
+    rect(upgradeSlotX, upgradeSlotY, upgradeSlotSize, upgradeSlotSize);
+
+    noFill();
+    stroke(0);
+    strokeWeight(5);
+    rect(upgradeSlotX, upgradeSlotY, upgradeSlotSize, upgradeSlotSize);
+
+    fill(255);
+    textSize(20*GAME_SCALE);
+    textAlign(CENTER, CENTER);
+    text('Locked', upgradeSlotX + upgradeSlotSize/2, upgradeSlotY + upgradeSlotSize/2);
+
+    upgradeSlotY += upgradeSlotSize + (50 * GAME_SCALE);
+  }
+
+  upgradeSlotX = width - upgradeSlotX - upgradeSlotSize;
+  upgradeSlotY = height/3 - upgradeSlotSize/2;
+
+  noStroke();
+  fill(255);
+  textSize(30*GAME_SCALE);
+  textAlign(CENTER, CENTER);
+  text('Upgrades', upgradeSlotX+upgradeSlotSize/2, upgradeSlotY - (30*GAME_SCALE));
+
+  for(let i = 0; i < 3; i++) {
+    fill(0, 100);
+    rect(upgradeSlotX, upgradeSlotY, upgradeSlotSize, upgradeSlotSize);
+
+    noFill();
+    stroke(0);
+    strokeWeight(5);
+    rect(upgradeSlotX, upgradeSlotY, upgradeSlotSize, upgradeSlotSize);
+
+    fill(255);
+    textSize(20*GAME_SCALE);
+    textAlign(CENTER, CENTER);
+    text('Locked', upgradeSlotX + upgradeSlotSize/2, upgradeSlotY + upgradeSlotSize/2);
+
+    upgradeSlotY += upgradeSlotSize + (50 * GAME_SCALE);
+  }
+
+
+  let powerupRadius = 125*GAME_SCALE;
+  let powerupX = width/2 - powerupRadius - powerupRadius/3;
+  let powerupY = height - powerupRadius/2 - (50*GAME_SCALE);
+
+  noStroke();
+  fill(255);
+  textSize(30*GAME_SCALE);
+  textAlign(CENTER, CENTER);
+  text('Powerups', powerupX + powerupRadius + powerupRadius/3, powerupY - powerupRadius/2 - (30*GAME_SCALE));
+
+
+  for(let i = 0; i < 3; i++) {
+    fill(0, 100);
+    circle(powerupX, powerupY, powerupRadius);
+
+    noFill();
+    stroke(0);
+    strokeWeight(5);
+    circle(powerupX, powerupY, powerupRadius);
+
+    fill(255);
+    textSize(20*GAME_SCALE);
+    textAlign(CENTER, CENTER);
+    text('Locked', powerupX, powerupY);
+
+    powerupX += powerupRadius + (50 * GAME_SCALE);
   }
 }

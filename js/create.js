@@ -17,48 +17,62 @@ function createMenu() {
   SETTINGS = false;
   CREDITS = false;
   ACHIEVEMENTS = false;
+  GAME_DEAD = false;
+  MENU_SHIP = false;
+  SHOP_SHIPS = false;
 
   let bHeight = 50 * GAME_SCALE;
   let bFS = 50 * GAME_SCALE;
+  let bX = 10*GAME_SCALE;
+  let bY = height - bHeight - 10*GAME_SCALE;
+  let bSpacing = 20 * GAME_SCALE;
 
-  const playButton = new Button(width/2, height/2-(75 * GAME_SCALE), bHeight, bFS, 'play');
-  const storeButton = new Button(width/2, height/2, bHeight, bFS, 'store');
-  const settingsButton = new Button(width/2, height/2+(75 * GAME_SCALE), bHeight, bFS, 'settings');
-  const achievementsButton = new Button(width/2, height/2+(150 * GAME_SCALE), bHeight, bFS, 'achievements');
-  const creditsButton = new Button(width/2, height/2+(225 * GAME_SCALE), bHeight, bFS, 'credits');
+  const achievementsButton = new Button(bX, bY, bHeight, bFS, 'achievements');
+  const settingsButton = new Button(bX, bY -= (bHeight + bSpacing), bHeight, bFS, 'settings');
+  const creditsButton = new Button(bX, bY -= (bHeight + bSpacing), bHeight, bFS, 'credits');
+  const storeButton = new Button(bX, bY -= (bHeight + bSpacing), bHeight, bFS, 'store');
+  const playButton = new Button(bX, bY - (bHeight + bSpacing), bHeight, bFS, 'play');
+
+  playButton.textAlign = 'LEFT';
+  storeButton.textAlign = 'LEFT';
+  creditsButton.textAlign = 'LEFT';
+  settingsButton.textAlign = 'LEFT';
+  achievementsButton.textAlign = 'LEFT';
 
   playButton.action = function() {
     MENU = false;
+    GAME = true;
     SHOP = false;
     SETTINGS = false;
-    CREDITS = true;
-    GAME = true;
+    CREDITS = false;
     ACHIEVEMENTS = false;
-    
-    createGame();
+    GAME_DEAD = false;
+
+    setTimeout(createGame, 10);
     print('GAME');
   }
   storeButton.action = function() {
     MENU = false;
     GAME = false;
-    SETTINGS = false;
-    CREDITS = true;
     SHOP = true;
+    SETTINGS = false;
+    CREDITS = false;
     ACHIEVEMENTS = false;
-    
-    createStore();
+    GAME_DEAD = false;
+
+    setTimeout(createStore, 10);
     print('STORE');
   }
   settingsButton.action = function() {
     MENU = false;
     GAME = false;
     SHOP = false;
-    CREDITS = true;
-    CREDITS = true;
     SETTINGS = true;
+    CREDITS = false;
     ACHIEVEMENTS = false;
-    
-    createSettings();
+    GAME_DEAD = false;
+
+    setTimeout(createSettings, 10);
     print('SETTINGS');
   }
   creditsButton.action = function() {
@@ -68,8 +82,9 @@ function createMenu() {
     SETTINGS = false;
     CREDITS = true;
     ACHIEVEMENTS = false;
-    
-    createCredits();
+    GAME_DEAD = false;
+
+    setTimeout(createCredits, 10);
     print('CREDITS');
   }
   achievementsButton.action = function() {
@@ -79,10 +94,15 @@ function createMenu() {
     SETTINGS = false;
     CREDITS = false;
     ACHIEVEMENTS = true;
+    GAME_DEAD = false;
 
-    createAchievements();
+    setTimeout(createAchievements, 10);
     print('ACHIEVEMENTS');
   }
+
+
+  player.pos.x = width-(350*GAME_SCALE)-(100*GAME_SCALE)+(350*GAME_SCALE/2)-player.size.x/2;
+  player.pos.y = (250 * GAME_SCALE) + (250 * GAME_SCALE/2);
 }
 
 function createStore() {
@@ -99,21 +119,25 @@ function createStore() {
   SHOP = true;
   SETTINGS = false;
   CREDITS = false;
+  MENU_SHIP = false;
+  SHOP_SHIPS = false;
 
   SHOP_BACKGROUNDS = false;
-  
+
   createBackButton();
 
-  let shipProducts = getShopProductsByCategory('ships');
+  let shipProducts = getShopProductsByCategory('shipUpgrades');
   let backgroundProducts = getShopProductsByCategory('backgrounds');
 
   const shopShipUpgrades = new ShopPreview('Ship Upgrades', shipProducts[floor(random(0,shipProducts.length))]);
   const shopBackgrounds = new ShopPreview('Backgrounds', backgroundProducts[floor(random(0,backgroundProducts.length))]);
 
-  shopBackgrounds.onClick = function() {
-    createStore_Backgrounds();
+  shopShipUpgrades.onClick = function() {
+    setTimeout(createStore_ShipUpgrades, 10);
   }
-
+  shopBackgrounds.onClick = function() {
+    setTimeout(createStore_Backgrounds, 10);
+  }
 }
 
 function createSettings() {
@@ -128,8 +152,9 @@ function createSettings() {
   SHOP = false;
   CREDITS = false;
   SETTINGS = true;
+  MENU_SHIP = false;
+  SHOP_SHIPS = false;
   createBackButton();
-
 
   const musicVolumeSlider = new Slider('Music Volume', 15 * GAME_SCALE, 175 * GAME_SCALE);
   musicVolumeSlider.sliderPos = (settings.sound.musicFullVolume * (musicVolumeSlider.size.x-(20*GAME_SCALE)))+(20*GAME_SCALE);
@@ -232,8 +257,6 @@ function createSettings() {
 
 function createGame() {
   // getMusicByName('normal_music').stop();
-
-  backgroundToDrawName = selectedBackground;
   MENU = false;
   GAME = true;
   SHOP = false;
@@ -242,6 +265,8 @@ function createGame() {
   GAME_PAUSE = false;
   GAME_DEAD = false;
   GAME_STARTED = false;
+  MENU_SHIP = false;
+  SHOP_SHIPS = false;
   GAME_COUNTDOWN = 4;
   
   buttons = [];
@@ -256,14 +281,15 @@ function createGame() {
   currentscore = 0;
   currentcredits = 0;
   stage = 0;
-  
-  player = new Player();
+
+  player.pos.x = width/2;
+  player.pos.y =  height-player.size.y-(10 * GAME_SCALE);
   player.bulletCooldown = 20;
   player.shipName = 'Level0';
   player.shoot = function() {
     createPlayerBullet(player.pos.x+player.size.x/2- (6 * GAME_SCALE), player.pos.y, -1);
   }
-  
+
   createEnemysStageZero();
 }
 
@@ -278,7 +304,9 @@ function createCredits() {
   SHOP = false;
   SETTINGS = false;
   CREDITS = true;
-  
+  MENU_SHIP = false;
+  SHOP_SHIPS = false;
+
   createBackButton();
 }
 
@@ -295,7 +323,8 @@ function createAchievements() {
   SETTINGS = false;
   CREDITS = false;
   ACHIEVEMENTS = true;
-
+  MENU_SHIP = false;
+  SHOP_SHIPS = false;
   createBackButton();
 }
 
@@ -313,6 +342,33 @@ function createBackToStoreButton() {
 }
 
 
+function createMenu_Ship() {
+  buttons = [];
+  enemys = [];
+  playerBullets = [];
+  enemyBullets = [];
+  animations = [];
+  sliders = [];
+  checkboxes = [];
+  keychangers = [];
+  shopPreviews = [];
+
+  MENU = false;
+  GAME = false;
+  SHOP = false;
+  SETTINGS = false;
+  CREDITS = false;
+  ACHIEVEMENTS = false;
+  GAME_DEAD = false;
+  MENU_SHIP = true;
+  SHOP_SHIPS = false;
+
+  createBackButton();
+
+
+  player.pos.x = width/2 - player.size.x/2;
+  player.pos.y = height/2 - player.size.y/2;
+}
 
 function createStore_Backgrounds() {
   storeMainSlideXOffset = 0;
@@ -327,14 +383,44 @@ function createStore_Backgrounds() {
   SETTINGS = false;
   CREDITS = false;
   SHOP_BACKGROUNDS = true;
+  MENU_SHIP = false;
+  SHOP_SHIPS = false;
 
   createBackToStoreButton();
-
 
   let backgroundProducts = getShopProductsByCategory('backgrounds');
   for(let i = backgroundProducts.length-1; i >= 0; i--) {
     const bgP = backgroundProducts[i];
     const background = new ShopPreview(bgP.text, bgP, true);
+    background.onClick = function () {
+      background.product.buyClickOrSelect();
+    }
   }
+}
+function createStore_ShipUpgrades() {
+  storeMainSlideXOffset = 0;
+  buttons = [];
+  sliders = [];
+  checkboxes = [];
+  shopPreviews = [];
 
+  MENU = false;
+  GAME = false;
+  SHOP = false;
+  SETTINGS = false;
+  CREDITS = false;
+  SHOP_BACKGROUNDS = false;
+  SHOP_SHIPS = true;
+  MENU_SHIP = false;
+
+  createBackToStoreButton();
+
+  let shipUpgradeProducts = getShopProductsByCategory('shipUpgrades');
+  for(let i = shipUpgradeProducts.length-1; i >= 0; i--) {
+    const bgP = shipUpgradeProducts[i];
+    const shipUpgrade = new ShopPreview(bgP.text, bgP, true);
+    shipUpgrade.onClick = function () {
+      shipUpgrade.product.buyClickOrSelect();
+    }
+  }
 }

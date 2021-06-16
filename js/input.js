@@ -1,5 +1,6 @@
 let inputMouseX = 0; inputMouseY = 0, inputLastMouseX = 0; inputLastMouseY = 0;
 let inputMouseDX = 0; inputMouseDY = 0;
+let mouseScrollY = 0, mouseScrollX = 0;
 
 function updateInput() {
   if(!mouseIsPressed) {
@@ -16,6 +17,9 @@ function updateInput() {
     inputMouseDX = 0;
     inputMouseDY = 0;
   }
+
+  mouseScrollX = 0;
+  mouseScrollY = 0;
 }
 
 function keyPressed() {
@@ -41,10 +45,10 @@ function keyPressed() {
       createGame();
     }
   }
-  if((SHOP || SETTINGS || CREDITS || ACHIEVEMENTS) && (key == 'Escape' || key == 'Backspace')) {
+  if((SHOP || SETTINGS || CREDITS || ACHIEVEMENTS || MENU_SHIP) && (key == 'Escape' || key == 'Backspace')) {
     createMenu();
   }
-  if((SHOP_BACKGROUNDS) && (key == 'Escape' || key == 'Backspace')) {
+  if((SHOP_BACKGROUNDS || SHOP_SHIPS) && (key == 'Escape' || key == 'Backspace')) {
     createStore();
   }
 
@@ -75,7 +79,6 @@ function keyPressed() {
   }
   pressedKey = key;
 }
-
 function keyReleased() {
   if(GAME) {
     if(!GAME_PAUSE) {
@@ -98,6 +101,10 @@ function mousePressed() {
         checkboxes[i].mousePressed();
     }
   }
+}
+function mouseWheel(event) {
+  mouseScrollX = constrain(event.deltaX, -1, 1);
+  mouseScrollY = constrain(event.deltaY, -1, 1);
 }
 
 function getKeyName(key) {

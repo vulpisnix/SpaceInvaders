@@ -5,6 +5,7 @@ function Button(x,y,h,fS,txt = '') {
   this.text = txt;
   this.fontSize = fS * (GAME_SCALE + 0.25);
   this.isHovering = false;
+  this.textAlign = 'CENTER'
 
   this.active = true;
 
@@ -15,22 +16,25 @@ function Button(x,y,h,fS,txt = '') {
     textSize(this.fontSize);
     this.size.x = textWidth(this.text)+10;
 
-    let x = this.pos.x - this.size.x/2;
-    let y = this.pos.y - this.size.y/2;
-    let sX = this.size.x;
-    let sY = this.size.y;
-
-    this.isHovering = AABB(mouseX, mouseY, 1,1,x,y,sX,sY);
+    if(this.textAlign == 'CENTER')
+      this.isHovering = AABB(mouseX, mouseY, 1,1,this.pos.x - this.size.x/2,this.pos.y - this.size.y/2,this.size.x,this.size.y);
+    else if(this.textAlign == 'LEFT')
+      this.isHovering = AABB(mouseX, mouseY, 1,1,this.pos.x,this.pos.y,this.size.x,this.size.y);
   }
   
   this.render = function() {
     if(!this.active) return;
-
     noStroke();
     fill(this.isHovering ? color(255, 0, 0) : 255);
-    textAlign(CENTER, CENTER);
-    textSize(this.fontSize);
-    text(this.text,this.pos.x, this.pos.y);
+    if(this.textAlign == 'CENTER') {
+      textAlign(CENTER, CENTER);
+      textSize(this.fontSize);
+      text(this.text, this.pos.x, this.pos.y);
+    } else if(this.textAlign == 'LEFT') {
+      textAlign(LEFT, CENTER);
+      textSize(this.fontSize);
+      text(this.text, this.pos.x + (5*GAME_SCALE), this.pos.y + (this.size.y/2) - (5*GAME_SCALE));
+    }
   }
   
   this.mousePressed = function() {

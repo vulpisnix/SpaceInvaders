@@ -1,6 +1,6 @@
 function Player() {
-  this.pos = createVector(width/2, height-(50 * GAME_SCALE));
-  this.size = createVector(18*2 * GAME_SCALE, 26*2 * GAME_SCALE);
+  this.size = createVector(18 * GAME_SCALE, 26 * GAME_SCALE);
+  this.pos = createVector(width/2, height-this.size.y-(10 * GAME_SCALE));
   this.dirX = 0;
   
   this.shipName = 'Level0';
@@ -10,12 +10,17 @@ function Player() {
   this.fire = false;
   this.bulletCooldown = 10;
   this.bulletCooldownCounter = 0;
+
+  this.shipUpgrades = [];
   
   this.shoot = function() {}
   
   this.dataUpdate = function() {
     if(this.shipData == null || this.shipData.name == 'fallback') {
       this.shipData = getShipByName(this.shipName);
+    }
+    for(let i = this.shipUpgrades.length-1; i >= 0; i--) {
+      this.shipUpgrades[i].dataUpdate();
     }
   }
   
@@ -28,6 +33,10 @@ function Player() {
       this.bulletCooldownCounter = this.bulletCooldown;
       this.shoot();
     }
+
+    for(let i = this.shipUpgrades.length-1; i >= 0; i--) {
+      this.shipUpgrades[i].update();
+    }
   }
   
   this.render = function() {
@@ -36,6 +45,22 @@ function Player() {
     }
     else {
       image(fallbackSprite, this.pos.x, this.pos.y, this.size.x, this.size.y);
+    }
+
+    for(let i = this.shipUpgrades.length-1; i >= 0; i--) {
+      this.shipUpgrades[i].render();
+    }
+  }
+  this.renderScaled = function(scale = 1) {
+    if(this.shipData != null) {
+      image(this.shipData.sprite, this.pos.x - (this.size.x/scale), this.pos.y- (this.size.y / scale), this.size.x * scale, this.size.y * scale);
+    }
+    else {
+      image(fallbackSprite, this.pos.x- (this.size.x / scale), this.pos.y- (this.size.y / scale), this.size.x * scale, this.size.y * scale);
+    }
+
+    for(let i = this.shipUpgrades.length-1; i >= 0; i--) {
+      this.shipUpgrades[i].renderScaled(scale);
     }
   }
 

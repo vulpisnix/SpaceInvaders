@@ -1,5 +1,5 @@
 let IS_DEVICE_SIZE_OK = false, IS_TOUCH_SUPPORTED = false;
-let MENU = true, GAME = false, SHOP = false, SETTINGS = false, CREDITS = false, ACHIEVEMENTS = false, SHOP_BACKGROUNDS = false;
+let MENU = true, GAME = false, SHOP = false, SETTINGS = false, CREDITS = false, ACHIEVEMENTS = false, SHOP_BACKGROUNDS = false, MENU_SHIP = false;
 let GAME_STARTED = false, GAME_PAUSE = false, GAME_DEAD = false, GAME_NEXT_STAGE = false;
 let font;
 let GAME_SCALE = 1;
@@ -22,6 +22,11 @@ let keychangers = [];
 let shopPreviews = [];
 let shopProducts = [];
 
+let storeBought = {
+    backgrounds: ['backgrounds/Normal_Background_0'],
+    shipUpgrades: []
+};
+
 let highscore = 0, currentscore = 0;
 let bestStage = 0, stage = 0;
 let credits = 0, currentcredits = 0;
@@ -37,7 +42,7 @@ let pressedKey = '';
 
 let storeMainSlideXOffset = 0;
 
-let settingsOrig = {
+let settingsORIG = {
     sound: {
         musicVolume: 0.15,
         musicFullVolume: 0.15,
@@ -45,7 +50,8 @@ let settingsOrig = {
         soundsFullVolume: 0.3
     },
     visuell: {
-        screenshake: true
+        screenshake: true,
+        selectedBackground: 'backgrounds/Normal_Background_0'
     },
     controls: {
         movement: {
@@ -58,7 +64,7 @@ let settingsOrig = {
         useTouch: false
     }
 }
-let settings = JSON.parse(JSON.stringify(settingsOrig));
+let settings = JSON.parse(JSON.stringify(settingsORIG));
 
 function is_touch_supported() {
     return ('ontouchstart' in window ) ||
