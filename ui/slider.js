@@ -1,5 +1,5 @@
 function Slider(text_, x,y) {
-  sliders.push(this);
+  currentScene.uiSliders.push(this);
   this.pos = createVector(x,y);
   this.size = createVector(300 * GAME_SCALE,60 * GAME_SCALE);
   this.text = text_;

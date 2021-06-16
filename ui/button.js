@@ -1,5 +1,5 @@
 function Button(x,y,h,fS,txt = '') {
-  buttons.push(this);
+  currentScene.buttons.push(this);
   this.pos = createVector(x,y);
   this.size = createVector(0,h);
   this.text = txt;

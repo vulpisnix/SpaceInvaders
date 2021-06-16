@@ -2,7 +2,7 @@ let fallbackSprite;
 let backgroundToDraw, spriteDeathBackground;
 let backgrounds = [];
 let bombSprite, bulletSprite, enemyWalkerSprite, enemyShooterSprite, enemyBomberSprite;
-let selectedBackground = 'background_normal', backgroundToDrawName = 'background_normal';
+let selectedBackground = 'Background_0', backgroundToDrawName = 'Background_0';
 
 let ships = [];
 let shipUpgrades = [];
@@ -337,7 +337,7 @@ function SaveSettings() {
   setCookie('settings', JSON.stringify(settings));
 }
 function ResetSettings() {
-  settings = JSON.parse(JSON.stringify(settingsOrig));
+  settings = JSON.parse(JSON.stringify(settingsORIG));
 }
 function SaveStore() {
   setCookie('store', JSON.stringify(storeBought));

@@ -1,5 +1,5 @@
 function KeyChanger(x,y,text_, subtext_) {
-    keychangers.push(this);
+    currentScene.keyChangers.push(this);
     this.pos = createVector(x,y);
     this.size = createVector(300 * GAME_SCALE,60 * GAME_SCALE);
     this.text = text_;
@@ -12,8 +12,6 @@ function KeyChanger(x,y,text_, subtext_) {
     this.onClick = function() {}
 
     this.update = function() {
-        if(keyChangerChange.name != '') return;
-
         this.isHovering = AABB(mouseX, mouseY, 1, 1, this.pos.x,this.pos.y,this.size.x,this.size.y);
 
         if(mouseIsPressed && this.isHovering) {

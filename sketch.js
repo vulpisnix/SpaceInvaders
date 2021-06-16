@@ -15,9 +15,9 @@ function setup() {
   InitStoreItems();
   LoadGame();
   SaveGame();
-  player = new Player();
 
   shakeEffect = createVector(0,0);
+  player = new Player();
   let sWidth = 1300, sHeight = 900;
   IS_DEVICE_SIZE_OK = (windowWidth >= 1300 && windowHeight >= 900);
   IS_TOUCH_SUPPORTED = is_touch_supported();
@@ -44,66 +44,48 @@ function setup() {
     cHeight *= GAME_SCALE;
   }
 
-  if(IS_DEVICE_SIZE_OK) {
-    createCanvas(cWidth, cHeight);
-    frameRate(60);
-    let hash = document.location.hash;
-    if(hash == '#store') {
-      createStore();
-    }
-    else if(hash == '#settings') {
-      createSettings();
-    }
-    else if(hash == '#achievements') {
-      createAchievements();
-    }
-    else if(hash == '#credits') {
-      createCredits();
-    }
-    else if(hash == '#yourship') {
-      createMenu_Ship();
-    }
-    else createMenu();
+  createCanvas(cWidth, cHeight);
+  frameRate(60);
 
-    loadExplosionSprites();
+  loadExplosionSprites();
+  loadShip('Level0', 0, 0);
+  loadShip('Level1', 1, 75);
+  loadShip('Level2', 2, 150);
 
-    loadShip('Level0', 0, 0);
-    loadShip('Level1', 1, 75);
-    loadShip('Level2', 2, 150);
-
-    if(IS_TOUCH_SUPPORTED) {
-      loadTouchIcon('directionControl');
-      loadTouchIcon('directionControlHighlighted');
-      loadTouchIcon('shot');
-      loadTouchIcon('shotHighlighted');
-    }
-
-  }
-  else {
-    createCanvas(windowWidth, windowHeight-1);
-    frameRate(60);
+  if(IS_TOUCH_SUPPORTED) {
+    loadTouchIcon('directionControl');
+    loadTouchIcon('directionControlHighlighted');
+    loadTouchIcon('shot');
+    loadTouchIcon('shotHighlighted');
   }
 
-  loadMusic('normal_music', (audio) => {
+
+  /*loadMusic('normal_music', (audio) => {
     audio.play(true);
   });
-  loadSFXSound('Explosion');
+  loadSFXSound('Explosion');*/
 
   UpdateSoundVolume();
   UpdateMusicVolume();
+
+
+  new MenuScene();
+  new SettingsScene();
+  new CreditsScene();
+  new AchievementsScene();
+  new StoreScene();
+  new StoreBackgroundsScene();
+  new StoreShipUpgradesScene();
+  new YourShipScene();
+  new GameScene();
+
+  ShowScene('MenuScene');
 }
 
 function draw() {
   background(0);
   textFont(font);
   textAlign(LEFT, CENTER);
-
-  if(shakeScreen && settings.visuell.screenshake) {
-    translate(shakeEffect.x, shakeEffect.y);
-    shakeEffect.x += random(-1, 1)*3;
-    shakeEffect.y += random(-1, 1)*3;
-  }
-
   if(!IS_DEVICE_SIZE_OK) {
     let tS = 90;
     if(width < 600)
@@ -121,6 +103,12 @@ function draw() {
     text("Your screen resolution is "+windowWidth+"x"+windowHeight, width/2, height/2+(45 * GAME_SCALE));
 
     return;
+  }
+/*
+  if(shakeScreen && settings.visuell.screenshake) {
+    translate(shakeEffect.x, shakeEffect.y);
+    shakeEffect.x += random(-1, 1)*3;
+    shakeEffect.y += random(-1, 1)*3;
   }
 
   if (settings.visuell.selectedBackground != null) {
@@ -189,7 +177,71 @@ function draw() {
     renderGame();
   }
 
-  updateInput();
+  updateInput();*/
+
+  if (settings.visuell.selectedBackground != null) {
+    image(getStoreSpriteByName(settings.visuell.selectedBackground).sprite, 0, 0, width, height);
+  }
+  else {
+    image(getStoreSpriteByName('Background_0').sprite, 0, 0, width, height);
+  }
+
+  if(currentScene != null) {
+    currentScene.dataUpdate();
+    currentScene.update();
+    currentScene.render();
+    currentScene.renderUI();
+  }
+  else {
+    fill(255);
+    textAlign(CENTER, CENTER);
+    textSize(60 * GAME_SCALE);
+    text('Scene not found', width/2, height/2);
+  }
+}
+
+function keyPressed() {
+  if(currentScene != null) {
+    currentScene.keyPressed();
+  }
+}
+function keyReleased() {
+  if(currentScene != null) {
+    currentScene.keyReleased();
+  }
+}
+function mousePressed() {
+  if(currentScene != null) {
+    currentScene.mousePressed();
+  }
+}
+function mouseReleased() {
+  if(currentScene != null) {
+    currentScene.mouseReleased();
+  }
+}
+function mouseWheel(e) {
+  if(currentScene != null) {
+    currentScene.mouseWheel(e);
+  }
+}
+
+function screenShake() {
+  if(shakeScreen)
+    return;
+  shakeScreen = true;
+  setTimeout(() => {
+    shakeScreen = false;
+    shakeEffect.x = 0;
+    shakeEffect.y = 0;
+  }, 500);
+}
+
+function createBackButton(sceneName = 'MenuScene') {
+  const backButton = new Button(60 * GAME_SCALE, height-(25 * GAME_SCALE), 50 * GAME_SCALE, 40 * GAME_SCALE, 'back');
+  backButton.action = function() {
+    ShowScene(sceneName);
+  }
 }
 
 function drawTitle(tS = 90, subTitle = '') {
@@ -201,7 +253,7 @@ function drawTitle(tS = 90, subTitle = '') {
   textSize(tS);
   textAlign(CENTER, CENTER);
   text('space invaders', width/2, 50 * GAME_SCALE);
-  textSize(tS - (30*GAME_SCALE));
+  textSize(tS - (40*GAME_SCALE));
   fill(255);
   text(subTitle, width/2, 120 * GAME_SCALE);
   textAlign(LEFT, CENTER);

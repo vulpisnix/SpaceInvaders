@@ -18,23 +18,7 @@
 	<title>Space Invaders</title>
 
 </head>
-	<body oncontextmenu="return false;">
-<!--		<script src="js/values.js?q="></script>-->
-<!--		<script src="js/loader.js"></script>-->
-
-<!--		<script src="js/checkbox.js"></script>-->
-<!--		<script src="js/slider.js"></script>-->
-<!--		<script src="js/input.js"></script>-->
-<!--		<script src="js/effects.js"></script>-->
-<!--		<script src="js/create.js"></script>-->
-<!--		<script src="js/animation.js"></script>-->
-<!--		<script src="js/button.js"></script>-->
-<!--		<script src="js/enemy.js"></script>-->
-<!--		<script src="js/bullet.js"></script>-->
-<!--		<script src="js/player.js"></script>-->
-<!--		<script src="js/renderer.js"></script>-->
-<!--		<script src="sketch.js"></script>-->
-	</body>
+	<body oncontextmenu="return false;"></body>
 </html>
 
 <script>
@@ -53,23 +37,32 @@
 	loadScript('js/audio.js');
 	loadScript('js/loader.js');
 
-	loadScript('js/ui/checkbox.js');
-	loadScript('js/ui/slider.js');
-	loadScript('js/ui/keychanger.js');
-	loadScript('js/ui/button.js');
+	loadScript('ui/checkbox.js');
+	loadScript('ui/slider.js');
+	loadScript('ui/keychanger.js');
+	loadScript('ui/button.js');
 
 	loadScript('js/shop/shopProduct.js');
 	loadScript('js/shop/shopPreview.js');
 	loadScript('js/shipUpgrade.js');
 
-	loadScript('js/input.js');
-	loadScript('js/effects.js');
-	loadScript('js/create.js');
 	loadScript('js/animation.js');
 	loadScript('js/enemy.js');
 	loadScript('js/bullet.js');
 	loadScript('js/bomb.js');
 	loadScript('js/player.js');
-	loadScript('js/renderer.js');
+
+
+	loadScript('scenes/scene.js');
+	loadScript('scenes/menuScene.js');
+	loadScript('scenes/settingsScene.js');
+	loadScript('scenes/creditsScene.js');
+	loadScript('scenes/achievementsScene.js');
+	loadScript('scenes/storeScene.js');
+	loadScript('scenes/storeBackgroundsScene.js');
+	loadScript('scenes/storeShipUpgradesScene.js');
+	loadScript('scenes/yourShipScene.js');
+	loadScript('scenes/gameScene.js');
+
 	loadScript('sketch.js');
 </script>

@@ -1,5 +1,5 @@
 function ShopPreview(name,product, displayFullInformation = false) {
-    shopPreviews.push(this);
+    currentScene.shopPreviews.push(this);
     this.pos = createVector(0,0);
     this.size = createVector(300*GAME_SCALE,!displayFullInformation ? 350*GAME_SCALE : 360*GAME_SCALE);
     this.text = name;

@@ -1,25 +1,13 @@
+let scenes = [], currentScene = null;
+
 let IS_DEVICE_SIZE_OK = false, IS_TOUCH_SUPPORTED = false;
-let MENU = true, GAME = false, SHOP = false, SETTINGS = false, CREDITS = false, ACHIEVEMENTS = false, SHOP_BACKGROUNDS = false, MENU_SHIP = false;
-let GAME_STARTED = false, GAME_PAUSE = false, GAME_DEAD = false, GAME_NEXT_STAGE = false;
 let font;
 let GAME_SCALE = 1;
 
-let GAME_COUNTDOWN = 3;
-
-let playerBullets = [];
 let player;
+let highscore = 0, bestStage = 0, credits = 0;
 
-let enemyBullets = [];
-let enemyBombs = [];
-let enemys = [];
-let enemyStepDown = 0;
-
-let buttons = [];
 let animations = [];
-let sliders = [];
-let checkboxes = [];
-let keychangers = [];
-let shopPreviews = [];
 let shopProducts = [];
 
 let storeBought = {
@@ -27,20 +15,8 @@ let storeBought = {
     shipUpgrades: []
 };
 
-let highscore = 0, currentscore = 0;
-let bestStage = 0, stage = 0;
-let credits = 0, currentcredits = 0;
-
 let shakeEffect;
 let shakeScreen = false;
-
-let keyChangerChange = {
-    target: null,
-    name: ''
-};
-let pressedKey = '';
-
-let storeMainSlideXOffset = 0;
 
 let settingsORIG = {
     sound: {
@@ -51,7 +27,7 @@ let settingsORIG = {
     },
     visuell: {
         screenshake: true,
-        selectedBackground: 'backgrounds/Normal_Background_0'
+        selectedBackground: 'backgrounds/Background_0'
     },
     controls: {
         movement: {
@@ -138,4 +114,52 @@ function getShopProductsByCategory(category) {
     }
 
     return array;
+}
+
+function ShowScene(sceneName) {
+    if(currentScene != null) {
+        currentScene.cleanUp();
+        currentScene = null;
+    }
+    for(let i = scenes.length-1; i >= 0; i--) {
+        if(scenes[i].name === sceneName) {
+            if(scenes[i] != null) {
+                currentScene = scenes[i];
+                currentScene.cleanUp();
+                currentScene.awake();
+                return;
+            }
+        }
+    }
+    if(currentScene != null) {
+        currentScene.cleanUp();
+        currentScene = null;
+    }
+    currentScene = null;
+}
+
+
+
+function getKeyName(key) {
+    switch(key) {
+        case ' ':
+            return 'space';
+            break;
+        case 'ArrowUp':
+            return 'Arrow Up';
+            break;
+        case 'ArrowDown':
+            return 'Arrow Down';
+            break;
+        case 'ArrowLeft':
+            return 'Arrow Left';
+            break;
+        case 'ArrowRight':
+            return 'Arrow Right';
+            break;
+
+        default:
+            return key;
+            break;
+    }
 }

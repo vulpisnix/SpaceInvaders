@@ -1,5 +1,5 @@
 function Checkbox(text_, x,y) {
-  checkboxes.push(this);
+  currentScene.checkboxes.push(this);
   this.pos = createVector(x,y);
   this.size = createVector(300 * GAME_SCALE,60 * GAME_SCALE);
   this.text = text_;

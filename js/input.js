@@ -106,27 +106,3 @@ function mouseWheel(event) {
   mouseScrollX = constrain(event.deltaX, -1, 1);
   mouseScrollY = constrain(event.deltaY, -1, 1);
 }
-
-function getKeyName(key) {
-  switch(key) {
-    case ' ':
-      return 'space';
-      break;
-    case 'ArrowUp':
-      return 'Arrow Up';
-      break;
-    case 'ArrowDown':
-      return 'Arrow Down';
-      break;
-    case 'ArrowLeft':
-      return 'Arrow Left';
-      break;
-    case 'ArrowRight':
-      return 'Arrow Right';
-      break;
-
-    default:
-      return key;
-      break;
-  }
-}
