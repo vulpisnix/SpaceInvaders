@@ -34,6 +34,17 @@
 	}
 
 	document.addEventListener("DOMContentLoaded", (event) => {
+		loadScript('scenes/scene.js');
+		loadScript('scenes/menuScene.js');
+		loadScript('scenes/settingsScene.js');
+		loadScript('scenes/creditsScene.js');
+		loadScript('scenes/achievementsScene.js');
+		loadScript('scenes/storeScene.js');
+		loadScript('scenes/storeBackgroundsScene.js');
+		loadScript('scenes/storeShipUpgradesScene.js');
+		loadScript('scenes/yourShipScene.js');
+		loadScript('scenes/gameScene.js');
+
 		loadScript('js/values.js');
 		loadScript('js/audio.js');
 		loadScript('js/loader.js');
@@ -53,20 +64,8 @@
 		loadScript('js/bomb.js');
 		loadScript('js/player.js');
 
-
-		loadScript('scenes/scene.js');
-		loadScript('scenes/menuScene.js');
-		loadScript('scenes/settingsScene.js');
-		loadScript('scenes/creditsScene.js');
-		loadScript('scenes/achievementsScene.js');
-		loadScript('scenes/storeScene.js');
-		loadScript('scenes/storeBackgroundsScene.js');
-		loadScript('scenes/storeShipUpgradesScene.js');
-		loadScript('scenes/yourShipScene.js');
-		loadScript('scenes/gameScene.js');
-
 		setTimeout(() => {
 			loadScript('sketch.js');
-		}, 500);
+		}, 10);
 	});
 </script>
