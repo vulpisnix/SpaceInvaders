@@ -21,6 +21,7 @@ function setup() {
   let sWidth = 1300, sHeight = 900;
   IS_DEVICE_SIZE_OK = (windowWidth >= 1300 && windowHeight >= 900);
   IS_TOUCH_SUPPORTED = is_touch_supported();
+  IS_MOBILE_DEVICE = navigator.userAgent.toLowerCase().match(/mobile/i) != null;
 
   let cWidth = sWidth, cHeight = sHeight;
   if(!IS_DEVICE_SIZE_OK) {
@@ -104,7 +105,7 @@ function draw() {
 
     return;
   }
-/*
+
   if(shakeScreen && settings.visuell.screenshake) {
     translate(shakeEffect.x, shakeEffect.y);
     shakeEffect.x += random(-1, 1)*3;
@@ -114,76 +115,16 @@ function draw() {
   if (settings.visuell.selectedBackground != null) {
     image(getStoreSpriteByName(settings.visuell.selectedBackground).sprite, 0, 0, width, height);
   }
-  if(GAME_DEAD) {
-    image(spriteDeathBackground, 0, 0, width, height);
-  }
-
-
-  for (let i = buttons.length - 1; i >= 0; i--) {
-    const button = buttons[i];
-    button.update();
-    button.render();
-  }
-  for (let i = animations.length - 1; i >= 0; i--) {
-    const anim = animations[i];
-    if (!GAME_PAUSE) {
-      anim.update();
-    }
-    anim.render();
-
-    if (anim.isFinished) {
-      animations.splice(i, 1);
-    }
-  }
-  for (let i = sliders.length - 1; i >= 0; i--) {
-    const slider = sliders[i];
-    slider.update();
-    slider.render();
-  }
-  for (let i = checkboxes.length - 1; i >= 0; i--) {
-    checkboxes[i].render();
-  }
-  for (let i = keychangers.length - 1; i >= 0; i--) {
-    keychangers[i].update();
-    keychangers[i].render();
-  }
-
-
-  if (MENU) {
-    renderMenu_Main();
-  }
-  if(MENU_SHIP) {
-    renderMenu_Ship();
-  }
-  if (SHOP) {
-    renderMenu_Store();
-  }
-  if(SHOP_BACKGROUNDS) {
-    renderMenu_Store_Backgrounds();
-  }
-  if(SHOP_SHIPS) {
-    renderMenu_Store_ShipUpgrades();
-  }
-  if (SETTINGS) {
-    renderMenu_Settings();
-  }
-  if (CREDITS) {
-    renderMenu_Credits();
-  }
-  if(ACHIEVEMENTS) {
-    renderMenu_Achievements();
-  }
-  if (GAME) {
-    renderGame();
-  }
-
-  updateInput();*/
-
-  if (settings.visuell.selectedBackground != null) {
-    image(getStoreSpriteByName(settings.visuell.selectedBackground).sprite, 0, 0, width, height);
-  }
   else {
     image(getStoreSpriteByName('Background_0').sprite, 0, 0, width, height);
+  }
+
+  if(IS_MOBILE_DEVICE) {
+    fill(255);
+    textAlign(CENTER, CENTER);
+    textSize(40*GAME_SCALE);
+    text("Sorry but mobile devices aren't supported.", width/2, height/2);
+    return;
   }
 
   if(currentScene != null) {

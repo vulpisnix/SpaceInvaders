@@ -1,6 +1,6 @@
 let scenes = [], currentScene = null;
 
-let IS_DEVICE_SIZE_OK = false, IS_TOUCH_SUPPORTED = false;
+let IS_DEVICE_SIZE_OK = false, IS_TOUCH_SUPPORTED = false, IS_MOBILE_DEVICE = false;
 let font;
 let GAME_SCALE = 1;
 

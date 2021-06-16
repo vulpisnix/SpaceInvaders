@@ -18,6 +18,7 @@ class GameScene extends Scene {
         this.GAME_DEAD = false;
         this.GAME_STARTED = false;
         this.GAME_NEXT_STAGE = false;
+        this.GAME_WON = false;
     }
 
     awake() {
@@ -38,6 +39,7 @@ class GameScene extends Scene {
         this.GAME_DEAD = false;
         this.GAME_STARTED = false;
         this.GAME_NEXT_STAGE = false;
+        this.GAME_WON = false;
 
         player.pos.x = width/2;
         player.pos.y =  height-player.size.y-(10 * GAME_SCALE);
@@ -49,9 +51,35 @@ class GameScene extends Scene {
         this.createEnemysStageZero();
     }
 
+    update() {
+        super.update();
+        this.GAME_WON = this.enemys.length == 0 && this.stage == 4;
+        if(this.enemys.length == 0 && this.stage < 4 && this.GAME_STARTED && !this.GAME_NEXT_STAGE && !this.GAME_WON) {
+            this.GAME_NEXT_STAGE = true;
+            this.GAME_STARTED = false;
+            this.GAME_COUNTDOWN = 4;
+            this.stage++;
+
+            if(this.stage == 1)
+                this.createEnemysStageOne();
+            else
+            if(this.stage == 2)
+                this.createEnemysStageTwo();
+            else
+            if(this.stage == 3)
+                this.createEnemysStageThree_BOSS();
+
+            this.GAME_NEXT_STAGE = false;
+
+            if(this.stage > bestStage) {
+                bestStage = this.stage;
+                SaveScores();
+            }
+        }
+    }
+
     render() {
         super.render();
-        const GAME_WON = this.enemys.length == 0 && this.stage == 4;
 
         if(this.GAME_DEAD) {
             image(spriteDeathBackground, 0,0,width,height);
@@ -183,7 +211,7 @@ class GameScene extends Scene {
             }
         }
 
-        if(!this.GAME_PAUSE && this.GAME_STARTED && !this.GAME_DEAD && !GAME_WON) {
+        if(!this.GAME_PAUSE && this.GAME_STARTED && !this.GAME_DEAD && !this.GAME_WON) {
             player.update();
             player.renderHUD();
         }
@@ -305,30 +333,7 @@ class GameScene extends Scene {
             }
         }
 
-        if(this.enemys.length == 0 && this.stage <= 3 && this.GAME_STARTED && !this.GAME_NEXT_STAGE && !GAME_WON) {
-            this.GAME_NEXT_STAGE = true;
-            this.GAME_STARTED = false;
-            this.GAME_COUNTDOWN = 4;
-            this.stage++;
-
-            if(this.stage == 1)
-                this.createEnemysStageOne();
-            else
-            if(this.stage == 2)
-                this.createEnemysStageTwo();
-            else
-            if(this.stage == 3)
-                this.createEnemysStageThree_BOSS();
-
-            this.GAME_NEXT_STAGE = false;
-
-            if(this.stage > bestStage) {
-                bestStage = this.stage;
-                SaveScores();
-            }
-        }
-
-        if(GAME_WON) {
+        if(this.GAME_WON) {
             drawTitle();
             fill(255);
             textAlign(CENTER,CENTER);
