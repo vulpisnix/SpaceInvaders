@@ -575,19 +575,7 @@ function renderMenu_Ship() {
   text('Upgrades', upgradeSlotX+upgradeSlotSize/2, upgradeSlotY - (30*GAME_SCALE));
 
   for(let i = 0; i < 3; i++) {
-    fill(0, 100);
-    rect(upgradeSlotX, upgradeSlotY, upgradeSlotSize, upgradeSlotSize);
-
-    noFill();
-    stroke(0);
-    strokeWeight(5);
-    rect(upgradeSlotX, upgradeSlotY, upgradeSlotSize, upgradeSlotSize);
-
-    fill(255);
-    textSize(20*GAME_SCALE);
-    textAlign(CENTER, CENTER);
-    text('Locked', upgradeSlotX + upgradeSlotSize/2, upgradeSlotY + upgradeSlotSize/2);
-
+    drawShipUpgrade(upgradeSlotX, upgradeSlotY, upgradeSlotSize, i);
     upgradeSlotY += upgradeSlotSize + (50 * GAME_SCALE);
   }
 
@@ -601,19 +589,7 @@ function renderMenu_Ship() {
   text('Upgrades', upgradeSlotX+upgradeSlotSize/2, upgradeSlotY - (30*GAME_SCALE));
 
   for(let i = 0; i < 3; i++) {
-    fill(0, 100);
-    rect(upgradeSlotX, upgradeSlotY, upgradeSlotSize, upgradeSlotSize);
-
-    noFill();
-    stroke(0);
-    strokeWeight(5);
-    rect(upgradeSlotX, upgradeSlotY, upgradeSlotSize, upgradeSlotSize);
-
-    fill(255);
-    textSize(20*GAME_SCALE);
-    textAlign(CENTER, CENTER);
-    text('Locked', upgradeSlotX + upgradeSlotSize/2, upgradeSlotY + upgradeSlotSize/2);
-
+    drawShipUpgrade(upgradeSlotX, upgradeSlotY, upgradeSlotSize, i+3);
     upgradeSlotY += upgradeSlotSize + (50 * GAME_SCALE);
   }
 
@@ -630,19 +606,115 @@ function renderMenu_Ship() {
 
 
   for(let i = 0; i < 3; i++) {
-    fill(0, 100);
-    circle(powerupX, powerupY, powerupRadius);
-
-    noFill();
-    stroke(0);
-    strokeWeight(5);
-    circle(powerupX, powerupY, powerupRadius);
-
-    fill(255);
-    textSize(20*GAME_SCALE);
-    textAlign(CENTER, CENTER);
-    text('Locked', powerupX, powerupY);
-
+    drawShipPowerup(powerupX, powerupY, powerupRadius, i);
     powerupX += powerupRadius + (50 * GAME_SCALE);
+  }
+}
+
+function drawShipUpgrade(x,y,size,index) {
+  const shipUpgradeData = shipData.upgrades[index];
+  fill(0, 100);
+  rect(x, y, size, size);
+
+  noFill();
+  stroke(0);
+  strokeWeight(5);
+  rect(x, y, size, size);
+
+  if(shipUpgradeData.unlocked == false) {
+    let hover = AABB(mouseX,mouseY,1,1,x,y,size,size);
+    if(!hover) {
+      fill(255);
+      textSize(20 * GAME_SCALE);
+      textAlign(CENTER, CENTER);
+      text('Locked', x + size / 2, y + size / 2);
+    }
+    else {
+      let price = 1000;
+      if(index == 1)
+        price = 1200;
+      if(index == 2)
+        price = 1440;
+      if(index == 3)
+        price = 1728;
+      if(index == 4)
+        price = 2074;
+      if(index == 5)
+        price = 2488;
+
+      noStroke();
+      fill(255);
+      textAlign(CENTER, CENTER);
+      if(credits-price >= 0) {
+        textSize(20 * GAME_SCALE);
+        text('Click to buy', x + size / 2, y + size / 2 - (10 * GAME_SCALE));
+      }
+      else {
+        fill(255, 0, 0);
+        textSize(15 * GAME_SCALE);
+        text('Not enough', x + size / 2, y + size / 2 - (10 * GAME_SCALE));
+      }
+      fill(255);
+      textSize(15 * GAME_SCALE);
+      text(price+' credits', x + size / 2, y + size / 2 + (10*GAME_SCALE));
+
+      if((credits-price >= 0) && hover && mouseIsPressed) {
+        credits -= price;
+        shipData.upgrades[index].unlocked = true;
+        SaveScores();
+        SaveShip();
+      }
+    }
+  }
+}
+function drawShipPowerup(x,y,r,index) {
+  const shipPowerupData = shipData.powerups[index];
+  fill(0, 100);
+  circle(x, y, r);
+
+  noFill();
+  stroke(0);
+  strokeWeight(5);
+  circle(x, y, r);
+
+  if(shipPowerupData.unlocked == false) {
+    let hover = collideRectCircle(mouseX,mouseY,1,1,x,y,r);
+
+    if(!hover) {
+      fill(255);
+      textSize(20 * GAME_SCALE);
+      textAlign(CENTER, CENTER);
+      text('Locked', x, y);
+    }
+    else {
+      let price = 1500;
+      if(index == 1)
+        price = 1800;
+      if(index == 2)
+        price = 2160;
+
+      noStroke();
+      fill(255);
+      textAlign(CENTER, CENTER);
+      if(credits-price >= 0) {
+        textSize(14 * GAME_SCALE);
+        text('Click to buy', x, y - (10 * GAME_SCALE));
+      }
+      else {
+        fill(255, 0, 0);
+        textSize(14 * GAME_SCALE);
+        text('Not enough', x, y - (10 * GAME_SCALE));
+      }
+      fill(255);
+      textSize(13 * GAME_SCALE);
+      text(price+' credits', x, y + (10*GAME_SCALE));
+
+      if((credits-price >= 0) && hover && mouseIsPressed) {
+        credits -= price;
+        shipData.powerups[index].unlocked = true;
+        SaveScores();
+        SaveShip();
+      }
+    }
   }
 }

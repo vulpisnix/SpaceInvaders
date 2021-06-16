@@ -213,6 +213,28 @@ function AABB(x1, y1, w1, h1, x2, y2, w2, h2) {
     y1 < y2 + h2 &&
     y1 + h1 > y2);
 }
+function collideRectCircle(rx, ry, rw, rh, cx, cy, diameter) {
+  //2d
+  // temporary variables to set edges for testing
+  var testX = cx;
+  var testY = cy;
+
+  // which edge is closest?
+  if (cx < rx){         testX = rx       // left edge
+  }else if (cx > rx+rw){ testX = rx+rw  }   // right edge
+
+  if (cy < ry){         testY = ry       // top edge
+  }else if (cy > ry+rh){ testY = ry+rh }   // bottom edge
+
+  // // get distance from closest edges
+  var distance = this.dist(cx,cy,testX,testY)
+
+  // if the distance is less than the radius, collision!
+  if (distance <= diameter/2) {
+    return true;
+  }
+  return false;
+}
 
 function InitStoreItems() {
   fetch('./data/store/store.json')

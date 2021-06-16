@@ -66,6 +66,60 @@ let settingsORIG = {
 }
 let settings = JSON.parse(JSON.stringify(settingsORIG));
 
+let shipDataORIG = {
+    shipSprite: 'ships/default',
+    upgrades: [
+        {
+            slot: 0,
+            unlocked: false,
+            upgradeName: ''
+        },
+        {
+            slot: 1,
+            unlocked: false,
+            upgradeName: ''
+        },
+        {
+            slot: 2,
+            unlocked: false,
+            upgradeName: ''
+        },
+        {
+            slot: 3,
+            unlocked: false,
+            upgradeName: ''
+        },
+        {
+            slot: 4,
+            unlocked: false,
+            upgradeName: ''
+        },
+        {
+            slot: 5,
+            unlocked: false,
+            upgradeName: ''
+        }
+    ],
+    powerups: [
+        {
+            slot: 0,
+            unlocked: false,
+            powerupName: ''
+        },
+        {
+            slot: 1,
+            unlocked: false,
+            powerupName: ''
+        },
+        {
+            slot: 2,
+            unlocked: false,
+            powerupName: ''
+        }
+    ]
+};
+let shipData = JSON.parse(JSON.stringify(shipDataORIG));
+
 function is_touch_supported() {
     return ('ontouchstart' in window ) ||
         ( navigator.maxTouchPoints > 0 ) ||

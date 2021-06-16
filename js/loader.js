@@ -308,11 +308,23 @@ function LoadGame() {
       storeBought = store;
     }
   }
+
+  const rawShip = getCookie('ship');
+  if(rawShip != '') {
+    const ship = JSON.parse(rawShip);
+    if(ship != undefined) {
+      shipData = ship;
+    }
+  }
+}
+function SaveShip() {
+  setCookie('ship', JSON.stringify(shipData));
 }
 function SaveGame() {
   SaveScores();
   SaveSettings();
   SaveStore();
+  SaveShip();
 }
 function SaveScores() {
   setCookie('scores', JSON.stringify({
