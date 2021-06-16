@@ -89,7 +89,7 @@ class MenuScene extends Scene {
         }
 
         noFill();
-        stroke(0);
+        stroke(255);
         strokeWeight(5);
         rect(ySBoxX, ySBoxY, ySBoxWidth, ySBoxHeight);
         noStroke();
@@ -97,7 +97,7 @@ class MenuScene extends Scene {
         fill(255);
         textSize(ySBoxTS);
         textAlign(CENTER, CENTER);
-        text('Your Ship', ySBoxX + ySBoxWidth/2, ySBoxY);
+        text('Your Ship', ySBoxX + ySBoxWidth/2, ySBoxY-(25*GAME_SCALE));
     }
 
     mousePressed() {

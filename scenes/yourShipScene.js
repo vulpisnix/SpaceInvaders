@@ -36,7 +36,7 @@ class YourShipScene extends Scene {
         player.renderScaled(2);
 
         noFill();
-        stroke(0);
+        stroke(255);
         strokeWeight(5);
         rect(ySBoxX, ySBoxY, ySBoxWidth, ySBoxHeight);
         noStroke();
@@ -44,7 +44,7 @@ class YourShipScene extends Scene {
         fill(255);
         textSize(ySBoxTS);
         textAlign(CENTER, CENTER);
-        text('Your Ship', ySBoxX + ySBoxWidth/2, ySBoxY);
+        text('Your Ship', ySBoxX + ySBoxWidth/2, ySBoxY-(25*GAME_SCALE));
 
 
         let upgradeSlotSize = 150*GAME_SCALE;
@@ -102,9 +102,10 @@ class YourShipScene extends Scene {
         rect(x, y, size, size);
 
         noFill();
-        stroke(0);
+        stroke(255);
         strokeWeight(5);
         rect(x, y, size, size);
+        noStroke();
 
         if(shipUpgradeData.unlocked == false) {
             let hover = AABB(mouseX,mouseY,1,1,x,y,size,size);
@@ -158,9 +159,10 @@ class YourShipScene extends Scene {
         circle(x, y, r);
 
         noFill();
-        stroke(0);
+        stroke(255);
         strokeWeight(5);
         circle(x, y, r);
+        noStroke();
 
         if(shipPowerupData.unlocked == false) {
             let hover = collideRectCircle(mouseX,mouseY,1,1,x,y,r);
