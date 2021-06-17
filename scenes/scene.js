@@ -66,8 +66,8 @@ class Scene {
     }
 
 
-    keyPressed() {}
-    keyReleased() {}
+    keyPressed(key) {}
+    keyReleased(key) {}
 
     mousePressed() {
         for (let i = this.buttons.length - 1; i >= 0; i--) {

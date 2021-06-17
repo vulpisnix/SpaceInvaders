@@ -53,7 +53,7 @@ class CreditsScene extends Scene {
         text('philipp schott', xPos, yPos+ (90 * GAME_SCALE));
     }
 
-    keyPressed() {
+    keyPressed(key) {
         super.keyPressed();
         if(key == 'Escape') {
             ShowScene('MenuScene');

@@ -7,15 +7,15 @@
       "type": "normal"
     },
     {
-      "name": "Waves",
+      "name": "Gammawaves",
       "imagePath": "backgrounds/Background_1",
-      "price": 500,
+      "price": 1000,
       "type": "normal"
     },
     {
       "name": "Gamma Rays",
       "imagePath": "backgrounds/Background_2",
-      "price": 500,
+      "price": 1000,
       "type": "normal"
     },
     {
@@ -25,25 +25,25 @@
       "type": "legendary"
     },
     {
-      "name": "Sun",
+      "name": "Stars in Nebula",
       "imagePath": "backgrounds/Background_4",
-      "price": 2000,
+      "price": 1000,
       "type": "normal"
     },
     {
-      "name": "Nebula",
+      "name": "Pixel Nebula",
       "imagePath": "backgrounds/Background_5",
-      "price": 2000,
+      "price": 4000,
       "type": "normal"
     },
     {
-      "name": "Epilepsy",
+      "name": "Color splash",
       "imagePath": "backgrounds/Background_6",
-      "price": 500,
+      "price": 4000,
       "type": "normal"
     },
     {
-      "name": "Purple Claws",
+      "name": "Victorian",
       "imagePath": "backgrounds/Background_7",
       "price": 1000,
       "type": "normal"
@@ -57,11 +57,11 @@
     {
       "name": "Bloody Leaves",
       "imagePath": "backgrounds/Background_9",
-      "price": 500,
+      "price": 1500,
       "type": "normal"
     },
     {
-      "name": "Bloody Leaves",
+      "name": "Colorbars",
       "imagePath": "backgrounds/Background_10",
       "price": 1000,
       "type": "normal"
@@ -69,13 +69,13 @@
     {
       "name": "Window to the Voids",
       "imagePath": "backgrounds/Background_11",
-      "price": 1500,
+      "price": 20000,
       "type": "normal"
     },
     {
-      "name": "Grass",
+      "name": "Purple Grass",
       "imagePath": "backgrounds/Background_12",
-      "price": 500,
+      "price": 1500,
       "type": "normal"
     },
     {

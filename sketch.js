@@ -143,12 +143,12 @@ function draw() {
 
 function keyPressed() {
   if(currentScene != null) {
-    currentScene.keyPressed();
+    currentScene.keyPressed(key);
   }
 }
 function keyReleased() {
   if(currentScene != null) {
-    currentScene.keyReleased();
+    currentScene.keyReleased(key);
   }
 }
 function mousePressed() {
