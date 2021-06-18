@@ -51,6 +51,17 @@ class CreditsScene extends Scene {
         text('conner bangel', xPos, yPos+ (30 * GAME_SCALE));
         text('and', xPos, yPos+ (60 * GAME_SCALE));
         text('philipp schott', xPos, yPos+ (90 * GAME_SCALE));
+
+
+
+        xPos = width/2;
+        yPos += 400 * GAME_SCALE;
+
+        textAlign(CENTER,CENTER);
+        textSize(30 * GAME_SCALE);
+        fill(textColour);
+        text('a CriseStudios & HolyGames production', xPos, yPos);
+
     }
 
     keyPressed(key) {

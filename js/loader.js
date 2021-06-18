@@ -1,13 +1,14 @@
 let fallbackSprite;
 let backgroundToDraw, spriteDeathBackground;
 let backgrounds = [];
-let bombSprite, bulletSprite, enemyWalkerSprite, enemyShooterSprite, enemyBomberSprite;
-let selectedBackground = 'Background_0', backgroundToDrawName = 'Background_0';
+let bulletSprite, enemyWalkerSprite, enemyShooterSprite, enemyBomberSprite;
+let selectedBackground = 'Background_0';
 
 let ships = [];
 let shipUpgrades = [];
 let storeSprites = [];
 let explosionSprites = [];
+let animBombSprites = [];
 let touchIcons = [];
 
 let music = [];
@@ -47,7 +48,7 @@ function loadExplosionSprites() {
   loadImage('./data/explosion/explosion.png', (img) => {
     explosionSprites.push({index: 0, sprite: img});
   });
-  
+
   for(let i = 1; i <= 6; i++) {
     loadImage('./data/explosion/explosion'+i+'.png', (img) => {
       explosionSprites.push({index: i, sprite: img});
@@ -58,13 +59,38 @@ function getExplosionSpriteByIndex(index) {
   if(explosionSprites.length == 0) {
     return fallbackSprite;
   }
-  
+
   for(let i = 0; i <= explosionSprites.length-1; i++) {
     if(explosionSprites[i].index == index) {
       return explosionSprites[i].sprite;
     }
   }
   return explosionSprites[0].sprite;
+}
+
+function loadBombSprites() {
+  loadImage('./data/bomb/bomb.png', (img) => {
+    animBombSprites.push({index: 0, sprite: img});
+  });
+/*
+  for(let i = 1; i <= 6; i++) {
+    loadImage('./data/bomb/bomb'+i+'.png', (img) => {
+      animBombSprites.push({index: i, sprite: img});
+    });
+  }
+*/
+}
+function getBombSpriteByIndex(index) {
+  if(animBombSprites.length == 0) {
+    return fallbackSprite;
+  }
+
+  for(let i = 0; i <= animBombSprites.length-1; i++) {
+    if(animBombSprites[i].index == index) {
+      return animBombSprites[i].sprite;
+    }
+  }
+  return animBombSprites[0].sprite;
 }
 
 function loadShip(name, level, price) {

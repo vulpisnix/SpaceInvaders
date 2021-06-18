@@ -391,6 +391,9 @@ class GameScene extends Scene {
             this.GAME_COUNTDOWN = 4;
         }
         player.keyPressed(key);
+
+        if(key == 'l')
+            this.enemys = [];
     }
 
     keyReleased() {
@@ -633,11 +636,17 @@ class GameScene extends Scene {
         this.enemyBullets.push(bullet);
     }
     createEnemyBomb(x,y,dirY) {
-        const bomb = new Bomb(x,y,20 * GAME_SCALE,20 * GAME_SCALE,dirY);
+        var sprites = [];
+        for(let i = 0; i <= animBombSprites.length-1; i++) {
+            sprites.push(getBombSpriteByIndex(i));
+        }
+
+        const bomb = new Bomb(x,y,20 * GAME_SCALE,20 * GAME_SCALE,dirY, sprites);
         bomb.bombSpeed = 5;
         this.enemyBombs.push(bomb);
     }
     createExplosion(x,y) {
+        console.log(x,y);
         var sprites = [];
         for(let i = 0; i <= explosionSprites.length-1; i++) {
             sprites.push(getExplosionSpriteByIndex(i));

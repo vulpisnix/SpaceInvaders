@@ -5,7 +5,7 @@ function preload() {
   spriteDeathBackground = loadImage('./data/store/backgrounds/death.png');
   
   bulletSprite = loadImage('./data/bullet.png');
-  bombSprite = loadImage('./data/bomb.png');
+
   enemyWalkerSprite = loadImage('./data/enemies/enemyZero.png');
   enemyShooterSprite = loadImage('./data/enemies/enemyOne.png');
   enemyBomberSprite = loadImage('./data/enemies/enemyTwo.png');
@@ -49,6 +49,8 @@ function setup() {
   frameRate(60);
 
   loadExplosionSprites();
+  loadBombSprites();
+
   loadShip('Level0', 0, 0);
   loadShip('Level1', 1, 75);
   loadShip('Level2', 2, 150);
@@ -108,8 +110,8 @@ function draw() {
 
   if(shakeScreen && settings.visuell.screenshake) {
     translate(shakeEffect.x, shakeEffect.y);
-    shakeEffect.x += random(-1, 1)*3;
-    shakeEffect.y += random(-1, 1)*3;
+    shakeEffect.x += random(-1, 1)*1.5;
+    shakeEffect.y += random(-1, 1)*1.5;
   }
 
   if (settings.visuell.selectedBackground != null) {

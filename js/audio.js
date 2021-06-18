@@ -20,4 +20,9 @@ function Audio(name, sound) {
             return this.sound.isPlaying();
         return false;
     }
+    this.setPlaybackSpeed = function(speed = 1) {
+        if(this.sound != null)
+            return this.sound.rate(constrain(speed, 0.01, 4));
+        return false;
+    }
 }
