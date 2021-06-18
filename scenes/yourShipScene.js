@@ -1,10 +1,16 @@
 class YourShipScene extends Scene {
     constructor() {
         super('YourShipScene');
+        this.UPGRADE_VIEW = false;
+        this.SELECT_UPGRADE = false;
     }
 
     awake() {
         super.awake();
+
+        this.UPGRADE_VIEW = false;
+        this.SELECT_UPGRADE = false;
+
         createBackButton();
 
         player.pos.x = width/2 - player.size.x/2;
@@ -93,6 +99,16 @@ class YourShipScene extends Scene {
             this.drawShipPowerup(powerupX, powerupY, powerupRadius, i);
             powerupX += powerupRadius + (50 * GAME_SCALE);
         }
+
+
+        if(this.UPGRADE_VIEW) {
+            fill(0, 200);
+            rect(0,0,width,height);
+
+            if(this.SELECT_UPGRADE) {
+
+            }
+        }
     }
 
 
@@ -106,49 +122,67 @@ class YourShipScene extends Scene {
         strokeWeight(5);
         rect(x, y, size, size);
         noStroke();
+        let hover = AABB(mouseX, mouseY, 1, 1, x, y, size, size);
 
-        if(shipUpgradeData.unlocked == false) {
-            let hover = AABB(mouseX,mouseY,1,1,x,y,size,size);
-            if(!hover) {
-                fill(255);
-                textSize(20 * GAME_SCALE);
-                textAlign(CENTER, CENTER);
-                text('Locked', x + size / 2, y + size / 2);
+        if(this.UPGRADE_VIEW == false) {
+            if (shipUpgradeData.unlocked == false) {
+                if (!hover) {
+                    fill(255);
+                    textSize(20 * GAME_SCALE);
+                    textAlign(CENTER, CENTER);
+                    text('Locked', x + size / 2, y + size / 2);
+                } else {
+                    let price = 1000;
+                    if (index == 1)
+                        price = 1200;
+                    if (index == 2)
+                        price = 1440;
+                    if (index == 3)
+                        price = 1728;
+                    if (index == 4)
+                        price = 2074;
+                    if (index == 5)
+                        price = 2488;
+
+                    noStroke();
+                    fill(255);
+                    textAlign(CENTER, CENTER);
+                    if (credits - price >= 0) {
+                        textSize(20 * GAME_SCALE);
+                        text('Click to buy', x + size / 2, y + size / 2 - (10 * GAME_SCALE));
+                    } else {
+                        fill(255, 0, 0);
+                        textSize(15 * GAME_SCALE);
+                        text('Not enough', x + size / 2, y + size / 2 - (10 * GAME_SCALE));
+                    }
+                    fill(255);
+                    textSize(15 * GAME_SCALE);
+                    text(price + ' credits', x + size / 2, y + size / 2 + (10 * GAME_SCALE));
+
+                    if ((credits - price >= 0) && hover && mouseIsPressed) {
+                        credits -= price;
+                        shipData.upgrades[index].unlocked = true;
+                        SaveScores();
+                        SaveShip();
+                    }
+                }
             }
             else {
-                let price = 1000;
-                if(index == 1)
-                    price = 1200;
-                if(index == 2)
-                    price = 1440;
-                if(index == 3)
-                    price = 1728;
-                if(index == 4)
-                    price = 2074;
-                if(index == 5)
-                    price = 2488;
-
-                noStroke();
-                fill(255);
-                textAlign(CENTER, CENTER);
-                if(credits-price >= 0) {
-                    textSize(20 * GAME_SCALE);
-                    text('Click to buy', x + size / 2, y + size / 2 - (10 * GAME_SCALE));
+                if(shipUpgradeData.upgradeName != '') {
+                    const upgrade = getStoreSpriteByName(shipUpgradeData.upgradeName);
+                    image(upgrade.sprite, x+(5*GAME_SCALE),y+(5*GAME_SCALE),size-(5*GAME_SCALE), size-(5*GAME_SCALE));
                 }
                 else {
-                    fill(255, 0, 0);
-                    textSize(15 * GAME_SCALE);
-                    text('Not enough', x + size / 2, y + size / 2 - (10 * GAME_SCALE));
+                    fill(255);
+                    textSize(18 * GAME_SCALE);
+                    text('Click to', x + size / 2, y + size / 2 - (15 * GAME_SCALE));
+                    text('select a', x + size / 2, y + size / 2);
+                    text('Upgrade', x + size / 2, y + size / 2 + (15 * GAME_SCALE));
                 }
-                fill(255);
-                textSize(15 * GAME_SCALE);
-                text(price+' credits', x + size / 2, y + size / 2 + (10*GAME_SCALE));
 
-                if((credits-price >= 0) && hover && mouseIsPressed) {
-                    credits -= price;
-                    shipData.upgrades[index].unlocked = true;
-                    SaveScores();
-                    SaveShip();
+                if(hover && mouseIsPressed) {
+                    this.UPGRADE_VIEW = true;
+                    this.SELECT_UPGRADE = true;
                 }
             }
         }
@@ -163,44 +197,43 @@ class YourShipScene extends Scene {
         strokeWeight(5);
         circle(x, y, r);
         noStroke();
+        let hover = collideRectCircle(mouseX, mouseY, 1, 1, x, y, r);
 
-        if(shipPowerupData.unlocked == false) {
-            let hover = collideRectCircle(mouseX,mouseY,1,1,x,y,r);
+        if(this.UPGRADE_VIEW == false) {
+            if (shipPowerupData.unlocked == false) {
+                if (!hover) {
+                    fill(255);
+                    textSize(20 * GAME_SCALE);
+                    textAlign(CENTER, CENTER);
+                    text('Locked', x, y);
+                } else {
+                    let price = 1500;
+                    if (index == 1)
+                        price = 1800;
+                    if (index == 2)
+                        price = 2160;
 
-            if(!hover) {
-                fill(255);
-                textSize(20 * GAME_SCALE);
-                textAlign(CENTER, CENTER);
-                text('Locked', x, y);
-            }
-            else {
-                let price = 1500;
-                if(index == 1)
-                    price = 1800;
-                if(index == 2)
-                    price = 2160;
+                    noStroke();
+                    fill(255);
+                    textAlign(CENTER, CENTER);
+                    if (credits - price >= 0) {
+                        textSize(14 * GAME_SCALE);
+                        text('Click to buy', x, y - (10 * GAME_SCALE));
+                    } else {
+                        fill(255, 0, 0);
+                        textSize(14 * GAME_SCALE);
+                        text('Not enough', x, y - (10 * GAME_SCALE));
+                    }
+                    fill(255);
+                    textSize(13 * GAME_SCALE);
+                    text(price + ' credits', x, y + (10 * GAME_SCALE));
 
-                noStroke();
-                fill(255);
-                textAlign(CENTER, CENTER);
-                if(credits-price >= 0) {
-                    textSize(14 * GAME_SCALE);
-                    text('Click to buy', x, y - (10 * GAME_SCALE));
-                }
-                else {
-                    fill(255, 0, 0);
-                    textSize(14 * GAME_SCALE);
-                    text('Not enough', x, y - (10 * GAME_SCALE));
-                }
-                fill(255);
-                textSize(13 * GAME_SCALE);
-                text(price+' credits', x, y + (10*GAME_SCALE));
-
-                if((credits-price >= 0) && hover && mouseIsPressed) {
-                    credits -= price;
-                    shipData.powerups[index].unlocked = true;
-                    SaveScores();
-                    SaveShip();
+                    if ((credits - price >= 0) && hover && mouseIsPressed) {
+                        credits -= price;
+                        shipData.powerups[index].unlocked = true;
+                        SaveScores();
+                        SaveShip();
+                    }
                 }
             }
         }

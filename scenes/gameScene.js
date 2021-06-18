@@ -391,9 +391,6 @@ class GameScene extends Scene {
             this.GAME_COUNTDOWN = 4;
         }
         player.keyPressed(key);
-
-        if(key == 'l')
-            this.enemys = [];
     }
 
     keyReleased() {
@@ -646,7 +643,7 @@ class GameScene extends Scene {
         this.enemyBombs.push(bomb);
     }
     createExplosion(x,y) {
-        console.log(x,y);
+        if(x == null || y == null) return;
         var sprites = [];
         for(let i = 0; i <= explosionSprites.length-1; i++) {
             sprites.push(getExplosionSpriteByIndex(i));
